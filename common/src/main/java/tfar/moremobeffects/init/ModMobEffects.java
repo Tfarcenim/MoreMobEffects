@@ -33,8 +33,16 @@ public class ModMobEffects {
             .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"b3f05015-d905-4e6f-a2b9-340559e7fd2a",() -> Services.PLATFORM.getConfig().getConfigEntry("precise"), AttributeModifier.Operation.ADDITION);
 
     public static final MobEffect BRUTALITY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"fb1fa74d-2925-4423-8c37-76aa2b3234a6", () -> Services.PLATFORM.getConfig().getConfigEntry("brutality"), AttributeModifier.Operation.ADDITION);
+            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitDamage,"fb1fa74d-2925-4423-8c37-76aa2b3234a6", () -> Services.PLATFORM.getConfig().getConfigEntry("brutality"), AttributeModifier.Operation.ADDITION);
 
     public static final MobEffect SAVAGE = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"15d3734f-8dab-485f-8b42-417f89794f9d",() -> Services.PLATFORM.getConfig().getConfigEntry("savage"), AttributeModifier.Operation.ADDITION);
+            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitDamage,"15d3734f-8dab-485f-8b42-417f89794f9d",() -> Services.PLATFORM.getConfig().getConfigEntry("savage"), AttributeModifier.Operation.ADDITION);
+
+    public static final MobEffect ARCHERS_FRENZY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getArrowDrawSpeed,"2eb65dfd-145e-4263-bc34-c38b82eac5dc", () -> Services.PLATFORM.getConfig().getConfigEntry("archers_frenzy"), AttributeModifier.Operation.ADDITION);
+
+    public static final MobEffect HASTY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getArrowDrawSpeed,"12ffc09f-db1d-46b7-b263-f63fe4177c5b",() -> Services.PLATFORM.getConfig().getConfigEntry("hasty"), AttributeModifier.Operation.ADDITION);
+
+    
 }

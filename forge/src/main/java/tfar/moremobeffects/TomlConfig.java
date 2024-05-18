@@ -17,6 +17,9 @@ public class TomlConfig {
     public static ForgeConfigSpec.DoubleValue brutality;
     public static ForgeConfigSpec.DoubleValue savage;
 
+    public static ForgeConfigSpec.DoubleValue archers_frenzy;
+    public static ForgeConfigSpec.DoubleValue hasty;
+
     public TomlConfig(ForgeConfigSpec.Builder builder) {
         builder.push("server");
         vulnerable = builder.
@@ -57,6 +60,13 @@ public class TomlConfig {
         savage = builder.
                 comment("Critical hit damage boost of savage")
                 .defineInRange("savage", .05, 0, Double.MAX_VALUE);
+
+        archers_frenzy = builder.
+                comment("Draw speed boost of archer's frenzy")
+                .defineInRange("archers_frenzy", .05, 0, Double.MAX_VALUE);
+        hasty = builder.
+                comment("Draw speed boost of hasty")
+                .defineInRange("hasty", .05, 0, Double.MAX_VALUE);
 
         builder.pop();
     }

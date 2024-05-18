@@ -44,6 +44,7 @@ public interface IPlatformHelper {
 
     Attribute getCriticalHitRate();
     Attribute getCriticalHitDamage();
+    Attribute getArrowDrawSpeed();
 
 
 }

@@ -70,4 +70,9 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public Attribute getCriticalHitDamage() {
         return ALObjects.Attributes.CRIT_DAMAGE.get();
     }
+
+    @Override
+    public Attribute getArrowDrawSpeed() {
+        return ALObjects.Attributes.DRAW_SPEED.get();
+    }
 }
