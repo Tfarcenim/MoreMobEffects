@@ -2,7 +2,9 @@ package tfar.moremobeffects;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tfar.moremobeffects.platform.Services;
@@ -18,5 +20,19 @@ public class MoreMobEffects {
     public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
     public static void init() {
         Services.PLATFORM.registerAll(ModMobEffects.class, BuiltInRegistries.MOB_EFFECT, MobEffect.class);
+    }
+
+
+    public static float livingAttack(LivingEntity living,float baseDamage) {
+        MobEffectInstance mobEffectInstance = living.getEffect(ModMobEffects.EXPOSED);
+        if (mobEffectInstance != null) {
+            baseDamage *= (1 + Services.PLATFORM.getConfig().exposed() * (mobEffectInstance.getAmplifier()+1));
+        }
+
+        MobEffectInstance mobEffectInstance2 = living.getEffect(ModMobEffects.VULNERABLE);
+        if (mobEffectInstance2 != null) {
+            baseDamage *= (1 + Services.PLATFORM.getConfig().vulnerable()  * (mobEffectInstance2.getAmplifier()+1));
+        }
+        return baseDamage;
     }
 }

@@ -1,6 +1,7 @@
 package tfar.moremobeffects.platform.services;
 
 import net.minecraft.core.Registry;
+import tfar.moremobeffects.platform.Config;
 
 public interface IPlatformHelper {
 
@@ -37,6 +38,8 @@ public interface IPlatformHelper {
     }
 
     <T extends Registry<? extends F>,F> void registerAll(Class<?> clazz, T registry, Class<? extends F> filter);
+
+    Config getConfig();
 
 
 }

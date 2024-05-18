@@ -18,6 +18,7 @@ import java.util.function.Supplier;
 
 public class ForgePlatformHelper implements IPlatformHelper {
 
+    final Config config = new ForgeConfig();
     @Override
     public String getPlatformName() {
 
@@ -53,4 +54,8 @@ public class ForgePlatformHelper implements IPlatformHelper {
         }
     }
 
+    @Override
+    public Config getConfig() {
+        return config;
+    }
 }
