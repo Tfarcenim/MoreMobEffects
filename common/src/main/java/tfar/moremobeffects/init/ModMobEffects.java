@@ -1,8 +1,10 @@
 package tfar.moremobeffects.init;
 
+import net.minecraft.world.effect.AttackDamageMobEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import tfar.moremobeffects.effect.ConfigurableMobEffect;
 import tfar.moremobeffects.effect.DamageMultiplierEffect;
 import tfar.moremobeffects.platform.Services;
@@ -18,6 +20,11 @@ public class ModMobEffects {
             .addConfigurableAttributeModifier(ModAttributes.PROJECTILE_ATTACK_DAMAGE,"38a9e050-71a9-4547-8359-57bea880d036", () -> Services.PLATFORM.getConfig().getConfigEntry("aiming"), AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final MobEffect MARKSMAN = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
             .addConfigurableAttributeModifier(ModAttributes.PROJECTILE_ATTACK_DAMAGE,"949b61bc-5f3d-42da-af06-2af1e3ce5a71", () -> Services.PLATFORM.getConfig().getConfigEntry("marksman"), AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+    public static final MobEffect MIGHT = new AttackDamageMobEffect(MobEffectCategory.BENEFICIAL,0xff0000,3){}
+            .addAttributeModifier(Attributes.ATTACK_DAMAGE,"c2989b6e-1394-470c-ae75-c81367c3f9b9", 0, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    public static final MobEffect STRENGTHENED = new AttackDamageMobEffect(MobEffectCategory.BENEFICIAL,0xff0000,3){}
+            .addAttributeModifier(Attributes.ATTACK_DAMAGE,"623eb27b-ce58-4672-9539-32b2f3e06c8d", 0, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
 
 }

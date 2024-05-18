@@ -8,6 +8,8 @@ public class TomlConfig {
     public static ForgeConfigSpec.DoubleValue archery;
     public static ForgeConfigSpec.DoubleValue aiming;
     public static ForgeConfigSpec.DoubleValue marksman;
+    public static ForgeConfigSpec.DoubleValue might;
+    public static ForgeConfigSpec.DoubleValue strengthened;
 
     public TomlConfig(ForgeConfigSpec.Builder builder) {
         builder.push("server");
@@ -28,6 +30,13 @@ public class TomlConfig {
         marksman = builder.
                 comment("Damage multiplier of marksman")
                 .defineInRange("marksman", .05, 0, Double.MAX_VALUE);
+
+        might = builder.
+                comment("Damage multiplier of might")
+                .defineInRange("might", .05, 0, Double.MAX_VALUE);
+        strengthened = builder.
+                comment("Damage multiplier of strength")
+                .defineInRange("strength", .05, 0, Double.MAX_VALUE);
         builder.pop();
     }
 }

@@ -18,6 +18,11 @@ public class ForgeConfig implements Config {
         configEntryMap.put("archery",new ForgeDoubleConfigEntry(TomlConfig.exposed));
         configEntryMap.put("aiming",new ForgeDoubleConfigEntry(TomlConfig.vulnerable));
         configEntryMap.put("marksman",new ForgeDoubleConfigEntry(TomlConfig.marksman));
+
+       // configEntryMap.put("might",new ForgeDoubleConfigEntry(TomlConfig.might));
+       // configEntryMap.put("strengthened",new ForgeDoubleConfigEntry(TomlConfig.strengthened));
+
+
     }
 
     @Override
