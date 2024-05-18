@@ -20,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.tuple.Pair;
+import tfar.moremobeffects.datagen.ModDatagen;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +39,7 @@ public class MoreMobEffectsForge {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::register);
         bus.addListener(this::commonSetup);
+        bus.addListener(ModDatagen::start);
         MinecraftForge.EVENT_BUS.addListener(this::livingAttack);
         // Use Forge to bootstrap the Common mod.
         MoreMobEffects.init();
@@ -67,6 +69,6 @@ public class MoreMobEffectsForge {
     }
 
     private void livingAttack(LivingHurtEvent event) {
-        event.setAmount(MoreMobEffects.livingAttack(event.getEntity(), event.getAmount()));
+        event.setAmount(MoreMobEffects.livingAttack(event.getEntity(),event.getSource(), event.getAmount()));
     }
 }

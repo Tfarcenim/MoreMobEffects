@@ -1,10 +1,10 @@
-package tfar.moremobeffects;
+package tfar.moremobeffects.effect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 
 public class DamageMultiplierEffect extends MobEffect {
-    protected DamageMultiplierEffect(MobEffectCategory category, int color) {
+    public DamageMultiplierEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
 
