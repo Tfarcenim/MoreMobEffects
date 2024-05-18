@@ -1,12 +1,8 @@
 package tfar.moremobeffects.platform;
 
 public interface Config {
+    void init();
 
-
-    double exposed();
-    double vulnerable();
-    double archery();
-    double aiming();
-    double marksman();
+    ConfigEntry getConfigEntry(String id);
 
 }

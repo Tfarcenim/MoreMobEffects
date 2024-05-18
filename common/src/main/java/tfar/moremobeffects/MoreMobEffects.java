@@ -26,9 +26,11 @@ public class MoreMobEffects {
     public static void init() {
         Services.PLATFORM.registerAll(ModMobEffects.class, BuiltInRegistries.MOB_EFFECT, MobEffect.class);
         Services.PLATFORM.registerAll(ModAttributes.class, BuiltInRegistries.ATTRIBUTE, Attribute.class);
-
     }
 
+    public static void commonSetup() {
+        Services.PLATFORM.getConfig().init();
+    }
 
     public static float livingAttack(LivingEntity living, DamageSource source,float baseDamage) {
 
@@ -41,12 +43,12 @@ public class MoreMobEffects {
 
         MobEffectInstance mobEffectInstance = living.getEffect(ModMobEffects.EXPOSED);
         if (mobEffectInstance != null) {
-            baseDamage *= (1 + Services.PLATFORM.getConfig().exposed() * (mobEffectInstance.getAmplifier()+1));
+            baseDamage *= (1 + Services.PLATFORM.getConfig().getConfigEntry("exposed").getAsDouble() * (mobEffectInstance.getAmplifier()+1));
         }
 
         MobEffectInstance mobEffectInstance2 = living.getEffect(ModMobEffects.VULNERABLE);
         if (mobEffectInstance2 != null) {
-            baseDamage *= (1 + Services.PLATFORM.getConfig().vulnerable()  * (mobEffectInstance2.getAmplifier()+1));
+            baseDamage *= (1 + Services.PLATFORM.getConfig().getConfigEntry("vulnerable").getAsDouble()  * (mobEffectInstance2.getAmplifier()+1));
         }
         return baseDamage;
     }

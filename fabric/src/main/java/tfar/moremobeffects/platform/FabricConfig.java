@@ -1,13 +1,13 @@
 package tfar.moremobeffects.platform;
 
-public class FabricConfig implements Config{
+public class FabricConfig implements Config {
     @Override
-    public double exposed() {
-        return 0;
+    public void init() {
+
     }
 
     @Override
-    public double vulnerable() {
-        return 0;
+    public ConfigEntry getConfigEntry(String id) {
+        return null;
     }
 }

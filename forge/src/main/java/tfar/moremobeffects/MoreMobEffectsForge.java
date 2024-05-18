@@ -66,6 +66,7 @@ public class MoreMobEffectsForge {
     }
     private void commonSetup(FMLCommonSetupEvent event) {
         registerLater.clear();
+        MoreMobEffects.commonSetup();
     }
 
     private void livingAttack(LivingHurtEvent event) {
