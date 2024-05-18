@@ -16,22 +16,26 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 public class ConfigurableMobEffect extends MobEffect {
-    protected final Map<Attribute, Supplier<AttributeModifier>> configurableAttributeModifiers = Maps.newHashMap();
+    protected final Map<Supplier<Attribute>, Supplier<AttributeModifier>> configurableAttributeModifiers = Maps.newHashMap();
 
     public ConfigurableMobEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
 
     public ConfigurableMobEffect addConfigurableAttributeModifier(Attribute attribute, String uuid, Supplier<ConfigEntry> value, AttributeModifier.Operation operation) {
+        return this.addConfigurableAttributeModifier(() -> attribute,uuid,value,operation);
+    }
+
+    public ConfigurableMobEffect addConfigurableAttributeModifier(Supplier<Attribute> attributeSupplier, String uuid, Supplier<ConfigEntry> value, AttributeModifier.Operation operation) {
         Supplier<AttributeModifier> modifier = () -> new AttributeModifier(UUID.fromString(uuid), this::getDescriptionId,value.get().getAsDouble(), operation);
-        this.configurableAttributeModifiers.put(attribute, modifier);
+        this.configurableAttributeModifiers.put(attributeSupplier, modifier);
         return this;
     }
 
     @Override
     public Map<Attribute, AttributeModifier> getAttributeModifiers() {
         Map<Attribute,AttributeModifier> allModifiers = new HashMap<>(super.getAttributeModifiers());
-        configurableAttributeModifiers.forEach((attribute, attributeModifierSupplier) -> allModifiers.put(attribute,attributeModifierSupplier.get()));
+        configurableAttributeModifiers.forEach((attributeSupplier, attributeModifierSupplier) -> allModifiers.put(attributeSupplier.get(),attributeModifierSupplier.get()));
         return allModifiers;
     }
 

@@ -1,14 +1,16 @@
 package tfar.moremobeffects.platform;
 
+import dev.shadowsoffire.attributeslib.api.ALObjects;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.moremobeffects.MoreMobEffects;
 import tfar.moremobeffects.MoreMobEffectsForge;
 import tfar.moremobeffects.platform.services.IPlatformHelper;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.loading.FMLLoader;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -57,5 +59,10 @@ public class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public Config getConfig() {
         return config;
+    }
+
+    @Override
+    public Attribute getCriticalHitRate() {
+        return ALObjects.Attributes.CRIT_CHANCE.get();
     }
 }

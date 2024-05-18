@@ -22,7 +22,8 @@ public class ForgeConfig implements Config {
        // configEntryMap.put("might",new ForgeDoubleConfigEntry(TomlConfig.might));
        // configEntryMap.put("strengthened",new ForgeDoubleConfigEntry(TomlConfig.strengthened));
 
-
+        configEntryMap.put("inspired",new ForgeDoubleConfigEntry(TomlConfig.inspired));
+        configEntryMap.put("precise",new ForgeDoubleConfigEntry(TomlConfig.marksman));
     }
 
     @Override

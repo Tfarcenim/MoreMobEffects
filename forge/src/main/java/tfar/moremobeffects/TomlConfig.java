@@ -11,6 +11,9 @@ public class TomlConfig {
     public static ForgeConfigSpec.DoubleValue might;
     public static ForgeConfigSpec.DoubleValue strengthened;
 
+    public static ForgeConfigSpec.DoubleValue inspired;
+    public static ForgeConfigSpec.DoubleValue precise;
+
     public TomlConfig(ForgeConfigSpec.Builder builder) {
         builder.push("server");
         vulnerable = builder.
@@ -37,6 +40,13 @@ public class TomlConfig {
         strengthened = builder.
                 comment("Damage multiplier of strength")
                 .defineInRange("strength", .05, 0, Double.MAX_VALUE);
+
+        inspired = builder.
+                comment("Critical hit chance boost of inspired")
+                .defineInRange("might", .05, 0, 100);
+        precise = builder.
+                comment("Critical hit chance boost of precise")
+                .defineInRange("precise", .05, 0, 100);
         builder.pop();
     }
 }

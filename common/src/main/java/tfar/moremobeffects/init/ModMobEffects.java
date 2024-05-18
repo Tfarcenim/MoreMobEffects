@@ -26,5 +26,9 @@ public class ModMobEffects {
     public static final MobEffect STRENGTHENED = new AttackDamageMobEffect(MobEffectCategory.BENEFICIAL,0xff0000,3){}
             .addAttributeModifier(Attributes.ATTACK_DAMAGE,"623eb27b-ce58-4672-9539-32b2f3e06c8d", 0, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
+    public static final MobEffect INSPIRED = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"576c3243-94d3-4a86-bddf-78b57b0a2c4c", () -> Services.PLATFORM.getConfig().getConfigEntry("inspired"), AttributeModifier.Operation.ADDITION);
 
+    public static final MobEffect PRECISE = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"b3f05015-d905-4e6f-a2b9-340559e7fd2a",() -> Services.PLATFORM.getConfig().getConfigEntry("precise"), AttributeModifier.Operation.ADDITION);
 }
