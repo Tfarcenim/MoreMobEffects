@@ -25,8 +25,11 @@ public class ForgeConfig implements Config {
         configEntryMap.put("inspired",new ForgeDoubleConfigEntry(TomlConfig.inspired));
         configEntryMap.put("precise",new ForgeDoubleConfigEntry(TomlConfig.marksman));
 
-        configEntryMap.put("inspired",new ForgeDoubleConfigEntry(TomlConfig.inspired));
-        configEntryMap.put("precise",new ForgeDoubleConfigEntry(TomlConfig.marksman));
+        configEntryMap.put("brutality",new ForgeDoubleConfigEntry(TomlConfig.brutality));
+        configEntryMap.put("savage",new ForgeDoubleConfigEntry(TomlConfig.savage));
+
+        configEntryMap.put("archers_frenzy",new ForgeDoubleConfigEntry(TomlConfig.archers_frenzy));
+        configEntryMap.put("hasty",new ForgeDoubleConfigEntry(TomlConfig.hasty));
     }
 
     @Override

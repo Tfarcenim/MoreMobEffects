@@ -44,5 +44,5 @@ public class ModMobEffects {
     public static final MobEffect HASTY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
             .addConfigurableAttributeModifier(Services.PLATFORM::getArrowDrawSpeed,"12ffc09f-db1d-46b7-b263-f63fe4177c5b",() -> Services.PLATFORM.getConfig().getConfigEntry("hasty"), AttributeModifier.Operation.ADDITION);
 
-    
+
 }
