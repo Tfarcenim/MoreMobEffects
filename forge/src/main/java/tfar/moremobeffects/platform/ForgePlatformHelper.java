@@ -65,4 +65,9 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public Attribute getCriticalHitRate() {
         return ALObjects.Attributes.CRIT_CHANCE.get();
     }
+
+    @Override
+    public Attribute getCriticalHitDamage() {
+        return ALObjects.Attributes.CRIT_DAMAGE.get();
+    }
 }

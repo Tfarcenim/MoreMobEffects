@@ -43,6 +43,7 @@ public interface IPlatformHelper {
     Config getConfig();
 
     Attribute getCriticalHitRate();
+    Attribute getCriticalHitDamage();
 
 
 }

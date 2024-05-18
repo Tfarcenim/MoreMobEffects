@@ -31,4 +31,10 @@ public class ModMobEffects {
 
     public static final MobEffect PRECISE = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
             .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"b3f05015-d905-4e6f-a2b9-340559e7fd2a",() -> Services.PLATFORM.getConfig().getConfigEntry("precise"), AttributeModifier.Operation.ADDITION);
+
+    public static final MobEffect BRUTALITY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"fb1fa74d-2925-4423-8c37-76aa2b3234a6", () -> Services.PLATFORM.getConfig().getConfigEntry("brutality"), AttributeModifier.Operation.ADDITION);
+
+    public static final MobEffect SAVAGE = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"15d3734f-8dab-485f-8b42-417f89794f9d",() -> Services.PLATFORM.getConfig().getConfigEntry("savage"), AttributeModifier.Operation.ADDITION);
 }
