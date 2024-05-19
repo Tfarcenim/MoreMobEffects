@@ -20,6 +20,10 @@ public class TomlConfig {
     public static ForgeConfigSpec.DoubleValue archers_frenzy;
     public static ForgeConfigSpec.DoubleValue hasty;
 
+    public static ForgeConfigSpec.DoubleValue empowered;
+    public static ForgeConfigSpec.DoubleValue magic_up;
+    public static ForgeConfigSpec.DoubleValue arcane_boost;
+
     public TomlConfig(ForgeConfigSpec.Builder builder) {
         builder.push("server");
         vulnerable = builder.
@@ -67,6 +71,16 @@ public class TomlConfig {
         hasty = builder.
                 comment("Draw speed boost of hasty")
                 .defineInRange("hasty", .05, 0, Double.MAX_VALUE);
+
+        empowered = builder.
+                comment("Spell power boost of empowered")
+                .defineInRange("empowered", .05, 0, Double.MAX_VALUE);
+        magic_up = builder.
+                comment("Spell power boost of magic up")
+                .defineInRange("magic_up", .05, 0, Double.MAX_VALUE);
+        arcane_boost = builder.
+                comment("Spell power boost of arcane boost")
+                .defineInRange("arcane_boost", .05, 0, Double.MAX_VALUE);
 
         builder.pop();
     }

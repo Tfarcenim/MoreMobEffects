@@ -28,21 +28,23 @@ public class ModMobEffects {
 
     public static final MobEffect INSPIRED = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
             .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"576c3243-94d3-4a86-bddf-78b57b0a2c4c", () -> Services.PLATFORM.getConfig().getConfigEntry("inspired"), AttributeModifier.Operation.ADDITION);
-
     public static final MobEffect PRECISE = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
             .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitRate,"b3f05015-d905-4e6f-a2b9-340559e7fd2a",() -> Services.PLATFORM.getConfig().getConfigEntry("precise"), AttributeModifier.Operation.ADDITION);
 
     public static final MobEffect BRUTALITY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitDamage,"fb1fa74d-2925-4423-8c37-76aa2b3234a6", () -> Services.PLATFORM.getConfig().getConfigEntry("brutality"), AttributeModifier.Operation.ADDITION);
-
+            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitDamage,"fb1fa74d-2925-4423-8c37-76aa2b3234a6", () -> Services.PLATFORM.getConfig().getConfigEntry("brutality"), AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final MobEffect SAVAGE = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitDamage,"15d3734f-8dab-485f-8b42-417f89794f9d",() -> Services.PLATFORM.getConfig().getConfigEntry("savage"), AttributeModifier.Operation.ADDITION);
+            .addConfigurableAttributeModifier(Services.PLATFORM::getCriticalHitDamage,"15d3734f-8dab-485f-8b42-417f89794f9d",() -> Services.PLATFORM.getConfig().getConfigEntry("savage"), AttributeModifier.Operation.MULTIPLY_TOTAL);
 
     public static final MobEffect ARCHERS_FRENZY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getArrowDrawSpeed,"2eb65dfd-145e-4263-bc34-c38b82eac5dc", () -> Services.PLATFORM.getConfig().getConfigEntry("archers_frenzy"), AttributeModifier.Operation.ADDITION);
-
+            .addConfigurableAttributeModifier(Services.PLATFORM::getArrowDrawSpeed,"2eb65dfd-145e-4263-bc34-c38b82eac5dc", () -> Services.PLATFORM.getConfig().getConfigEntry("archers_frenzy"), AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final MobEffect HASTY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getArrowDrawSpeed,"12ffc09f-db1d-46b7-b263-f63fe4177c5b",() -> Services.PLATFORM.getConfig().getConfigEntry("hasty"), AttributeModifier.Operation.ADDITION);
+            .addConfigurableAttributeModifier(Services.PLATFORM::getArrowDrawSpeed,"12ffc09f-db1d-46b7-b263-f63fe4177c5b",() -> Services.PLATFORM.getConfig().getConfigEntry("hasty"), AttributeModifier.Operation.MULTIPLY_TOTAL);
 
-
+    public static final MobEffect EMPOWERED = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellPower,"cafda9bf-0ebf-41e5-85fa-065340e66763", () -> Services.PLATFORM.getConfig().getConfigEntry("empowered"), AttributeModifier.Operation.MULTIPLY_TOTAL);
+    public static final MobEffect MAGIC_UP = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellPower,"b2877f0b-8def-42f7-be7d-de069edc079d",() -> Services.PLATFORM.getConfig().getConfigEntry("magic_up"), AttributeModifier.Operation.MULTIPLY_TOTAL);
+    public static final MobEffect ARCANE_BOOST = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellPower,"e47ab303-40f0-4c8f-a88c-8b1aa450dfc9",() -> Services.PLATFORM.getConfig().getConfigEntry("arcane_boost"), AttributeModifier.Operation.MULTIPLY_TOTAL);
 }

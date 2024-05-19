@@ -1,6 +1,7 @@
 package tfar.moremobeffects.platform;
 
 import dev.shadowsoffire.attributeslib.api.ALObjects;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -8,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.commons.lang3.tuple.Pair;
+import org.w3c.dom.Attr;
 import tfar.moremobeffects.MoreMobEffects;
 import tfar.moremobeffects.MoreMobEffectsForge;
 import tfar.moremobeffects.platform.services.IPlatformHelper;
@@ -74,5 +76,10 @@ public class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public Attribute getArrowDrawSpeed() {
         return ALObjects.Attributes.DRAW_SPEED.get();
+    }
+
+    @Override
+    public Attribute getSpellPower() {
+        return AttributeRegistry.SPELL_POWER.get();
     }
 }
