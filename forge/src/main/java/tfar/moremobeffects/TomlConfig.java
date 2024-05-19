@@ -24,6 +24,10 @@ public class TomlConfig {
     public static ForgeConfigSpec.DoubleValue magic_up;
     public static ForgeConfigSpec.DoubleValue arcane_boost;
 
+    public static ForgeConfigSpec.DoubleValue spell_haste;
+
+    public static ForgeConfigSpec.DoubleValue focused;
+
     public TomlConfig(ForgeConfigSpec.Builder builder) {
         builder.push("server");
         vulnerable = builder.
@@ -81,6 +85,14 @@ public class TomlConfig {
         arcane_boost = builder.
                 comment("Spell power boost of arcane boost")
                 .defineInRange("arcane_boost", .05, 0, Double.MAX_VALUE);
+
+        spell_haste = builder.
+                comment("Spell cooldown reduction boost of spell haste")
+                .defineInRange("spell_haste", 5d, 0, 100);
+
+        focused = builder.
+                comment("Spell cast time reduction boost of focused")
+                .defineInRange("focused", 5d, 0, 100);
 
         builder.pop();
     }

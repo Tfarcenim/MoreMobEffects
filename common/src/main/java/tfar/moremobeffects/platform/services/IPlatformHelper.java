@@ -46,6 +46,8 @@ public interface IPlatformHelper {
     Attribute getCriticalHitDamage();
     Attribute getArrowDrawSpeed();
     Attribute getSpellPower();
+    Attribute getSpellCooldown();
+    Attribute getSpellCastTimeReduction();
 
 
 }

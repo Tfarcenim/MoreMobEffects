@@ -1,0 +1,21 @@
+{
+  "attribute.name.generic.projectile_attack_damage": "Projectile Attack Damage",
+  "effect.moremobeffects.aiming": "Aiming",
+  "effect.moremobeffects.arcane_boost": "Arcane Boost",
+  "effect.moremobeffects.archers_frenzy": "Archer's Frenzy",
+  "effect.moremobeffects.archery": "Archery",
+  "effect.moremobeffects.brutality": "Brutality",
+  "effect.moremobeffects.empowered": "Empowered",
+  "effect.moremobeffects.exposed": "Exposed",
+  "effect.moremobeffects.focused": "Focused",
+  "effect.moremobeffects.hasty": "Hasty",
+  "effect.moremobeffects.inspired": "Inspired",
+  "effect.moremobeffects.magic_up": "Magic Up",
+  "effect.moremobeffects.marksman": "Marksman",
+  "effect.moremobeffects.might": "Might",
+  "effect.moremobeffects.precise": "Precise",
+  "effect.moremobeffects.savage": "Savage",
+  "effect.moremobeffects.spell_haste": "Spell Haste",
+  "effect.moremobeffects.strengthened": "Strengthened",
+  "effect.moremobeffects.vulnerable": "Vulnerable"
+}

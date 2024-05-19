@@ -83,6 +83,13 @@ dependencies {
     implementation fg.deobf("curse.maven:apothic-attributes-898963:5340012")
     implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:5341949")
 
+    implementation fg.deobf("dev.shadowsoffire:Placebo:$minecraft_version-$placebo")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-$minecraft_version:$geckolib")
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:$curios")
+    implementation fg.deobf("top.theillusivec4.caelus:caelus-forge:$caelus")
+
+    implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:$project.player_animator")
+
 }
 
 tasks.withType(JavaCompile).configureEach {

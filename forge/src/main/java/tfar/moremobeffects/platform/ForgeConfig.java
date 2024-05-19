@@ -30,6 +30,14 @@ public class ForgeConfig implements Config {
 
         configEntryMap.put("archers_frenzy",new ForgeDoubleConfigEntry(TomlConfig.archers_frenzy));
         configEntryMap.put("hasty",new ForgeDoubleConfigEntry(TomlConfig.hasty));
+
+        configEntryMap.put("empowered",new ForgeDoubleConfigEntry(TomlConfig.empowered));
+        configEntryMap.put("magic_up",new ForgeDoubleConfigEntry(TomlConfig.magic_up));
+        configEntryMap.put("arcane_boost",new ForgeDoubleConfigEntry(TomlConfig.arcane_boost));
+
+        configEntryMap.put("spell_haste",new ForgeDoubleConfigEntry(TomlConfig.spell_haste));
+
+        configEntryMap.put("focused",new ForgeDoubleConfigEntry(TomlConfig.focused));
     }
 
     @Override

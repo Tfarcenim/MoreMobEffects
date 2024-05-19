@@ -82,4 +82,13 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public Attribute getSpellPower() {
         return AttributeRegistry.SPELL_POWER.get();
     }
+
+    @Override
+    public Attribute getSpellCooldown() {
+        return AttributeRegistry.COOLDOWN_REDUCTION.get();
+    }
+
+    public Attribute getSpellCastTimeReduction() {
+        return AttributeRegistry.CAST_TIME_REDUCTION.get();
+    }
 }
