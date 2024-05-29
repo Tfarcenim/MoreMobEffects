@@ -69,7 +69,7 @@ public class ModMobEffects {
 
     public static final MobEffect ARCANIC_CONVERSION = IRONS_SPELLBOOKS ? new ArcanicConversionMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
     public static final MobEffect ARCANIC_OVERLOAD = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
-    public static final MobEffect RETRIBUTION = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+    public static final MobEffect RETRIBUTION = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
     public static final MobEffect DOMINEERING = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
     public static final MobEffect MARKED = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
     public static final MobEffect MANA_FLARE = IRONS_SPELLBOOKS ? new ManaFlareMobEffect(MobEffectCategory.HARMFUL,0xff0000) : null;

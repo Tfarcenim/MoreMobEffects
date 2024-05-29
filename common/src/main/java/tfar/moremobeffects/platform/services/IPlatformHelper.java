@@ -48,6 +48,7 @@ public interface IPlatformHelper {
     Attribute getSpellPower();
     Attribute getSpellCooldown();
     Attribute getSpellCastTimeReduction();
+    Attribute getEnderSpellPower();
 
 
 }

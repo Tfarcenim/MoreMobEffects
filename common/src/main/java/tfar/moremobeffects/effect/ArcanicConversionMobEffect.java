@@ -36,7 +36,7 @@ public class ArcanicConversionMobEffect extends MobEffect {
 
         double total_spell_boost = spellboost * physical_damage;
 
-        AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getSpellPower());
+        AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getEnderSpellPower());
         if (attributeInstance != null) {
             AttributeModifier currentModifier = attributeInstance.getModifier(uuid);
             if (currentModifier != null) {

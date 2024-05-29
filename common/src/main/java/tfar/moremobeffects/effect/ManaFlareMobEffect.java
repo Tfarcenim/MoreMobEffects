@@ -20,8 +20,8 @@ public class ManaFlareMobEffect extends MobEffect {
     public void applyEffectTick(LivingEntity living, int amplifier) {
         AttributeInstance spellPower = living.getAttribute(Services.PLATFORM.getSpellPower());
         if (spellPower != null) {
-            double multi = spellPower.getBaseValue();
-            living.hurt(living.damageSources().magic(), (float) ((amplifier + 1)*multi * Services.PLATFORM.getConfig().mana_flare()));
+            double multi = spellPower.getValue();
+            living.hurt(living.damageSources().magic(), (float) ((amplifier + 1) * multi * Services.PLATFORM.getConfig().mana_flare()));
         }
     }
 }

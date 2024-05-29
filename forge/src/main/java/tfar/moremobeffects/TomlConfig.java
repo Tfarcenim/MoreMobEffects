@@ -205,7 +205,7 @@ public class TomlConfig implements MultiloaderConfig {
                     .defineInRange("focused", 5d, 0, 100);
 
             arcanic_conversion = builder.
-                    comment("Boost spell power by x for each point of attack * projectile_attack attribute")
+                    comment("Boost ender spell power by x for each point of attack * projectile_attack attribute")
                     .defineInRange("arcanic_conversion", .05, 0, Double.MAX_VALUE);
 
             arcanic_overload = builder.

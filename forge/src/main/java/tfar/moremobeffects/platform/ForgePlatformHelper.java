@@ -91,4 +91,9 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public Attribute getSpellCastTimeReduction() {
         return AttributeRegistry.CAST_TIME_REDUCTION.get();
     }
+
+    @Override
+    public Attribute getEnderSpellPower() {
+        return AttributeRegistry.ENDER_SPELL_POWER.get();
+    }
 }

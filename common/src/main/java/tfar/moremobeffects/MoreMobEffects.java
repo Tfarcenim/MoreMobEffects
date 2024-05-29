@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tfar.moremobeffects.init.ModAttributes;
@@ -63,8 +64,13 @@ public class MoreMobEffects {
             MobEffectInstance retribution = living.getEffect(ModMobEffects.RETRIBUTION);
 
             if (retribution != null) {
-                attacker.hurt(living.damageSources().thorns(living), (float)
-                        (Services.PLATFORM.getConfig().retribution() * (retribution.getAmplifier()+1)));
+                AttributeInstance spellPower = living.getAttributes().hasAttribute(Services.PLATFORM.getEnderSpellPower())
+                        ? living.getAttribute(Services.PLATFORM.getEnderSpellPower()) : null;
+
+                if (spellPower != null) {
+                    attacker.hurt(living.damageSources().thorns(living), (float)
+                            (Services.PLATFORM.getConfig().retribution() * (retribution.getAmplifier() + 1) * spellPower.getValue()));
+                }
             }
 
             MobEffectInstance domineering = livingAttacker.getEffect(ModMobEffects.DOMINEERING);

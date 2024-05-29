@@ -81,4 +81,34 @@ public class FabricMultiloaderConfig implements MultiloaderConfig {
     public double focused() {
         return 0;
     }
+
+    @Override
+    public double arcanic_conversion() {
+        return 0;
+    }
+
+    @Override
+    public double arcanic_overload() {
+        return 0;
+    }
+
+    @Override
+    public double retribution() {
+        return 0;
+    }
+
+    @Override
+    public double domineering() {
+        return 0;
+    }
+
+    @Override
+    public double marked() {
+        return 0;
+    }
+
+    @Override
+    public double mana_flare() {
+        return 0;
+    }
 }

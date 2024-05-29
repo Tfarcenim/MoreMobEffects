@@ -63,4 +63,9 @@ public class FabricPlatformHelper implements IPlatformHelper {
     public Attribute getSpellCastTimeReduction() {
         return null;
     }
+
+    @Override
+    public Attribute getEnderSpellPower() {
+        return null;
+    }
 }
