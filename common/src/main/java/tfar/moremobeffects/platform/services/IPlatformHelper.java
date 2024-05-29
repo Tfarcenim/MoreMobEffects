@@ -2,7 +2,7 @@ package tfar.moremobeffects.platform.services;
 
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import tfar.moremobeffects.platform.Config;
+import tfar.moremobeffects.platform.MultiloaderConfig;
 
 public interface IPlatformHelper {
 
@@ -40,7 +40,7 @@ public interface IPlatformHelper {
 
     <T extends Registry<? extends F>,F> void registerAll(Class<?> clazz, T registry, Class<? extends F> filter);
 
-    Config getConfig();
+    MultiloaderConfig getConfig();
 
     Attribute getCriticalHitRate();
     Attribute getCriticalHitDamage();

@@ -45,11 +45,11 @@ public class MoreMobEffectsForge {
         MoreMobEffects.init();
     }
 
-    public static final TomlConfig SERVER;
+    public static final TomlConfig.Server SERVER;
     public static final ForgeConfigSpec SERVER_SPEC;
 
     static {
-        final Pair<TomlConfig, ForgeConfigSpec> specPair2 = new ForgeConfigSpec.Builder().configure(TomlConfig::new);
+        final Pair<TomlConfig.Server, ForgeConfigSpec> specPair2 = new ForgeConfigSpec.Builder().configure(TomlConfig.Server::new);
         SERVER_SPEC = specPair2.getRight();
         SERVER = specPair2.getLeft();
     }

@@ -1,99 +1,234 @@
 package tfar.moremobeffects;
 
 import net.minecraftforge.common.ForgeConfigSpec;
+import tfar.moremobeffects.platform.MultiloaderConfig;
 
-public class TomlConfig {
-    public static ForgeConfigSpec.DoubleValue vulnerable;
-    public static ForgeConfigSpec.DoubleValue exposed;
-    public static ForgeConfigSpec.DoubleValue archery;
-    public static ForgeConfigSpec.DoubleValue aiming;
-    public static ForgeConfigSpec.DoubleValue marksman;
-    public static ForgeConfigSpec.DoubleValue might;
-    public static ForgeConfigSpec.DoubleValue strengthened;
+public class TomlConfig implements MultiloaderConfig {
 
-    public static ForgeConfigSpec.DoubleValue inspired;
-    public static ForgeConfigSpec.DoubleValue precise;
+    @Override
+    public double vulnerable() {
+        return Server.vulnerable.get();
+    }
 
-    public static ForgeConfigSpec.DoubleValue brutality;
-    public static ForgeConfigSpec.DoubleValue savage;
+    @Override
+    public double exposed() {
+        return Server.exposed.get();
+    }
 
-    public static ForgeConfigSpec.DoubleValue archers_frenzy;
-    public static ForgeConfigSpec.DoubleValue hasty;
+    @Override
+    public double archery() {
+        return Server.archery.get();
+    }
 
-    public static ForgeConfigSpec.DoubleValue empowered;
-    public static ForgeConfigSpec.DoubleValue magic_up;
-    public static ForgeConfigSpec.DoubleValue arcane_boost;
+    @Override
+    public double aiming() {
+        return Server.aiming.get();
+    }
 
-    public static ForgeConfigSpec.DoubleValue spell_haste;
+    @Override
+    public double marksman() {
+        return Server.marksman.get();
+    }
 
-    public static ForgeConfigSpec.DoubleValue focused;
+    @Override
+    public double inspired() {
+        return Server.inspired.get();
+    }
 
-    public TomlConfig(ForgeConfigSpec.Builder builder) {
-        builder.push("server");
-        vulnerable = builder.
-                comment("Damage multiplier of vulnerable")
-                .defineInRange("vulnerable", .05, 0, Double.MAX_VALUE);
-        exposed = builder.
-                comment("Damage multiplier of exposed")
-                .defineInRange("exposed", .05, 0, Double.MAX_VALUE);
+    @Override
+    public double precise() {
+        return Server.precise.get();
+    }
 
-        archery = builder.
-                comment("Damage multiplier of archery")
-                .defineInRange("archery", .05, 0, Double.MAX_VALUE);
-        aiming = builder.
-                comment("Damage multiplier of aiming")
-                .defineInRange("aiming", .05, 0, Double.MAX_VALUE);
+    @Override
+    public double brutality() {
+        return Server.brutality.get();
+    }
 
-        marksman = builder.
-                comment("Damage multiplier of marksman")
-                .defineInRange("marksman", .05, 0, Double.MAX_VALUE);
+    @Override
+    public double savage() {
+        return Server.savage.get();
+    }
 
-        might = builder.
-                comment("Damage multiplier of might")
-                .defineInRange("might", .05, 0, Double.MAX_VALUE);
-        strengthened = builder.
-                comment("Damage multiplier of strength")
-                .defineInRange("strength", .05, 0, Double.MAX_VALUE);
+    @Override
+    public double archers_frenzy() {
+        return Server.archers_frenzy.get();
+    }
 
-        inspired = builder.
-                comment("Critical hit chance boost of inspired")
-                .defineInRange("might", .05, 0, 100);
-        precise = builder.
-                comment("Critical hit chance boost of precise")
-                .defineInRange("precise", .05, 0, 100);
+    @Override
+    public double hasty() {
+        return Server.hasty.get();
+    }
 
-        brutality = builder.
-                comment("Critical hit damage boost of brutality")
-                .defineInRange("brutality", .05, 0, Double.MAX_VALUE);
-        savage = builder.
-                comment("Critical hit damage boost of savage")
-                .defineInRange("savage", .05, 0, Double.MAX_VALUE);
+    @Override
+    public double empowered() {
+        return Server.empowered.get();
+    }
 
-        archers_frenzy = builder.
-                comment("Draw speed boost of archer's frenzy")
-                .defineInRange("archers_frenzy", .05, 0, Double.MAX_VALUE);
-        hasty = builder.
-                comment("Draw speed boost of hasty")
-                .defineInRange("hasty", .05, 0, Double.MAX_VALUE);
+    @Override
+    public double magic_up() {
+        return Server.magic_up.get();
+    }
 
-        empowered = builder.
-                comment("Spell power boost of empowered")
-                .defineInRange("empowered", .05, 0, Double.MAX_VALUE);
-        magic_up = builder.
-                comment("Spell power boost of magic up")
-                .defineInRange("magic_up", .05, 0, Double.MAX_VALUE);
-        arcane_boost = builder.
-                comment("Spell power boost of arcane boost")
-                .defineInRange("arcane_boost", .05, 0, Double.MAX_VALUE);
+    @Override
+    public double arcane_boost() {
+        return Server.arcane_boost.get();
+    }
 
-        spell_haste = builder.
-                comment("Spell cooldown reduction boost of spell haste")
-                .defineInRange("spell_haste", 5d, 0, 100);
+    @Override
+    public double spell_haste() {
+        return Server.spell_haste.get();
+    }
 
-        focused = builder.
-                comment("Spell cast time reduction boost of focused")
-                .defineInRange("focused", 5d, 0, 100);
+    @Override
+    public double focused() {
+        return Server.focused.get();
+    }
 
-        builder.pop();
+    @Override
+    public double arcanic_conversion() {
+        return Server.arcanic_conversion.get();
+    }
+
+    @Override
+    public double arcanic_overload() {
+        return Server.arcanic_overload.get();
+    }
+
+    @Override
+    public double retribution() {
+        return Server.retribution.get();
+    }
+
+    @Override
+    public double domineering() {
+        return Server.domineering.get();
+    }
+
+    @Override
+    public double marked() {
+        return Server.marked.get();
+    }
+
+    @Override
+    public double mana_flare() {
+        return Server.mana_flare.get();
+    }
+
+    public static class Server {
+        public static ForgeConfigSpec.DoubleValue vulnerable;
+        public static ForgeConfigSpec.DoubleValue exposed;
+        public static ForgeConfigSpec.DoubleValue archery;
+        public static ForgeConfigSpec.DoubleValue aiming;
+        public static ForgeConfigSpec.DoubleValue marksman;
+
+        public static ForgeConfigSpec.DoubleValue inspired;
+        public static ForgeConfigSpec.DoubleValue precise;
+
+        public static ForgeConfigSpec.DoubleValue brutality;
+        public static ForgeConfigSpec.DoubleValue savage;
+
+        public static ForgeConfigSpec.DoubleValue archers_frenzy;
+        public static ForgeConfigSpec.DoubleValue hasty;
+
+        public static ForgeConfigSpec.DoubleValue empowered;
+        public static ForgeConfigSpec.DoubleValue magic_up;
+        public static ForgeConfigSpec.DoubleValue arcane_boost;
+
+        public static ForgeConfigSpec.DoubleValue spell_haste;
+
+        public static ForgeConfigSpec.DoubleValue focused;
+        public static ForgeConfigSpec.DoubleValue arcanic_conversion;
+        public static ForgeConfigSpec.DoubleValue arcanic_overload;
+        public static ForgeConfigSpec.DoubleValue retribution;
+        public static ForgeConfigSpec.DoubleValue domineering;
+        public static ForgeConfigSpec.DoubleValue marked;
+        public static ForgeConfigSpec.DoubleValue mana_flare;
+
+        public Server(ForgeConfigSpec.Builder builder) {
+            builder.push("server");
+            vulnerable = builder.
+                    comment("Damage multiplier of vulnerable")
+                    .defineInRange("vulnerable", .05, 0, Double.MAX_VALUE);
+            exposed = builder.
+                    comment("Damage multiplier of exposed")
+                    .defineInRange("exposed", .05, 0, Double.MAX_VALUE);
+
+            archery = builder.
+                    comment("Damage multiplier of archery")
+                    .defineInRange("archery", .05, 0, Double.MAX_VALUE);
+            aiming = builder.
+                    comment("Damage multiplier of aiming")
+                    .defineInRange("aiming", .05, 0, Double.MAX_VALUE);
+
+            marksman = builder.
+                    comment("Damage multiplier of marksman")
+                    .defineInRange("marksman", .05, 0, Double.MAX_VALUE);
+
+            inspired = builder.
+                    comment("Critical hit chance boost of inspired")
+                    .defineInRange("might", .05, 0, 100);
+            precise = builder.
+                    comment("Critical hit chance boost of precise")
+                    .defineInRange("precise", .05, 0, 100);
+
+            brutality = builder.
+                    comment("Critical hit damage boost of brutality")
+                    .defineInRange("brutality", .05, 0, Double.MAX_VALUE);
+            savage = builder.
+                    comment("Critical hit damage boost of savage")
+                    .defineInRange("savage", .05, 0, Double.MAX_VALUE);
+
+            archers_frenzy = builder.
+                    comment("Draw speed boost of archer's frenzy")
+                    .defineInRange("archers_frenzy", .05, 0, Double.MAX_VALUE);
+            hasty = builder.
+                    comment("Draw speed boost of hasty")
+                    .defineInRange("hasty", .05, 0, Double.MAX_VALUE);
+
+            empowered = builder.
+                    comment("Spell power boost of empowered")
+                    .defineInRange("empowered", .05, 0, Double.MAX_VALUE);
+            magic_up = builder.
+                    comment("Spell power boost of magic up")
+                    .defineInRange("magic_up", .05, 0, Double.MAX_VALUE);
+            arcane_boost = builder.
+                    comment("Spell power boost of arcane boost")
+                    .defineInRange("arcane_boost", .05, 0, Double.MAX_VALUE);
+
+            spell_haste = builder.
+                    comment("Spell cooldown reduction boost of spell haste")
+                    .defineInRange("spell_haste", 5d, 0, 100);
+
+            focused = builder.
+                    comment("Spell cast time reduction boost of focused")
+                    .defineInRange("focused", 5d, 0, 100);
+
+            arcanic_conversion = builder.
+                    comment("Boost spell power by x for each point of attack * projectile_attack attribute")
+                    .defineInRange("arcanic_conversion", .05, 0, Double.MAX_VALUE);
+
+            arcanic_overload = builder.
+                    comment("Physical Damage (ranged/melee) has an additional x damage (multiplicative) added as magic damage")
+                    .defineInRange("arcanic_overload", .05, 0, Double.MAX_VALUE);
+
+            retribution = builder.
+                    comment("Deals x damage (additive) to the attacker")
+                    .defineInRange("retribution", 1, 0, Double.MAX_VALUE);
+
+            domineering = builder.
+                    comment("Deal x more damage (multiplicative) on enemies under a negative status effect.")
+                    .defineInRange("domineering", .05, 0, Double.MAX_VALUE);
+
+            marked = builder.
+                    comment("Increases the damage of the next physical damage by x (multiplicative). Immediately disappears after a successful attack.")
+                    .defineInRange("marked", .05, 0, Double.MAX_VALUE);
+
+            mana_flare = builder.
+                    comment("Deals x damage (multiplicative with spell power) every second.")
+                    .defineInRange("mana_flare", 1, 0, Double.MAX_VALUE);
+
+            builder.pop();
+        }
     }
 }

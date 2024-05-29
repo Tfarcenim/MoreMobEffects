@@ -30,7 +30,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public Config getConfig() {
+    public MultiloaderConfig getConfig() {
         return null;
     }
 

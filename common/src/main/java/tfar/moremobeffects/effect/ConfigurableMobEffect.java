@@ -8,7 +8,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import tfar.moremobeffects.platform.ConfigEntry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,12 +21,12 @@ public class ConfigurableMobEffect extends MobEffect {
         super(category, color);
     }
 
-    public ConfigurableMobEffect addConfigurableAttributeModifier(Attribute attribute, String uuid, Supplier<ConfigEntry> value, AttributeModifier.Operation operation) {
+    public ConfigurableMobEffect addConfigurableAttributeModifier(Attribute attribute, String uuid, Supplier<Double> value, AttributeModifier.Operation operation) {
         return this.addConfigurableAttributeModifier(() -> attribute,uuid,value,operation);
     }
 
-    public ConfigurableMobEffect addConfigurableAttributeModifier(Supplier<Attribute> attributeSupplier, String uuid, Supplier<ConfigEntry> value, AttributeModifier.Operation operation) {
-        Supplier<AttributeModifier> modifier = () -> new AttributeModifier(UUID.fromString(uuid), this::getDescriptionId,value.get().getAsDouble(), operation);
+    public ConfigurableMobEffect addConfigurableAttributeModifier(Supplier<Attribute> attributeSupplier, String uuid, Supplier<Double> value, AttributeModifier.Operation operation) {
+        Supplier<AttributeModifier> modifier = () -> new AttributeModifier(UUID.fromString(uuid), this::getDescriptionId,value.get(), operation);
         this.configurableAttributeModifiers.put(attributeSupplier, modifier);
         return this;
     }

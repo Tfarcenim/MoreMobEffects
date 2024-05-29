@@ -3,7 +3,10 @@ package tfar.moremobeffects;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,27 +32,57 @@ public class MoreMobEffects {
     }
 
     public static void commonSetup() {
-        Services.PLATFORM.getConfig().init();
     }
 
     public static float livingAttack(LivingEntity living, DamageSource source,float baseDamage) {
 
+        MobEffectInstance exposed = living.getEffect(ModMobEffects.EXPOSED);
+        if (exposed != null) {
+            baseDamage *= (1 + Services.PLATFORM.getConfig().exposed() * (exposed.getAmplifier()+1));
+        }
+
+        MobEffectInstance vulnerable = living.getEffect(ModMobEffects.VULNERABLE);
+        if (vulnerable != null) {
+            baseDamage *= (1 + Services.PLATFORM.getConfig().vulnerable()  * (vulnerable.getAmplifier()+1));
+        }
+
         Entity attacker = source.getEntity();
 
-        if (attacker instanceof LivingEntity livingAttacker && source.is(DamageTypeTags.IS_PROJECTILE)) {
-            double projectile_damage = livingAttacker.getAttributeValue(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
-            baseDamage *= projectile_damage;
+        if (attacker instanceof LivingEntity livingAttacker) {
+            if (source.is(DamageTypeTags.IS_PROJECTILE)) {
+                double projectile_damage = livingAttacker.getAttributeValue(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
+                baseDamage *= projectile_damage;
+            }
+
+            MobEffectInstance arcanic_overload = livingAttacker.getEffect(ModMobEffects.ARCANIC_OVERLOAD);
+            if (arcanic_overload != null && !source.is(DamageTypes.MAGIC)) {
+                living.hurt(living.damageSources().magic(), (float)
+                        (Services.PLATFORM.getConfig().arcanic_overload() * (arcanic_overload.getAmplifier()+1) * baseDamage));
+            }
+
+            MobEffectInstance retribution = living.getEffect(ModMobEffects.RETRIBUTION);
+
+            if (retribution != null) {
+                attacker.hurt(living.damageSources().thorns(living), (float)
+                        (Services.PLATFORM.getConfig().retribution() * (retribution.getAmplifier()+1)));
+            }
+
+            MobEffectInstance domineering = livingAttacker.getEffect(ModMobEffects.DOMINEERING);
+
+            if (domineering != null) {
+                long count = living.getActiveEffects()
+                        .stream().filter(mobEffectInstance -> mobEffectInstance.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
+                baseDamage *= (1 + (Services.PLATFORM.getConfig().domineering() * domineering.getAmplifier() + 1) * count);
+            }
+
         }
 
-        MobEffectInstance mobEffectInstance = living.getEffect(ModMobEffects.EXPOSED);
-        if (mobEffectInstance != null) {
-            baseDamage *= (1 + Services.PLATFORM.getConfig().getConfigEntry("exposed").getAsDouble() * (mobEffectInstance.getAmplifier()+1));
+        MobEffectInstance marked = living.getEffect(ModMobEffects.MARKED);
+        if (marked != null && !source.is(DamageTypes.MAGIC)) {
+            baseDamage *= (1 + (Services.PLATFORM.getConfig().marked() * marked.getAmplifier() + 1));
+            living.removeEffect(ModMobEffects.MARKED);
         }
 
-        MobEffectInstance mobEffectInstance2 = living.getEffect(ModMobEffects.VULNERABLE);
-        if (mobEffectInstance2 != null) {
-            baseDamage *= (1 + Services.PLATFORM.getConfig().getConfigEntry("vulnerable").getAsDouble()  * (mobEffectInstance2.getAmplifier()+1));
-        }
         return baseDamage;
     }
 }

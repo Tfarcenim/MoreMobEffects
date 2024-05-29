@@ -9,9 +9,9 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.commons.lang3.tuple.Pair;
-import org.w3c.dom.Attr;
 import tfar.moremobeffects.MoreMobEffects;
 import tfar.moremobeffects.MoreMobEffectsForge;
+import tfar.moremobeffects.TomlConfig;
 import tfar.moremobeffects.platform.services.IPlatformHelper;
 
 import java.lang.reflect.Field;
@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 
 public class ForgePlatformHelper implements IPlatformHelper {
 
-    final Config config = new ForgeConfig();
+    final MultiloaderConfig config = new TomlConfig();
     @Override
     public String getPlatformName() {
 
@@ -59,7 +59,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public Config getConfig() {
+    public MultiloaderConfig getConfig() {
         return config;
     }
 
