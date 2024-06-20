@@ -31,6 +31,16 @@ public interface MultiloaderConfig {
     double domineering();
     double marked();
     double mana_flare();
+    double endergized();
+    double enderphins();
+    double life_steal();
+    double armor_pierce();
 
+    double overheal();
 
+    double summon_boost();
+
+    double spell_exhaustion();
+
+    double disarming();
 }

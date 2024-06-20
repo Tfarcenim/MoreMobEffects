@@ -73,4 +73,33 @@ public class ModMobEffects {
     public static final MobEffect DOMINEERING = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
     public static final MobEffect MARKED = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
     public static final MobEffect MANA_FLARE = IRONS_SPELLBOOKS ? new ManaFlareMobEffect(MobEffectCategory.HARMFUL,0xff0000) : null;
+    public static final MobEffect ENDERGIZED = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getEnderSpellPower,"5bb0fc9f-b714-4fe5-94c5-a1810596bc14",() -> Services.PLATFORM.getConfig().endergized(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            :null;
+    public static final MobEffect ENDERPHINS = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getEnderSpellPower,"fcec827c-e5d8-4119-8758-5a20aa8127d4",() -> Services.PLATFORM.getConfig().enderphins(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            :null;
+
+    public static final MobEffect LIFE_STEAL = ATTRIBUTESLIB ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getLifeSteal,"3b5e19e5-b4d6-4f0e-a07b-95f6e9b11002",() -> Services.PLATFORM.getConfig().life_steal(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            :null;
+
+    public static final MobEffect ARMOR_PIERCE = ATTRIBUTESLIB ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getArmorPiercing,"77b66b2b-016d-4834-af75-2fc5171568e0",() -> Services.PLATFORM.getConfig().armor_pierce(), AttributeModifier.Operation.ADDITION)
+            :null;
+
+    public static final MobEffect OVERHEAL = ATTRIBUTESLIB ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getOverheal,"20a3054e-b56e-4f65-a7ab-09f8e61de5bf",() -> Services.PLATFORM.getConfig().overheal(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            :null;
+
+    public static final MobEffect SUMMON_BOOST = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSummonDamage,"af4d0fe7-9e0d-4673-8594-df665049b2f8",() -> Services.PLATFORM.getConfig().summon_boost(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            :null;
+
+    public static final MobEffect SPELL_EXHAUSTION = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.HARMFUL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellPower,"37789c2c-6034-4e8c-985f-647ecca0ea6d",() -> Services.PLATFORM.getConfig().spell_exhaustion(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            :null;
+
+    public static final MobEffect DISARMING = new ConfigurableMobEffect(MobEffectCategory.HARMFUL,0xff0000)
+            .addConfigurableAttributeModifier(() -> ModAttributes.PROJECTILE_ATTACK_DAMAGE,"d5d5a1fe-fb0c-493a-8b2d-8f33b35e6b80",() -> -Services.PLATFORM.getConfig().disarming(), AttributeModifier.Operation.MULTIPLY_TOTAL);
 }

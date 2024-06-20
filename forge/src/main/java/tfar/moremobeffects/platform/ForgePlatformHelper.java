@@ -96,4 +96,24 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public Attribute getEnderSpellPower() {
         return AttributeRegistry.ENDER_SPELL_POWER.get();
     }
+
+    @Override
+    public Attribute getLifeSteal() {
+        return ALObjects.Attributes.LIFE_STEAL.get();
+    }
+
+    @Override
+    public Attribute getArmorPiercing() {
+        return ALObjects.Attributes.ARMOR_PIERCE.get();
+    }
+
+    @Override
+    public Attribute getOverheal() {
+        return ALObjects.Attributes.OVERHEAL.get();
+    }
+
+    @Override
+    public Attribute getSummonDamage() {
+        return AttributeRegistry.SUMMON_DAMAGE.get();
+    }
 }

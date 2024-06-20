@@ -115,6 +115,46 @@ public class TomlConfig implements MultiloaderConfig {
         return Server.mana_flare.get();
     }
 
+    @Override
+    public double endergized() {
+        return Server.endergized.get();
+    }
+
+    @Override
+    public double enderphins() {
+        return Server.enderphins.get();
+    }
+
+    @Override
+    public double life_steal() {
+        return Server.life_steal.get();
+    }
+
+    @Override
+    public double armor_pierce() {
+        return Server.armor_pierce.get();
+    }
+
+    @Override
+    public double overheal() {
+        return Server.overheal.get();
+    }
+
+    @Override
+    public double summon_boost() {
+        return Server.summon_boost.get();
+    }
+
+    @Override
+    public double spell_exhaustion() {
+        return Server.spell_exhaustion.get();
+    }
+
+    @Override
+    public double disarming() {
+        return Server.spell_exhaustion.get();
+    }
+
     public static class Server {
         public static ForgeConfigSpec.DoubleValue vulnerable;
         public static ForgeConfigSpec.DoubleValue exposed;
@@ -144,6 +184,14 @@ public class TomlConfig implements MultiloaderConfig {
         public static ForgeConfigSpec.DoubleValue domineering;
         public static ForgeConfigSpec.DoubleValue marked;
         public static ForgeConfigSpec.DoubleValue mana_flare;
+        public static ForgeConfigSpec.DoubleValue endergized;
+        public static ForgeConfigSpec.DoubleValue enderphins;
+        public static ForgeConfigSpec.DoubleValue life_steal;
+        public static ForgeConfigSpec.DoubleValue armor_pierce;
+        public static ForgeConfigSpec.DoubleValue overheal;
+        public static ForgeConfigSpec.DoubleValue summon_boost;
+        public static ForgeConfigSpec.DoubleValue spell_exhaustion;
+        public static ForgeConfigSpec.DoubleValue disarming;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
@@ -227,6 +275,38 @@ public class TomlConfig implements MultiloaderConfig {
             mana_flare = builder.
                     comment("Deals x damage (multiplicative with spell power) every second.")
                     .defineInRange("mana_flare", 1, 0, Double.MAX_VALUE);
+
+            endergized = builder.
+                    comment("Increases ender spell power by x per level")
+                    .defineInRange("endergized", .05, 0, Double.MAX_VALUE);
+
+            enderphins = builder.
+                    comment("Increases ender spell power by x per level")
+                    .defineInRange("enderphins", .05, 0, Double.MAX_VALUE);
+
+            life_steal = builder.
+                    comment("x physical damage dealt (multiplicative) is converted into health ")
+                    .defineInRange("life_steal", .05, 0, Double.MAX_VALUE);
+
+            armor_pierce = builder
+                    .comment("x armor penetration per level (additive)")
+                    .defineInRange("armor_pierce",1,0,Double.MAX_VALUE);
+
+            overheal = builder
+                    .comment("Increases the attributeslib:overheal attribute by x (multiplicative), which converts damage into absorption hearts at full health.")
+                    .defineInRange("overheal",.05,0,Double.MAX_VALUE);
+
+            summon_boost = builder
+                    .comment("Increases the irons_spellbooks:summon_damage attribute by x (multiplicative) per level")
+                    .defineInRange("summon_boost",.05,0,Double.MAX_VALUE);
+
+            spell_exhaustion = builder
+                    .comment("Reduces spell power by x (multiplicative) per level")
+                    .defineInRange("spell_exhaustion",.05,0,1);
+
+            disarming = builder
+                    .comment("Reduces projectile damage by x (multiplicative) per level")
+                    .defineInRange("disarming",.05,0,1);
 
             builder.pop();
         }

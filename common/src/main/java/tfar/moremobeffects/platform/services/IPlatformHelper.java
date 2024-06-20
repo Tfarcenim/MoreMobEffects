@@ -51,4 +51,11 @@ public interface IPlatformHelper {
     Attribute getEnderSpellPower();
 
 
+    Attribute getLifeSteal();
+
+    Attribute getArmorPiercing();
+
+    Attribute getOverheal();
+
+    Attribute getSummonDamage();
 }
