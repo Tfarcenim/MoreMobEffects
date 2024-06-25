@@ -155,6 +155,56 @@ public class TomlConfig implements MultiloaderConfig {
         return Server.spell_exhaustion.get();
     }
 
+    @Override
+    public double enders_game_spell_power_decrease() {
+        return Server.enders_game_spell_power_decrease.get();
+    }
+
+    @Override
+    public double enders_game_spell_cooldown_decrease() {
+        return Server.enders_game_spell_cooldown_decrease.get();
+    }
+
+    @Override
+    public double enders_game_spell_cast_time_decrease() {
+        return Server.enders_game_spell_cast_time_decrease.get();
+    }
+
+    @Override
+    public double will_of_the_summoner() {
+        return Server.will_of_the_summoner.get();
+    }
+
+    @Override
+    public double battle_mage() {
+        return Server.battle_mage.get();
+    }
+
+    @Override
+    public double peak_health() {
+        return Server.peak_health.get();
+    }
+
+    @Override
+    public double berserk() {
+        return Server.berserk.get();
+    }
+
+    @Override
+    public double revive() {
+        return Server.revive.get();
+    }
+
+    @Override
+    public double martyr() {
+        return Server.martyr.get();
+    }
+
+    @Override
+    public double warden_absorption() {
+        return Server.warden_absorption.get();
+    }
+
     public static class Server {
         public static ForgeConfigSpec.DoubleValue vulnerable;
         public static ForgeConfigSpec.DoubleValue exposed;
@@ -192,6 +242,19 @@ public class TomlConfig implements MultiloaderConfig {
         public static ForgeConfigSpec.DoubleValue summon_boost;
         public static ForgeConfigSpec.DoubleValue spell_exhaustion;
         public static ForgeConfigSpec.DoubleValue disarming;
+
+        public static ForgeConfigSpec.DoubleValue enders_game_spell_power_decrease;
+        public static ForgeConfigSpec.DoubleValue enders_game_spell_cooldown_decrease;
+        public static ForgeConfigSpec.DoubleValue enders_game_spell_cast_time_decrease;
+
+        public static ForgeConfigSpec.DoubleValue will_of_the_summoner;
+        public static ForgeConfigSpec.DoubleValue battle_mage;
+        public static ForgeConfigSpec.DoubleValue peak_health;
+        public static ForgeConfigSpec.DoubleValue berserk;
+        public static ForgeConfigSpec.DoubleValue revive;
+        public static ForgeConfigSpec.DoubleValue martyr;
+
+        public static ForgeConfigSpec.DoubleValue warden_absorption;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
@@ -307,6 +370,50 @@ public class TomlConfig implements MultiloaderConfig {
             disarming = builder
                     .comment("Reduces projectile damage by x (multiplicative) per level")
                     .defineInRange("disarming",.05,0,1);
+
+            builder.push("enders_game");
+
+            enders_game_spell_power_decrease = builder
+                    .comment("x Spell Power Reduction per level (multiplicative)")
+                    .defineInRange("spell_power_decrease",.12,-100,100);
+            enders_game_spell_cooldown_decrease = builder
+                    .comment("x Cooldown Reduction per level (multiplicative)")
+                    .defineInRange("spell_cooldown_decrease",.2,-100,100);
+            enders_game_spell_cast_time_decrease = builder
+                    .comment("x Cast Time Reduction per level (multiplicative)")
+                    .defineInRange("cast_time_decrease",.1,-100,100);
+
+            builder.pop();
+
+            will_of_the_summoner = builder.
+                    comment("Boost summoning damage by x per point of spell power + ender spell power")
+                    .defineInRange("will_of_the_summoner", .05, 0, Double.MAX_VALUE);
+
+            battle_mage = builder.
+                    comment("Physical and Ranged attacks deal (x *  (ender spell power + spell power - 1) extra damage as thorns")
+                    .defineInRange("battle_mage", .05, 0, Double.MAX_VALUE);
+
+            peak_health = builder.
+                    comment("Gain x per level of your Max Health boosts as Critical damage. (multiplicative)")
+                    .defineInRange("peak_health", .05, 0, Double.MAX_VALUE);
+
+            berserk = builder
+                    .comment("Deal more ender spell, ranged, and melee damage the lower your health is. ")
+                            .defineInRange("berserk",2.5,0,Double.MAX_VALUE);
+
+            revive = builder.comment("When health reaches 0, revive with x% of your maximum health.")
+                    .defineInRange("revive",.1,0,1);
+
+            martyr = builder.comment("Redirects x% of all damage received from teammates to you.")
+                    .defineInRange("martyr",.1,0,1);
+
+            builder.push("warden");
+
+            warden_absorption = builder.comment("Gain x% of your maximum health per level as absorption hearts, further boosted by ender/spell power.")
+                            .defineInRange("absorption",1,0,Double.MAX_VALUE);
+
+            builder.pop();
+
 
             builder.pop();
         }

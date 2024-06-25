@@ -84,7 +84,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public Attribute getSpellCooldown() {
+    public Attribute getSpellCooldownReduction() {
         return AttributeRegistry.COOLDOWN_REDUCTION.get();
     }
 

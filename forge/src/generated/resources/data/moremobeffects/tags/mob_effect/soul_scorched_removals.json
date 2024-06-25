@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:poison",
+    "minecraft:wither",
+    "minecraft:slowness",
+    {
+      "id": "attributeslib:bleeding",
+      "required": false
+    }
+  ]
+}

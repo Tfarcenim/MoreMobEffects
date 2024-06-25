@@ -37,10 +37,21 @@ public interface MultiloaderConfig {
     double armor_pierce();
 
     double overheal();
-
     double summon_boost();
-
     double spell_exhaustion();
-
     double disarming();
+
+    double enders_game_spell_power_decrease();//.12
+    double enders_game_spell_cooldown_decrease();//.20
+    double enders_game_spell_cast_time_decrease();//.10
+
+    double will_of_the_summoner();
+    double battle_mage();
+
+    double peak_health();
+    double berserk();
+    double revive();
+    double martyr();
+
+    double warden_absorption();
 }

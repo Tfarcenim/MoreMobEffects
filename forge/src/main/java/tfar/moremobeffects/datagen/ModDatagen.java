@@ -6,6 +6,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
+import tfar.moremobeffects.datagen.assets.MobEffectTagsProvider;
+import tfar.moremobeffects.datagen.assets.ModDamageTypeTagsProvider;
 import tfar.moremobeffects.datagen.assets.ModLangProvider;
 
 import java.util.Set;
@@ -24,7 +26,8 @@ public class ModDatagen {
             generator.addProvider(true,new ModLangProvider(output));
         }
         if (e.includeServer()) {
-
+            generator.addProvider(true,new MobEffectTagsProvider(output,lookupProvider,helper));
+            generator.addProvider(true,new ModDamageTypeTagsProvider(output,lookupProvider,helper));
         }
     }
 

@@ -3,16 +3,18 @@ package tfar.moremobeffects;
 import com.google.common.collect.Lists;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +23,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.moremobeffects.datagen.ModDatagen;
+import tfar.moremobeffects.init.ModMobEffects;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +44,9 @@ public class MoreMobEffectsForge {
         bus.addListener(this::commonSetup);
         bus.addListener(ModDatagen::start);
         MinecraftForge.EVENT_BUS.addListener(this::livingAttack);
+        MinecraftForge.EVENT_BUS.addListener(this::livingDeath);
+        MinecraftForge.EVENT_BUS.addListener(this::looting);
+        MinecraftForge.EVENT_BUS.addListener(this::applyEffects);
         // Use Forge to bootstrap the Common mod.
         MoreMobEffects.init();
     }
@@ -64,6 +70,21 @@ public class MoreMobEffectsForge {
             }
         }
     }
+
+    private void applyEffects(MobEffectEvent.Applicable event) {
+        LivingEntity living = event.getEntity();
+        MobEffect effect = event.getEffectInstance().getEffect();
+        if (living.hasEffect(ModMobEffects.SOUL_SCORCHED)) {
+            if (CommonTagUtil.isIn(ModTags.SOUL_SCORCHED_REMOVALS,effect)) {
+                event.setResult(Event.Result.ALLOW);
+            }
+        }
+    }
+
+    private void looting(LootingLevelEvent event) {
+        event.setLootingLevel(MoreMobEffects.getLootingLevel(event.getEntity(),event.getLootingLevel()));
+    }
+
     private void commonSetup(FMLCommonSetupEvent event) {
         registerLater.clear();
         MoreMobEffects.commonSetup();
@@ -71,5 +92,11 @@ public class MoreMobEffectsForge {
 
     private void livingAttack(LivingHurtEvent event) {
         event.setAmount(MoreMobEffects.livingAttack(event.getEntity(),event.getSource(), event.getAmount()));
+    }
+
+    private void livingDeath(LivingDeathEvent event) {
+        if (MoreMobEffects.livingDeath(event.getEntity(),event.getSource())) {
+            event.setCanceled(true);
+        }
     }
 }

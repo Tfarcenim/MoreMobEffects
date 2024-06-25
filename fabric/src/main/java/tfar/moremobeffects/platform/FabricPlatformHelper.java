@@ -55,7 +55,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public Attribute getSpellCooldown() {
+    public Attribute getSpellCooldownReduction() {
         return null;
     }
 

@@ -60,14 +60,14 @@ public class ModMobEffects {
 
 
     public static final MobEffect SPELL_HASTE = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellCooldown,"651d6520-a30c-415e-b2b7-0388c4c017be",() -> Services.PLATFORM.getConfig().spell_haste(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellCooldownReduction,"651d6520-a30c-415e-b2b7-0388c4c017be",() -> Services.PLATFORM.getConfig().spell_haste(), AttributeModifier.Operation.MULTIPLY_TOTAL)
             : null;
 
     public static final MobEffect FOCUSED = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
             .addConfigurableAttributeModifier(Services.PLATFORM::getSpellCastTimeReduction,"e5ad4abb-d4f7-4b26-adac-64f2944c3af8",() -> Services.PLATFORM.getConfig().focused(), AttributeModifier.Operation.MULTIPLY_TOTAL)
             : null;
 
-    public static final MobEffect ARCANIC_CONVERSION = IRONS_SPELLBOOKS ? new ArcanicConversionMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
+    public static final MobEffect ARCANIC_CONVERSION = IRONS_SPELLBOOKS ? new ArcanicConversionMobEffect(MobEffectCategory.BENEFICIAL,0xff0000, ArcanicConversionMobEffect.Variant.physical) : null;
     public static final MobEffect ARCANIC_OVERLOAD = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
     public static final MobEffect RETRIBUTION = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
     public static final MobEffect DOMINEERING = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
@@ -102,4 +102,24 @@ public class ModMobEffects {
 
     public static final MobEffect DISARMING = new ConfigurableMobEffect(MobEffectCategory.HARMFUL,0xff0000)
             .addConfigurableAttributeModifier(() -> ModAttributes.PROJECTILE_ATTACK_DAMAGE,"d5d5a1fe-fb0c-493a-8b2d-8f33b35e6b80",() -> -Services.PLATFORM.getConfig().disarming(), AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+
+    public static final MobEffect ENDERS_GAME = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellPower,"c547c1d9-de47-451e-968a-6155c2eefe14",() -> -Services.PLATFORM.getConfig().enders_game_spell_power_decrease(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellCooldownReduction,"48f19c4f-47da-4e37-8574-61e4804c5f29",() -> Services.PLATFORM.getConfig().enders_game_spell_cooldown_decrease(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellCastTimeReduction,"8eff1bf0-a7ba-44b6-8479-e78f64a2aa94",() -> Services.PLATFORM.getConfig().enders_game_spell_cast_time_decrease(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            :null;
+
+    public static final MobEffect WILL_OF_THE_SUMMONER = IRONS_SPELLBOOKS ? new ArcanicConversionMobEffect(MobEffectCategory.BENEFICIAL,0xff0000, ArcanicConversionMobEffect.Variant.summoner) : null;
+    public static final MobEffect BATTLE_MAGE = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
+
+    public static final MobEffect PEAK_HEALTH = ATTRIBUTESLIB ? new PeakHealthEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
+    public static final MobEffect BERSERK = IRONS_SPELLBOOKS ? new BerserkEffect(MobEffectCategory.NEUTRAL,0xff0000) : null;
+    public static final MobEffect REVIVE = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+    public static final MobEffect MARTYR = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+    public static final MobEffect WARDEN = IRONS_SPELLBOOKS ? new WardenEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            :null;
+
+    public static final MobEffect LOOTING = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+    public static final MobEffect SOUL_SCORCHED = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
 }

@@ -13,8 +13,15 @@ import tfar.moremobeffects.platform.Services;
 import java.util.UUID;
 
 public class ArcanicConversionMobEffect extends MobEffect {
-    public ArcanicConversionMobEffect(MobEffectCategory $$0, int $$1) {
+    private final Variant variant;
+
+    public ArcanicConversionMobEffect(MobEffectCategory $$0, int $$1, Variant variant) {
         super($$0, $$1);
+        this.variant = variant;
+    }
+
+    public enum Variant {
+        physical,summoner;
     }
 
     static final UUID uuid = UUID.fromString("7953ce22-069d-4d14-964c-88b2bef556b6");
@@ -28,24 +35,50 @@ public class ArcanicConversionMobEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
-        double spellboost = Services.PLATFORM.getConfig().arcanic_conversion() * (amplifier + 1);
+        switch (variant) {
+            case physical -> {
+                double spellboost = Services.PLATFORM.getConfig().arcanic_conversion() * (amplifier + 1);
 
-        double attack_damage = living.getAttributeValue(Attributes.ATTACK_DAMAGE);
-        double projectile_damage = living.getAttributeValue(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
-        double physical_damage = attack_damage - 1 + (projectile_damage - 1) * 100;
+                double attack_damage = living.getAttributeValue(Attributes.ATTACK_DAMAGE);
+                double projectile_damage = living.getAttributeValue(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
+                double physical_damage = attack_damage - 1 + (projectile_damage - 1) * 100;
 
-        double total_spell_boost = spellboost * physical_damage + 1;
+                double total_spell_boost = spellboost * physical_damage + 1;
 
-        AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getEnderSpellPower());
-        if (attributeInstance != null) {
-            AttributeModifier currentModifier = attributeInstance.getModifier(uuid);
-            if (currentModifier != null) {
-                if (currentModifier.getAmount() != total_spell_boost) {
-                    attributeInstance.removeModifier(uuid);
-                    attributeInstance.addPermanentModifier(new AttributeModifier(uuid,"arcanic_conversion",total_spell_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getEnderSpellPower());
+                if (attributeInstance != null) {
+                    AttributeModifier currentModifier = attributeInstance.getModifier(uuid);
+                    if (currentModifier != null) {
+                        if (currentModifier.getAmount() != total_spell_boost) {
+                            attributeInstance.removeModifier(uuid);
+                            attributeInstance.addPermanentModifier(new AttributeModifier(uuid,"arcanic_conversion",total_spell_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                        }
+                    } else {
+                        attributeInstance.addPermanentModifier(new AttributeModifier(uuid,"arcanic_conversion",total_spell_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    }
                 }
-            } else {
-                attributeInstance.addPermanentModifier(new AttributeModifier(uuid,"arcanic_conversion",total_spell_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            }
+
+            case summoner -> {
+                double spellboost = Services.PLATFORM.getConfig().will_of_the_summoner() * (amplifier + 1);
+
+                double spell_power = living.getAttributeValue(Services.PLATFORM.getSpellPower());
+                double ender_spell_power = living.getAttributeValue(Services.PLATFORM.getEnderSpellPower());
+
+                double total_spell_boost = spellboost * Math.max(spell_power + ender_spell_power - 1,-1);
+
+                AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getSummonDamage());
+                if (attributeInstance != null) {
+                    AttributeModifier currentModifier = attributeInstance.getModifier(uuid);
+                    if (currentModifier != null) {
+                        if (currentModifier.getAmount() != total_spell_boost) {
+                            attributeInstance.removeModifier(uuid);
+                            attributeInstance.addPermanentModifier(new AttributeModifier(uuid,"will_of_the_summoner",total_spell_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                        }
+                    } else {
+                        attributeInstance.addPermanentModifier(new AttributeModifier(uuid,"will_of_the_summoner",total_spell_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    }
+                }
             }
         }
     }
