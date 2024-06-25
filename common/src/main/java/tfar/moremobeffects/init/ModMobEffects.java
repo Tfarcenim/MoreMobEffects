@@ -12,8 +12,8 @@ public class ModMobEffects {
 
     public static final MobEffect VULNERABLE = new DamageMultiplierEffect(MobEffectCategory.HARMFUL,0xff0000);
     public static final MobEffect EXPOSED = new DamageMultiplierEffect(MobEffectCategory.HARMFUL,0xff0000);
-    static final boolean ATTRIBUTESLIB = Services.PLATFORM.isModLoaded("attributeslib");
-    static final boolean IRONS_SPELLBOOKS = Services.PLATFORM.isModLoaded("irons_spellbooks");
+    public static final boolean ATTRIBUTESLIB = Services.PLATFORM.isModLoaded("attributeslib");
+    public static final boolean IRONS_SPELLBOOKS = Services.PLATFORM.isModLoaded("irons_spellbooks");
 
     public static final MobEffect ARCHERY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
             .addConfigurableAttributeModifier(ModAttributes.PROJECTILE_ATTACK_DAMAGE,"c43c24a2-ef12-4670-9801-ebaba2dab2c8",() -> Services.PLATFORM.getConfig().archery(), AttributeModifier.Operation.MULTIPLY_TOTAL);
@@ -122,4 +122,9 @@ public class ModMobEffects {
 
     public static final MobEffect LOOTING = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
     public static final MobEffect SOUL_SCORCHED = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
+
+    public static final MobEffect BLAZING_ASPECT = ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) :null;
+    public static final MobEffect WOLF_ASPECT = ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) :null;
+    public static final MobEffect WITHERING_ASPECT = ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
+    public static final MobEffect SIGIL_OF_MANA = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
 }

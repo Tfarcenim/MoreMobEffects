@@ -1,6 +1,7 @@
 package tfar.moremobeffects.platform.services;
 
 import net.minecraft.core.Registry;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import tfar.moremobeffects.platform.MultiloaderConfig;
 
@@ -58,4 +59,5 @@ public interface IPlatformHelper {
     Attribute getOverheal();
 
     Attribute getSummonDamage();
+    MobEffect getBleeding();
 }

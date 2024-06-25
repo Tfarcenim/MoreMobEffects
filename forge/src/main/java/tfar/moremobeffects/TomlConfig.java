@@ -2,6 +2,7 @@ package tfar.moremobeffects;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import tfar.moremobeffects.platform.MultiloaderConfig;
+import tfar.moremobeffects.platform.Services;
 
 public class TomlConfig implements MultiloaderConfig {
 
@@ -205,6 +206,26 @@ public class TomlConfig implements MultiloaderConfig {
         return Server.warden_absorption.get();
     }
 
+    @Override
+    public double blazing_aspect() {
+        return Server.blazing_aspect.get();
+    }
+
+    @Override
+    public double wolf_aspect() {
+        return Server.wolf_aspect.get();
+    }
+
+    @Override
+    public double withering_aspect() {
+        return Server.withering_aspect.get();
+    }
+
+    @Override
+    public double sigil_of_mana() {
+        return Server.sigil_of_mana.get();
+    }
+
     public static class Server {
         public static ForgeConfigSpec.DoubleValue vulnerable;
         public static ForgeConfigSpec.DoubleValue exposed;
@@ -255,6 +276,11 @@ public class TomlConfig implements MultiloaderConfig {
         public static ForgeConfigSpec.DoubleValue martyr;
 
         public static ForgeConfigSpec.DoubleValue warden_absorption;
+
+        public static ForgeConfigSpec.DoubleValue blazing_aspect;
+        public static ForgeConfigSpec.DoubleValue wolf_aspect;
+        public static ForgeConfigSpec.DoubleValue withering_aspect;
+        public static ForgeConfigSpec.DoubleValue sigil_of_mana;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
@@ -414,6 +440,17 @@ public class TomlConfig implements MultiloaderConfig {
 
             builder.pop();
 
+            blazing_aspect = builder.comment("Deal x% additional crit damage per level to targets that are burning.\n")
+                    .defineInRange("blazing_aspect",.1,0,Double.MAX_VALUE);
+
+            wolf_aspect = builder.comment("Attacks have an x% additional crit chance per level to targets that are bleeding.")
+                    .defineInRange("wolf_aspect",.1,0,Double.MAX_VALUE);
+
+            withering_aspect = builder.comment("Attacks ignore x% of armor per level to targets that are under the wither effect.")
+                    .defineInRange("withering_aspect",.1,0,100);
+
+            sigil_of_mana = builder.comment("Attacks deal x% increased spell damage to targets that are under the Mana Flare effect.")
+                    .defineInRange("sigil_of_mana",.1,0,100);
 
             builder.pop();
         }

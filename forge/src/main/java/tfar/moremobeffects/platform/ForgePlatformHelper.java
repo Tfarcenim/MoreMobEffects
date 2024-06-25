@@ -5,6 +5,7 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
@@ -115,5 +116,10 @@ public class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public Attribute getSummonDamage() {
         return AttributeRegistry.SUMMON_DAMAGE.get();
+    }
+
+    @Override
+    public MobEffect getBleeding() {
+        return ALObjects.MobEffects.BLEEDING.get();
     }
 }

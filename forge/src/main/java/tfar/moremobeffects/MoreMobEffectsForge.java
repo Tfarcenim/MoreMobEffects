@@ -88,6 +88,9 @@ public class MoreMobEffectsForge {
     private void commonSetup(FMLCommonSetupEvent event) {
         registerLater.clear();
         MoreMobEffects.commonSetup();
+        if (ModMobEffects.IRONS_SPELLBOOKS) {
+            MinecraftForge.EVENT_BUS.addListener(IronSpellbooksEvents::spellDamage);
+        }
     }
 
     private void livingAttack(LivingHurtEvent event) {

@@ -111,4 +111,114 @@ public class FabricMultiloaderConfig implements MultiloaderConfig {
     public double mana_flare() {
         return 0;
     }
+
+    @Override
+    public double endergized() {
+        return 0;
+    }
+
+    @Override
+    public double enderphins() {
+        return 0;
+    }
+
+    @Override
+    public double life_steal() {
+        return 0;
+    }
+
+    @Override
+    public double armor_pierce() {
+        return 0;
+    }
+
+    @Override
+    public double overheal() {
+        return 0;
+    }
+
+    @Override
+    public double summon_boost() {
+        return 0;
+    }
+
+    @Override
+    public double spell_exhaustion() {
+        return 0;
+    }
+
+    @Override
+    public double disarming() {
+        return 0;
+    }
+
+    @Override
+    public double enders_game_spell_power_decrease() {
+        return 0;
+    }
+
+    @Override
+    public double enders_game_spell_cooldown_decrease() {
+        return 0;
+    }
+
+    @Override
+    public double enders_game_spell_cast_time_decrease() {
+        return 0;
+    }
+
+    @Override
+    public double will_of_the_summoner() {
+        return 0;
+    }
+
+    @Override
+    public double battle_mage() {
+        return 0;
+    }
+
+    @Override
+    public double peak_health() {
+        return 0;
+    }
+
+    @Override
+    public double berserk() {
+        return 0;
+    }
+
+    @Override
+    public double revive() {
+        return 0;
+    }
+
+    @Override
+    public double martyr() {
+        return 0;
+    }
+
+    @Override
+    public double warden_absorption() {
+        return 0;
+    }
+
+    @Override
+    public double blazing_aspect() {
+        return 0;
+    }
+
+    @Override
+    public double wolf_aspect() {
+        return 0;
+    }
+
+    @Override
+    public double withering_aspect() {
+        return 0;
+    }
+
+    @Override
+    public double sigil_of_mana() {
+        return 0;
+    }
 }

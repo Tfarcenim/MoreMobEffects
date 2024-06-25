@@ -10,10 +10,12 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.scores.Team;
 import org.slf4j.Logger;
@@ -21,6 +23,8 @@ import org.slf4j.LoggerFactory;
 import tfar.moremobeffects.init.ModAttributes;
 import tfar.moremobeffects.init.ModMobEffects;
 import tfar.moremobeffects.platform.Services;
+
+import java.util.UUID;
 
 // This class is part of the common project meaning it is shared between all supported loaders. Code written here can only
 // import and access the vanilla codebase, libraries used by vanilla, and optionally third party libraries that provide
@@ -39,17 +43,21 @@ public class MoreMobEffects {
     public static void commonSetup() {
     }
 
-    public static float livingAttack(LivingEntity living, DamageSource source,float baseDamage) {
+    static final UUID blazing_aspect_id = UUID.fromString("93966058-6d05-4ad4-91c2-d97311b80fd7");
+    static final UUID wolf_aspect_id = UUID.fromString("8d07a724-7e9a-4055-9fdf-b33fe05da5e1");
+    static final UUID withering_aspect_id = UUID.fromString("2f0edfe8-a36f-4064-b2f1-a484704000f5");
 
-        if (living instanceof Player player) {
-            MobEffectInstance martyr = living.getEffect(ModMobEffects.MARTYR);
+    public static float livingAttack(LivingEntity target, DamageSource source,float baseDamage) {
+
+        if (target instanceof Player player) {
+            MobEffectInstance martyr = target.getEffect(ModMobEffects.MARTYR);
 
             if (martyr == null) {
                 Team team = player.getTeam();
                 if (team != null) {
                     double fraction = 0;
                     for (String teamPlayer : team.getPlayers()) {
-                        MinecraftServer server = living.getServer();
+                        MinecraftServer server = target.getServer();
                         ServerPlayer player1 = server.getPlayerList().getPlayerByName(teamPlayer);
                         if (player1 != null) {
                             MobEffectInstance martyr1 = player1.getEffect(ModMobEffects.MARTYR);
@@ -67,12 +75,12 @@ public class MoreMobEffects {
         }
 
 
-        MobEffectInstance exposed = living.getEffect(ModMobEffects.EXPOSED);
+        MobEffectInstance exposed = target.getEffect(ModMobEffects.EXPOSED);
         if (exposed != null) {
             baseDamage *= 1 + Services.PLATFORM.getConfig().exposed() * (exposed.getAmplifier()+1);
         }
 
-        MobEffectInstance vulnerable = living.getEffect(ModMobEffects.VULNERABLE);
+        MobEffectInstance vulnerable = target.getEffect(ModMobEffects.VULNERABLE);
         if (vulnerable != null) {
             baseDamage *= 1 + Services.PLATFORM.getConfig().vulnerable()  * (vulnerable.getAmplifier()+1);
         }
@@ -80,6 +88,42 @@ public class MoreMobEffects {
         Entity attacker = source.getEntity();
 
         if (attacker instanceof LivingEntity livingAttacker) {
+
+            if (ModMobEffects.ATTRIBUTESLIB) {
+
+                AttributeInstance attributeInstance = livingAttacker.getAttribute(Services.PLATFORM.getCriticalHitRate());
+                if (attributeInstance != null) {
+
+                    attributeInstance.removeModifier(blazing_aspect_id);
+
+                    if (target.isOnFire()) {
+                        MobEffectInstance blazing_aspect = livingAttacker.getEffect(ModMobEffects.BLAZING_ASPECT);
+                        if (blazing_aspect != null) {
+                            attributeInstance.addTransientModifier(new AttributeModifier(blazing_aspect_id, "Blazing Aspect Bonus", Services.PLATFORM.getConfig().blazing_aspect() * (blazing_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
+                        }
+                    }
+
+                    attributeInstance.removeModifier(wolf_aspect_id);
+
+                    if (target.hasEffect(Services.PLATFORM.getBleeding())) {
+                        MobEffectInstance wolf_aspect = livingAttacker.getEffect(ModMobEffects.WOLF_ASPECT);
+                        if (wolf_aspect != null) {
+                            attributeInstance.addTransientModifier(new AttributeModifier(wolf_aspect_id, "Wolf Aspect Bonus", Services.PLATFORM.getConfig().wolf_aspect() * (wolf_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
+                        }
+                    }
+                }
+
+                AttributeInstance attributeInstanceArmorShred = livingAttacker.getAttribute(Services.PLATFORM.getArmorPiercing());
+                if (attributeInstanceArmorShred != null) {
+                    if (target.hasEffect(MobEffects.WITHER)) {
+                        MobEffectInstance wolf_aspect = livingAttacker.getEffect(ModMobEffects.WITHERING_ASPECT);
+                        if (wolf_aspect != null) {
+                            attributeInstanceArmorShred.addTransientModifier(new AttributeModifier(withering_aspect_id, "Withering Aspect Bonus", Services.PLATFORM.getConfig().withering_aspect() * (wolf_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
+                        }
+                    }
+                }
+            }
+
             if (source.is(DamageTypeTags.IS_PROJECTILE)) {
                 double projectile_damage = livingAttacker.getAttributeValue(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
                 baseDamage *= projectile_damage;
@@ -87,18 +131,18 @@ public class MoreMobEffects {
 
             MobEffectInstance arcanic_overload = livingAttacker.getEffect(ModMobEffects.ARCANIC_OVERLOAD);
             if (arcanic_overload != null && !source.is(DamageTypes.MAGIC)) {
-                living.hurt(living.damageSources().magic(), (float)
+                target.hurt(target.damageSources().magic(), (float)
                         (Services.PLATFORM.getConfig().arcanic_overload() * (arcanic_overload.getAmplifier()+1) * baseDamage));
             }
 
-            MobEffectInstance retribution = living.getEffect(ModMobEffects.RETRIBUTION);
+            MobEffectInstance retribution = target.getEffect(ModMobEffects.RETRIBUTION);
 
             if (retribution != null) {
-                AttributeInstance spellPower = living.getAttributes().hasAttribute(Services.PLATFORM.getEnderSpellPower())
-                        ? living.getAttribute(Services.PLATFORM.getEnderSpellPower()) : null;
+                AttributeInstance spellPower = target.getAttributes().hasAttribute(Services.PLATFORM.getEnderSpellPower())
+                        ? target.getAttribute(Services.PLATFORM.getEnderSpellPower()) : null;
 
                 if (spellPower != null) {
-                    attacker.hurt(living.damageSources().thorns(living), (float)
+                    attacker.hurt(target.damageSources().thorns(target), (float)
                             (Services.PLATFORM.getConfig().retribution() * (retribution.getAmplifier() + 1) * spellPower.getValue()));
                 }
             }
@@ -106,7 +150,7 @@ public class MoreMobEffects {
             MobEffectInstance domineering = livingAttacker.getEffect(ModMobEffects.DOMINEERING);
 
             if (domineering != null) {
-                long count = living.getActiveEffects()
+                long count = target.getActiveEffects()
                         .stream().filter(mobEffectInstance -> mobEffectInstance.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
                 baseDamage *= 1 + (Services.PLATFORM.getConfig().domineering() * domineering.getAmplifier() + 1) * count;
             }
@@ -115,18 +159,18 @@ public class MoreMobEffects {
 
             if (battle_mage != null && !source.is(DamageTypes.MAGIC)) {
 
-                double spell_power = living.getAttributeValue(Services.PLATFORM.getSpellPower());
-                double ender_spell_power = living.getAttributeValue(Services.PLATFORM.getEnderSpellPower());
+                double spell_power = target.getAttributeValue(Services.PLATFORM.getSpellPower());
+                double ender_spell_power = target.getAttributeValue(Services.PLATFORM.getEnderSpellPower());
 
                 double extraDamage = Services.PLATFORM.getConfig().battle_mage() * (battle_mage.getAmplifier() + 1) * (1 +ender_spell_power + spell_power) * baseDamage;
-                living.hurt(living.level().damageSources().thorns(attacker), (float) extraDamage);
+                target.hurt(target.level().damageSources().thorns(attacker), (float) extraDamage);
             }
         }
 
-        MobEffectInstance marked = living.getEffect(ModMobEffects.MARKED);
+        MobEffectInstance marked = target.getEffect(ModMobEffects.MARKED);
         if (marked != null && !source.is(DamageTypes.MAGIC)) {
             baseDamage *= 1 + (Services.PLATFORM.getConfig().marked() * marked.getAmplifier() + 1);
-            living.removeEffect(ModMobEffects.MARKED);
+            target.removeEffect(ModMobEffects.MARKED);
         }
 
 

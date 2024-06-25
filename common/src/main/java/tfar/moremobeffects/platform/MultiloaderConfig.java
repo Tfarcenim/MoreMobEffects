@@ -54,4 +54,9 @@ public interface MultiloaderConfig {
     double martyr();
 
     double warden_absorption();
+
+    double blazing_aspect();
+    double wolf_aspect();
+    double withering_aspect();
+    double sigil_of_mana();
 }
