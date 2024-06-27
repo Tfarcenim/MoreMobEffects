@@ -82,7 +82,7 @@ public class MoreMobEffectsForge {
     }
 
     private void looting(LootingLevelEvent event) {
-        event.setLootingLevel(MoreMobEffects.getLootingLevel(event.getEntity(),event.getLootingLevel()));
+        event.setLootingLevel(MoreMobEffects.getLootingLevel(event.getEntity(),event.getDamageSource(),event.getLootingLevel()));
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

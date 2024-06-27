@@ -86,7 +86,7 @@ public class ArcanicConversionMobEffect extends MobEffect {
     @Override
     public void removeAttributeModifiers(LivingEntity living, AttributeMap map, int amplifier) {
         super.removeAttributeModifiers(living, map, amplifier);
-        AttributeInstance attributeInstance = map.getInstance(Services.PLATFORM.getSpellPower());
+        AttributeInstance attributeInstance = map.getInstance(Services.PLATFORM.getEnderSpellPower());
         if (attributeInstance != null) {
             attributeInstance.removeModifier(uuid);
         }

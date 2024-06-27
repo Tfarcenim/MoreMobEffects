@@ -1,6 +1,7 @@
 package tfar.moremobeffects.platform;
 
 import net.minecraft.core.Registry;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import tfar.moremobeffects.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
@@ -66,6 +67,31 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public Attribute getEnderSpellPower() {
+        return null;
+    }
+
+    @Override
+    public Attribute getLifeSteal() {
+        return null;
+    }
+
+    @Override
+    public Attribute getArmorPiercing() {
+        return null;
+    }
+
+    @Override
+    public Attribute getOverheal() {
+        return null;
+    }
+
+    @Override
+    public Attribute getSummonDamage() {
+        return null;
+    }
+
+    @Override
+    public MobEffect getBleeding() {
         return null;
     }
 }

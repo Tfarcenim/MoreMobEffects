@@ -87,6 +87,16 @@ public class TomlConfig implements MultiloaderConfig {
     }
 
     @Override
+    public double might() {
+        return Server.might.get();
+    }
+
+    @Override
+    public double strengthened() {
+        return Server.strengthened.get();
+    }
+
+    @Override
     public double arcanic_conversion() {
         return Server.arcanic_conversion.get();
     }
@@ -202,6 +212,11 @@ public class TomlConfig implements MultiloaderConfig {
     }
 
     @Override
+    public double sorcerous_transference() {
+        return Server.sorcerous_transference.get();
+    }
+
+    @Override
     public double warden_absorption() {
         return Server.warden_absorption.get();
     }
@@ -242,6 +257,9 @@ public class TomlConfig implements MultiloaderConfig {
         public static ForgeConfigSpec.DoubleValue archers_frenzy;
         public static ForgeConfigSpec.DoubleValue hasty;
 
+        public static ForgeConfigSpec.DoubleValue might;
+        public static ForgeConfigSpec.DoubleValue strengthened;
+
         public static ForgeConfigSpec.DoubleValue empowered;
         public static ForgeConfigSpec.DoubleValue magic_up;
         public static ForgeConfigSpec.DoubleValue arcane_boost;
@@ -274,6 +292,7 @@ public class TomlConfig implements MultiloaderConfig {
         public static ForgeConfigSpec.DoubleValue berserk;
         public static ForgeConfigSpec.DoubleValue revive;
         public static ForgeConfigSpec.DoubleValue martyr;
+        public static ForgeConfigSpec.DoubleValue sorcerous_transference;
 
         public static ForgeConfigSpec.DoubleValue warden_absorption;
 
@@ -322,6 +341,13 @@ public class TomlConfig implements MultiloaderConfig {
             hasty = builder.
                     comment("Draw speed boost of hasty")
                     .defineInRange("hasty", .05, 0, Double.MAX_VALUE);
+
+            might = builder.
+                    comment("Strength variant modifier")
+                    .defineInRange("might", 3, 0, Double.MAX_VALUE);
+            strengthened = builder.
+                    comment("Strength variant modifier")
+                    .defineInRange("strengthened", 3, 0, Double.MAX_VALUE);
 
             empowered = builder.
                     comment("Spell power boost of empowered")
@@ -426,6 +452,11 @@ public class TomlConfig implements MultiloaderConfig {
             berserk = builder
                     .comment("Deal more ender spell, ranged, and melee damage the lower your health is. ")
                             .defineInRange("berserk",2.5,0,Double.MAX_VALUE);
+
+            sorcerous_transference = builder
+                    .comment("When under this effect, the user’s melee/ranged attacks give the target a spell power buff " +
+                            "based on x% of the user’s ender & general spell power (not the targets).")
+                    .defineInRange("sorcerous_transference",.1,0,Double.MAX_VALUE);
 
             revive = builder.comment("When health reaches 0, revive with x% of your maximum health.")
                     .defineInRange("revive",.1,0,1);

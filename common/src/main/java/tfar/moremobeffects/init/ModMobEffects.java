@@ -22,9 +22,9 @@ public class ModMobEffects {
     public static final MobEffect MARKSMAN = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
             .addConfigurableAttributeModifier(ModAttributes.PROJECTILE_ATTACK_DAMAGE,"949b61bc-5f3d-42da-af06-2af1e3ce5a71", () -> Services.PLATFORM.getConfig().marksman(), AttributeModifier.Operation.MULTIPLY_TOTAL);
 
-    public static final MobEffect MIGHT = new AttackDamageMobEffect(MobEffectCategory.BENEFICIAL,0xff0000,3){}
+    public static final MobEffect MIGHT = new ConfigurableStrengthEffect(MobEffectCategory.BENEFICIAL,0xff0000,() -> Services.PLATFORM.getConfig().might())
             .addAttributeModifier(Attributes.ATTACK_DAMAGE,"c2989b6e-1394-470c-ae75-c81367c3f9b9", 0, AttributeModifier.Operation.MULTIPLY_TOTAL);
-    public static final MobEffect STRENGTHENED = new AttackDamageMobEffect(MobEffectCategory.BENEFICIAL,0xff0000,3){}
+    public static final MobEffect STRENGTHENED = new ConfigurableStrengthEffect(MobEffectCategory.BENEFICIAL,0xff0000,() -> Services.PLATFORM.getConfig().strengthened())
             .addAttributeModifier(Attributes.ATTACK_DAMAGE,"623eb27b-ce58-4672-9539-32b2f3e06c8d", 0, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
     public static final MobEffect INSPIRED = ATTRIBUTESLIB ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
@@ -97,7 +97,7 @@ public class ModMobEffects {
             :null;
 
     public static final MobEffect SPELL_EXHAUSTION = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.HARMFUL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellPower,"37789c2c-6034-4e8c-985f-647ecca0ea6d",() -> Services.PLATFORM.getConfig().spell_exhaustion(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getSpellPower,"37789c2c-6034-4e8c-985f-647ecca0ea6d",() -> -Services.PLATFORM.getConfig().spell_exhaustion(), AttributeModifier.Operation.MULTIPLY_TOTAL)
             :null;
 
     public static final MobEffect DISARMING = new ConfigurableMobEffect(MobEffectCategory.HARMFUL,0xff0000)
@@ -127,4 +127,5 @@ public class ModMobEffects {
     public static final MobEffect WOLF_ASPECT = ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) :null;
     public static final MobEffect WITHERING_ASPECT = ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
     public static final MobEffect SIGIL_OF_MANA = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
+    public static final MobEffect SORCEROUS_TRANSFERENCE = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
 }

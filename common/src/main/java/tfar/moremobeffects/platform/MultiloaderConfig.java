@@ -25,6 +25,11 @@ public interface MultiloaderConfig {
 
     double focused();
 
+    double might();
+    double strengthened();
+
+    double sorcerous_transference();
+
     double arcanic_conversion();
     double arcanic_overload();
     double retribution();

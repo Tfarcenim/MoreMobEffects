@@ -27,33 +27,32 @@ public class PeakHealthEffect extends MobEffect {
     }
 
 
-
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
-                double boost = Services.PLATFORM.getConfig().peak_health() * (amplifier + 1);
+        double boost = Services.PLATFORM.getConfig().peak_health() * (amplifier + 1);
 
-                double max_health = living.getAttributeValue(Attributes.MAX_HEALTH);
+        double max_health = living.getAttributeValue(Attributes.MAX_HEALTH);
 
-                double total_boost = boost * max_health + 1;
+        double total_boost = boost * max_health;
 
-                AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getCriticalHitDamage());
-                if (attributeInstance != null) {
-                    AttributeModifier currentModifier = attributeInstance.getModifier(uuid);
-                    if (currentModifier != null) {
-                        if (currentModifier.getAmount() != total_boost) {
-                            attributeInstance.removeModifier(uuid);
-                            attributeInstance.addPermanentModifier(new AttributeModifier(uuid,"peak_health",total_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
-                        }
-                    } else {
-                        attributeInstance.addPermanentModifier(new AttributeModifier(uuid,"peak_health",total_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
-                    }
+        AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getCriticalHitDamage());
+        if (attributeInstance != null) {
+            AttributeModifier currentModifier = attributeInstance.getModifier(uuid);
+            if (currentModifier != null) {
+                if (currentModifier.getAmount() != total_boost) {
+                    attributeInstance.removeModifier(uuid);
+                    attributeInstance.addPermanentModifier(new AttributeModifier(uuid, "peak_health", total_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
+            } else {
+                attributeInstance.addPermanentModifier(new AttributeModifier(uuid, "peak_health", total_boost, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            }
+        }
     }
 
     @Override
     public void removeAttributeModifiers(LivingEntity living, AttributeMap map, int amplifier) {
         super.removeAttributeModifiers(living, map, amplifier);
-        AttributeInstance attributeInstance = map.getInstance(Services.PLATFORM.getSpellPower());
+        AttributeInstance attributeInstance = map.getInstance(Services.PLATFORM.getCriticalHitDamage());
         if (attributeInstance != null) {
             attributeInstance.removeModifier(uuid);
         }

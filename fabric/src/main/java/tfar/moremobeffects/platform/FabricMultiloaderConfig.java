@@ -83,6 +83,21 @@ public class FabricMultiloaderConfig implements MultiloaderConfig {
     }
 
     @Override
+    public double might() {
+        return 0;
+    }
+
+    @Override
+    public double strengthened() {
+        return 0;
+    }
+
+    @Override
+    public double sorcerous_transference() {
+        return 0;
+    }
+
+    @Override
     public double arcanic_conversion() {
         return 0;
     }
