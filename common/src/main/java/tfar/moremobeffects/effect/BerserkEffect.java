@@ -27,14 +27,13 @@ public class BerserkEffect extends MobEffect {
 
     public void applyEffectTick(LivingEntity entity, int level) {
 
-        Set<Attribute> applicable = Set.of(Attributes.ATTACK_DAMAGE, Services.PLATFORM.getEnderSpellPower(), ModAttributes.PROJECTILE_ATTACK_DAMAGE);
-
+        Set<Attribute> applicable = getApplicable();
         for (Attribute attribute : applicable) {
             AttributeInstance attributeinstance = entity.getAttribute(attribute);
             if (attributeinstance != null) {
                 float levelScale = (float) ((1 + level) * Services.PLATFORM.getConfig().berserk());
                 float f = (1 - entity.getHealth() / entity.getMaxHealth()) * levelScale;
-                removeRageModifier(entity);
+                removeRageModifier(entity,attribute);
                 attributeinstance.addTransientModifier(new AttributeModifier(uuid, "Berserk attack boost", f, AttributeModifier.Operation.ADDITION));
             }
         }
@@ -62,8 +61,8 @@ public class BerserkEffect extends MobEffect {
         return duration > 0;
     }
 
-    protected void removeRageModifier(LivingEntity living) {
-        AttributeInstance attributeinstance = living.getAttribute(Attributes.ATTACK_DAMAGE);
+    protected void removeRageModifier(LivingEntity living,Attribute attribute) {
+        AttributeInstance attributeinstance = living.getAttribute(attribute);
         if (attributeinstance != null) {
             if (attributeinstance.getModifier(uuid) != null) {
                 attributeinstance.removeModifier(uuid);
@@ -72,13 +71,20 @@ public class BerserkEffect extends MobEffect {
         }
     }
 
+    Set<Attribute> getApplicable() {
+        return Set.of(Attributes.ATTACK_DAMAGE, Services.PLATFORM.getEnderSpellPower(), ModAttributes.PROJECTILE_ATTACK_DAMAGE);
+    }
+
     public void addAttributeModifiers(LivingEntity entity, AttributeMap map, int i) {
         super.addAttributeModifiers(entity, map, i);
     }
 
     public void removeAttributeModifiers(LivingEntity entity, AttributeMap map, int i) {
         super.removeAttributeModifiers(entity, map, i);
-        removeRageModifier(entity);
+        Set<Attribute> applicable = getApplicable();
+        for (Attribute attribute : applicable) {
+            removeRageModifier(entity,attribute);
+        }
     }
 
 }
