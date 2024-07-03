@@ -54,7 +54,12 @@ public interface MultiloaderConfig {
     double battle_mage();
 
     double peak_health();
-    double berserk();
+
+    double berserk_attack_damage();
+    double berserk_ender_spell_power();
+    double berserk_projectile_damage();
+
+
     double revive();
     double martyr();
 

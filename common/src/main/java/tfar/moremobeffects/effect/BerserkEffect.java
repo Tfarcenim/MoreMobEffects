@@ -31,7 +31,7 @@ public class BerserkEffect extends MobEffect {
         for (Attribute attribute : applicable) {
             AttributeInstance attributeinstance = entity.getAttribute(attribute);
             if (attributeinstance != null) {
-                float levelScale = (float) ((1 + level) * Services.PLATFORM.getConfig().berserk());
+                float levelScale = (float) ((1 + level) * getBoost(attribute));
                 float f = (1 - entity.getHealth() / entity.getMaxHealth()) * levelScale;
                 removeRageModifier(entity,attribute);
                 attributeinstance.addTransientModifier(new AttributeModifier(uuid, "Berserk attack boost", f, AttributeModifier.Operation.ADDITION));
@@ -73,6 +73,17 @@ public class BerserkEffect extends MobEffect {
 
     Set<Attribute> getApplicable() {
         return Set.of(Attributes.ATTACK_DAMAGE, Services.PLATFORM.getEnderSpellPower(), ModAttributes.PROJECTILE_ATTACK_DAMAGE);
+    }
+
+    double getBoost(Attribute attribute) {
+        if (attribute ==  Attributes.ATTACK_DAMAGE) {
+            return Services.PLATFORM.getConfig().berserk_attack_damage();
+        } else if (attribute ==  Services.PLATFORM.getEnderSpellPower()) {
+            return Services.PLATFORM.getConfig().berserk_ender_spell_power();
+        } else if (attribute == ModAttributes.PROJECTILE_ATTACK_DAMAGE) {
+            return Services.PLATFORM.getConfig().berserk_projectile_damage();
+        }
+        return 0;
     }
 
     public void addAttributeModifiers(LivingEntity entity, AttributeMap map, int i) {

@@ -2,6 +2,7 @@ package tfar.moremobeffects.platform;
 
 import dev.shadowsoffire.attributeslib.api.ALObjects;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
+import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -121,5 +122,10 @@ public class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public MobEffect getBleeding() {
         return ALObjects.MobEffects.BLEEDING.get();
+    }
+
+    @Override
+    public MobEffect getBlight() {
+        return MobEffectRegistry.BLIGHT.get();
     }
 }

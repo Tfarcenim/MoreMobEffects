@@ -1,6 +1,5 @@
 package tfar.moremobeffects.init;
 
-import net.minecraft.world.effect.AttackDamageMobEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -81,7 +80,7 @@ public class ModMobEffects {
             :null;
 
     public static final MobEffect LIFE_STEAL = ATTRIBUTESLIB ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getLifeSteal,"3b5e19e5-b4d6-4f0e-a07b-95f6e9b11002",() -> Services.PLATFORM.getConfig().life_steal(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getLifeSteal,"3b5e19e5-b4d6-4f0e-a07b-95f6e9b11002",() -> Services.PLATFORM.getConfig().life_steal(), AttributeModifier.Operation.ADDITION)
             :null;
 
     public static final MobEffect ARMOR_PIERCE = ATTRIBUTESLIB ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
@@ -89,7 +88,7 @@ public class ModMobEffects {
             :null;
 
     public static final MobEffect OVERHEAL = ATTRIBUTESLIB ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Services.PLATFORM::getOverheal,"20a3054e-b56e-4f65-a7ab-09f8e61de5bf",() -> Services.PLATFORM.getConfig().overheal(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getOverheal,"20a3054e-b56e-4f65-a7ab-09f8e61de5bf",() -> Services.PLATFORM.getConfig().overheal(), AttributeModifier.Operation.ADDITION)
             :null;
 
     public static final MobEffect SUMMON_BOOST = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
@@ -123,7 +122,7 @@ public class ModMobEffects {
     public static final MobEffect LOOTING = new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
     public static final MobEffect SOUL_SCORCHED = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
 
-    public static final MobEffect BLAZING_ASPECT = ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) :null;
+    public static final MobEffect COMMANDING_ASPECT = IRONS_SPELLBOOKS && ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) :null;
     public static final MobEffect WOLF_ASPECT = ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) :null;
     public static final MobEffect WITHERING_ASPECT = ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
     public static final MobEffect SIGIL_OF_MANA = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;

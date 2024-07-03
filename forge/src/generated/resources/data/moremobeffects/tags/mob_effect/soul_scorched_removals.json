@@ -3,8 +3,13 @@
     "minecraft:poison",
     "minecraft:wither",
     "minecraft:slowness",
+    "minecraft:weakness",
     {
       "id": "attributeslib:bleeding",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:blight",
       "required": false
     }
   ]

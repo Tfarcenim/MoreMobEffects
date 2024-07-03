@@ -1,6 +1,7 @@
 package tfar.moremobeffects.datagen.assets;
 
 import dev.shadowsoffire.attributeslib.api.ALObjects;
+import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -25,7 +26,9 @@ public class MobEffectTagsProvider extends TagsProvider<MobEffect> {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(ModTags.SOUL_SCORCHED_REMOVALS).add(from(MobEffects.POISON),from(MobEffects.WITHER),from(MobEffects.MOVEMENT_SLOWDOWN)).addOptional(ALObjects.MobEffects.BLEEDING.getKey().location());
+        tag(ModTags.SOUL_SCORCHED_REMOVALS).add(from(MobEffects.POISON),from(MobEffects.WITHER),
+                        from(MobEffects.MOVEMENT_SLOWDOWN),from(MobEffects.WEAKNESS))
+                .addOptional(ALObjects.MobEffects.BLEEDING.getId()).addOptional(MobEffectRegistry.BLIGHT.getId());
     }
 
     protected ResourceKey<MobEffect> from(MobEffect effect) {

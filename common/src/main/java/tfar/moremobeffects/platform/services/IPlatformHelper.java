@@ -60,4 +60,6 @@ public interface IPlatformHelper {
 
     Attribute getSummonDamage();
     MobEffect getBleeding();
+
+    MobEffect getBlight();
 }

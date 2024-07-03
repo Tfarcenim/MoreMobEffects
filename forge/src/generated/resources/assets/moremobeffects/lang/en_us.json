@@ -10,6 +10,7 @@
   "effect.moremobeffects.battle_mage": "Battle Mage",
   "effect.moremobeffects.berserk": "Berserk",
   "effect.moremobeffects.brutality": "Brutality",
+  "effect.moremobeffects.commanding_aspect": "Commanding Aspect",
   "effect.moremobeffects.disarming": "Disarming",
   "effect.moremobeffects.domineering": "Domineering",
   "effect.moremobeffects.empowered": "Empowered",
@@ -34,6 +35,8 @@
   "effect.moremobeffects.retribution": "Retribution",
   "effect.moremobeffects.revive": "Revive",
   "effect.moremobeffects.savage": "Savage",
+  "effect.moremobeffects.sigil_of_mana": "Sigil Of Mana",
+  "effect.moremobeffects.sorcerous_transference": "Sorcerous Transference",
   "effect.moremobeffects.soul_scorched": "Soul Scorched",
   "effect.moremobeffects.spell_exhaustion": "Spell Exhaustion",
   "effect.moremobeffects.spell_haste": "Spell Haste",
@@ -41,5 +44,7 @@
   "effect.moremobeffects.summon_boost": "Summon Boost",
   "effect.moremobeffects.vulnerable": "Vulnerable",
   "effect.moremobeffects.warden": "Warden",
-  "effect.moremobeffects.will_of_the_summoner": "Will Of The Summoner"
+  "effect.moremobeffects.will_of_the_summoner": "Will Of The Summoner",
+  "effect.moremobeffects.withering_aspect": "Withering Aspect",
+  "effect.moremobeffects.wolf_aspect": "Wolf Aspect"
 }

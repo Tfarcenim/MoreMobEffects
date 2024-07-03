@@ -2,7 +2,6 @@ package tfar.moremobeffects;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import tfar.moremobeffects.platform.MultiloaderConfig;
-import tfar.moremobeffects.platform.Services;
 
 public class TomlConfig implements MultiloaderConfig {
 
@@ -197,8 +196,18 @@ public class TomlConfig implements MultiloaderConfig {
     }
 
     @Override
-    public double berserk() {
-        return Server.berserk.get();
+    public double berserk_attack_damage() {
+        return Server.berserk_attack_damage.get();
+    }
+
+    @Override
+    public double berserk_ender_spell_power() {
+        return Server.berserk_ender_spell_power.get();
+    }
+
+    @Override
+    public double berserk_projectile_damage() {
+        return Server.berserk_projectile_damage.get();
     }
 
     @Override
@@ -289,7 +298,11 @@ public class TomlConfig implements MultiloaderConfig {
         public static ForgeConfigSpec.DoubleValue will_of_the_summoner;
         public static ForgeConfigSpec.DoubleValue battle_mage;
         public static ForgeConfigSpec.DoubleValue peak_health;
-        public static ForgeConfigSpec.DoubleValue berserk;
+
+        public static ForgeConfigSpec.DoubleValue berserk_attack_damage;
+        public static ForgeConfigSpec.DoubleValue berserk_ender_spell_power;
+        public static ForgeConfigSpec.DoubleValue berserk_projectile_damage;
+
         public static ForgeConfigSpec.DoubleValue revive;
         public static ForgeConfigSpec.DoubleValue martyr;
         public static ForgeConfigSpec.DoubleValue sorcerous_transference;
@@ -449,9 +462,17 @@ public class TomlConfig implements MultiloaderConfig {
                     comment("Gain x per level of your Max Health boosts as Critical damage. (multiplicative)")
                     .defineInRange("peak_health", .05, 0, Double.MAX_VALUE);
 
-            berserk = builder
-                    .comment("Deal more ender spell, ranged, and melee damage the lower your health is. ")
-                            .defineInRange("berserk",2.5,0,Double.MAX_VALUE);
+            berserk_attack_damage = builder
+                    .comment("Deal more melee damage the lower your health is. ")
+                            .defineInRange("berserk_attack_damage",2.5,0,Double.MAX_VALUE);
+
+            berserk_ender_spell_power = builder
+                    .comment("Gain more ender spell power the lower your health is. ")
+                    .defineInRange("berserk_ender_spell_power",2.5,0,Double.MAX_VALUE);
+
+            berserk_projectile_damage = builder
+                    .comment("Deal more ranged damage the lower your health is. ")
+                    .defineInRange("berserk_projectile_damage",.025,0,Double.MAX_VALUE);
 
             sorcerous_transference = builder
                     .comment("When under this effect, the user’s melee/ranged attacks give the target a spell power buff " +

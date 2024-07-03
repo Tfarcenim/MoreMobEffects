@@ -97,11 +97,9 @@ public class MoreMobEffects {
 
                 if (attributeInstance != null) {
                     attributeInstance.removeModifier(blazing_aspect_id);
-                    if (target.isOnFire()) {
-                        MobEffectInstance blazing_aspect = livingAttacker.getEffect(ModMobEffects.BLAZING_ASPECT);
-                        if (blazing_aspect != null) {
-                            attributeInstance.addTransientModifier(new AttributeModifier(blazing_aspect_id, "Blazing Aspect Bonus", Services.PLATFORM.getConfig().blazing_aspect() * (blazing_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
-                        }
+                    MobEffectInstance blazing_aspect = livingAttacker.getEffect(ModMobEffects.COMMANDING_ASPECT);
+                    if (blazing_aspect != null && (target.hasEffect(MobEffects.WEAKNESS) || target.hasEffect(Services.PLATFORM.getBlight()))) {
+                        attributeInstance.addTransientModifier(new AttributeModifier(blazing_aspect_id, "Blazing Aspect Bonus", Services.PLATFORM.getConfig().blazing_aspect() * (blazing_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
                     }
                 }
 
@@ -118,11 +116,9 @@ public class MoreMobEffects {
 
                 AttributeInstance attributeInstanceArmorShred = livingAttacker.getAttribute(Services.PLATFORM.getArmorPiercing());
                 if (attributeInstanceArmorShred != null) {
-                    if (target.hasEffect(MobEffects.WITHER)) {
-                        MobEffectInstance wolf_aspect = livingAttacker.getEffect(ModMobEffects.WITHERING_ASPECT);
-                        if (wolf_aspect != null) {
-                            attributeInstanceArmorShred.addTransientModifier(new AttributeModifier(withering_aspect_id, "Withering Aspect Bonus", Services.PLATFORM.getConfig().withering_aspect() * (wolf_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
-                        }
+                    MobEffectInstance withering_aspect = livingAttacker.getEffect(ModMobEffects.WITHERING_ASPECT);
+                    if (withering_aspect != null) {
+                        attributeInstanceArmorShred.addTransientModifier(new AttributeModifier(withering_aspect_id, "Withering Aspect Bonus", Services.PLATFORM.getConfig().withering_aspect() * (withering_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
                     }
                 }
             }
@@ -147,6 +143,7 @@ public class MoreMobEffects {
                 if (spellPower != null) {
                     attacker.hurt(target.damageSources().thorns(target), (float)
                             (Services.PLATFORM.getConfig().retribution() * (retribution.getAmplifier() + 1) * spellPower.getValue()));
+                    target.removeEffect(ModMobEffects.RETRIBUTION);
                 }
             }
 
@@ -183,7 +180,7 @@ public class MoreMobEffects {
                     double ender_spell_power = target.getAttributeValue(Services.PLATFORM.getEnderSpellPower());
 
                     double extraDamage = Services.PLATFORM.getConfig().battle_mage() * (battle_mage.getAmplifier() + 1) * (1 + ender_spell_power + spell_power) * baseDamage;
-                    target.hurt(target.level().damageSources().thorns(attacker), (float) extraDamage);
+                    baseDamage += extraDamage;
                 }
             }
         }
