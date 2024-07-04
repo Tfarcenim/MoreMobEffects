@@ -128,7 +128,7 @@ public class ModMobEffects {
     public static final MobEffect SIGIL_OF_MANA = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
     public static final MobEffect SORCEROUS_TRANSFERENCE = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
 
-    public static final MobEffect BLOCK_ED = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
+    public static final MobEffect BLOCK_ED = new Block_edEffect(MobEffectCategory.HARMFUL,0xff0000);
     public static final MobEffect TIME_FOR_A_BREAK = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
     public static final MobEffect DISPELLED = new DispelledEffect(MobEffectCategory.HARMFUL,0xff0000);
     public static final MobEffect REJUVENATED = new RejuvenatedEffect(MobEffectCategory.BENEFICIAL,0xff0000);
@@ -143,7 +143,7 @@ public class ModMobEffects {
             .addConfigurableAttributeModifier(Attributes.MAX_HEALTH, "cb35a893-3ace-4359-864b-0a43014fa75c", () -> Services.PLATFORM.getConfig().hardy(), AttributeModifier.Operation.MULTIPLY_TOTAL);
 
     public static final MobEffect SWINGY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
-            .addConfigurableAttributeModifier(Attributes.MAX_HEALTH, "8feb35da-06fd-4a81-bc2d-5c1ffbee5360", () -> Services.PLATFORM.getConfig().swingy(), AttributeModifier.Operation.ADDITION);
+            .addConfigurableAttributeModifier(Attributes.ATTACK_SPEED, "8feb35da-06fd-4a81-bc2d-5c1ffbee5360", () -> Services.PLATFORM.getConfig().swingy(), AttributeModifier.Operation.ADDITION);
 
     public static final MobEffect MANA_REGENERATION = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
             .addConfigurableAttributeModifier(Services.PLATFORM::getManaRegen,"fa312d45-b803-40cb-abea-930f27cfeeea",() -> Services.PLATFORM.getConfig().mana_regeneration(), AttributeModifier.Operation.ADDITION): null;

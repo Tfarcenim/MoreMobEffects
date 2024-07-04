@@ -1,9 +1,14 @@
 package tfar.moremobeffects.platform.services;
 
 import net.minecraft.core.Registry;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import tfar.moremobeffects.network.S2CModPacket;
 import tfar.moremobeffects.platform.MultiloaderConfig;
+
+import java.util.function.Function;
 
 public interface IPlatformHelper {
 
@@ -66,4 +71,6 @@ public interface IPlatformHelper {
     Attribute getMaxMana();
     Attribute getManaRegen();
 
+    <MSG extends S2CModPacket> void registerClientPacket(Class<MSG> packetLocation, Function<FriendlyByteBuf,MSG> reader);
+    void sendToClient(S2CModPacket packet, ServerPlayer player);
 }

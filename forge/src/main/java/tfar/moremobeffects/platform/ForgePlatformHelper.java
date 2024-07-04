@@ -5,7 +5,9 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraftforge.fml.ModList;
@@ -14,12 +16,16 @@ import org.apache.commons.lang3.tuple.Pair;
 import tfar.moremobeffects.MoreMobEffects;
 import tfar.moremobeffects.MoreMobEffectsForge;
 import tfar.moremobeffects.TomlConfig;
+import tfar.moremobeffects.network.PacketHandler;
+import tfar.moremobeffects.network.PacketHandlerForge;
+import tfar.moremobeffects.network.S2CModPacket;
 import tfar.moremobeffects.platform.services.IPlatformHelper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ForgePlatformHelper implements IPlatformHelper {
@@ -137,5 +143,17 @@ public class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public Attribute getManaRegen() {
         return AttributeRegistry.MANA_REGEN.get();
+    }
+
+    int i;
+
+    @Override
+    public <MSG extends S2CModPacket> void registerClientPacket(Class<MSG> packetLocation, Function<FriendlyByteBuf, MSG> reader) {
+        PacketHandlerForge.INSTANCE.registerMessage(i++, packetLocation, MSG::write, reader, PacketHandlerForge.wrapS2C());
+    }
+
+    @Override
+    public void sendToClient(S2CModPacket packet, ServerPlayer player) {
+        PacketHandlerForge.sendToClient(packet,player);
     }
 }

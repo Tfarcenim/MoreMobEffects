@@ -499,7 +499,7 @@ public class TomlConfig implements MultiloaderConfig {
                     .defineInRange("will_of_the_summoner", .05, 0, Double.MAX_VALUE);
 
             battle_mage = builder.
-                    comment("Physical and Ranged attacks deal (x *  (ender spell power + spell power - 1) extra damage as thorns")
+                    comment("Physical and Ranged attacks deal (x *  (ender spell power + spell power - 1) extra damage")
                     .defineInRange("battle_mage", .05, 0, Double.MAX_VALUE);
 
             peak_health = builder.

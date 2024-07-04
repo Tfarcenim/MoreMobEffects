@@ -98,11 +98,11 @@ public class MoreMobEffectsForge {
 
     private void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
         Entity entity = event.getEntity();
-        if (entity instanceof LivingEntity living) {
+    /*    if (entity instanceof LivingEntity living) {
             if (living.hasEffect(ModMobEffects.BLOCK_ED)) {
                 event.setCanceled(true);
             }
-        }
+        }*/
     }
 
     private void applyEffects(MobEffectEvent.Applicable event) {

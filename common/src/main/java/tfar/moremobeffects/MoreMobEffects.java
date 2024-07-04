@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tfar.moremobeffects.init.ModAttributes;
 import tfar.moremobeffects.init.ModMobEffects;
+import tfar.moremobeffects.network.PacketHandler;
 import tfar.moremobeffects.platform.Services;
 
 import java.util.UUID;
@@ -40,6 +41,7 @@ public class MoreMobEffects {
     public static void init() {
         Services.PLATFORM.registerAll(ModMobEffects.class, BuiltInRegistries.MOB_EFFECT, MobEffect.class);
         Services.PLATFORM.registerAll(ModAttributes.class, BuiltInRegistries.ATTRIBUTE, Attribute.class);
+        PacketHandler.registerPackets();
     }
 
     public static void commonSetup() {
@@ -116,6 +118,7 @@ public class MoreMobEffects {
 
                 AttributeInstance attributeInstanceArmorShred = livingAttacker.getAttribute(Services.PLATFORM.getArmorPiercing());
                 if (attributeInstanceArmorShred != null) {
+                    attributeInstanceArmorShred.removeModifier(withering_aspect_id);
                     MobEffectInstance withering_aspect = livingAttacker.getEffect(ModMobEffects.WITHERING_ASPECT);
                     if (withering_aspect != null) {
                         attributeInstanceArmorShred.addTransientModifier(new AttributeModifier(withering_aspect_id, "Withering Aspect Bonus", Services.PLATFORM.getConfig().withering_aspect() * (withering_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
@@ -176,10 +179,11 @@ public class MoreMobEffects {
                 MobEffectInstance battle_mage = livingAttacker.getEffect(ModMobEffects.BATTLE_MAGE);
                 if (battle_mage != null) {
 
-                    double spell_power = target.getAttributeValue(Services.PLATFORM.getSpellPower());
-                    double ender_spell_power = target.getAttributeValue(Services.PLATFORM.getEnderSpellPower());
+                    double spell_power = livingAttacker.getAttributeValue(Services.PLATFORM.getSpellPower());
+                    double ender_spell_power = livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower());
 
-                    double extraDamage = Services.PLATFORM.getConfig().battle_mage() * (battle_mage.getAmplifier() + 1) * (1 + ender_spell_power + spell_power) * baseDamage;
+                    double extraDamage = Services.PLATFORM.getConfig().battle_mage() * (battle_mage.getAmplifier() + 1)
+                            * (1 + ender_spell_power + spell_power) * baseDamage;
                     baseDamage += extraDamage;
                 }
             }
