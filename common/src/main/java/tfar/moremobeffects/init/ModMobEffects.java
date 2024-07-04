@@ -132,5 +132,26 @@ public class ModMobEffects {
     public static final MobEffect TIME_FOR_A_BREAK = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
     public static final MobEffect DISPELLED = new DispelledEffect(MobEffectCategory.HARMFUL,0xff0000);
     public static final MobEffect REJUVENATED = new RejuvenatedEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+    public static final MobEffect BEEFY = new ConfigurableHealthBoostMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Attributes.MAX_HEALTH, "d3fa24af-1450-4fec-852f-3af1499cb86a", () -> Services.PLATFORM.getConfig().beefy(), AttributeModifier.Operation.ADDITION);
+
+    public static final MobEffect ROBUST = new ConfigurableHealthBoostMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Attributes.MAX_HEALTH, "549923b8-28bb-4b03-97ab-2750fd3d7972", () -> Services.PLATFORM.getConfig().robust(), AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+
+    public static final MobEffect HARDY = new ConfigurableHealthBoostMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Attributes.MAX_HEALTH, "cb35a893-3ace-4359-864b-0a43014fa75c", () -> Services.PLATFORM.getConfig().hardy(), AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+    public static final MobEffect SWINGY = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Attributes.MAX_HEALTH, "8feb35da-06fd-4a81-bc2d-5c1ffbee5360", () -> Services.PLATFORM.getConfig().swingy(), AttributeModifier.Operation.ADDITION);
+
+    public static final MobEffect MANA_REGENERATION = IRONS_SPELLBOOKS ? new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(Services.PLATFORM::getManaRegen,"fa312d45-b803-40cb-abea-930f27cfeeea",() -> Services.PLATFORM.getConfig().mana_regeneration(), AttributeModifier.Operation.ADDITION): null;
+
+    public static final MobEffect INJURY = new ConfigurableMobEffect(MobEffectCategory.HARMFUL,0xff0000)
+            .addConfigurableAttributeModifier(Attributes.MAX_HEALTH,"e13e086f-a412-4b10-b31f-eb9b1e62f8ff",() -> -Services.PLATFORM.getConfig().injury(), AttributeModifier.Operation.ADDITION);
+
+    public static final MobEffect FRACTURED = new ConfigurableMobEffect(MobEffectCategory.HARMFUL,0xff0000)
+            .addConfigurableAttributeModifier(Attributes.MAX_HEALTH,"5eb6dd61-eaf4-44b7-aac6-e1cc979e9980",() -> -Services.PLATFORM.getConfig().fractured(), AttributeModifier.Operation.MULTIPLY_TOTAL);
 
 }

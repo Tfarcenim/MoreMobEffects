@@ -250,6 +250,41 @@ public class TomlConfig implements MultiloaderConfig {
         return Server.sigil_of_mana.get();
     }
 
+    @Override
+    public double beefy() {
+        return Server.beefy.get();
+    }
+
+    @Override
+    public double robust() {
+        return Server.robust.get();
+    }
+
+    @Override
+    public double hardy() {
+        return Server.hardy.get();
+    }
+
+    @Override
+    public double swingy() {
+        return Server.swingy.get();
+    }
+
+    @Override
+    public double mana_regeneration() {
+        return Server.mana_regeneration.get();
+    }
+
+    @Override
+    public double injury() {
+        return Server.injury.get();
+    }
+
+    @Override
+    public double fractured() {
+        return Server.fractured.get();
+    }
+
     public static class Server {
         public static ForgeConfigSpec.DoubleValue vulnerable;
         public static ForgeConfigSpec.DoubleValue exposed;
@@ -313,6 +348,15 @@ public class TomlConfig implements MultiloaderConfig {
         public static ForgeConfigSpec.DoubleValue wolf_aspect;
         public static ForgeConfigSpec.DoubleValue withering_aspect;
         public static ForgeConfigSpec.DoubleValue sigil_of_mana;
+
+        public static ForgeConfigSpec.DoubleValue beefy;
+        public static ForgeConfigSpec.DoubleValue robust;
+        public static ForgeConfigSpec.DoubleValue hardy;
+        public static ForgeConfigSpec.DoubleValue swingy;
+        public static ForgeConfigSpec.DoubleValue mana_regeneration;
+
+        public static ForgeConfigSpec.DoubleValue injury;
+        public static ForgeConfigSpec.DoubleValue fractured;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
@@ -503,6 +547,26 @@ public class TomlConfig implements MultiloaderConfig {
 
             sigil_of_mana = builder.comment("Attacks deal x% increased spell damage to targets that are under the Mana Flare effect.")
                     .defineInRange("sigil_of_mana",.1,0,100);
+
+            beefy = builder.comment("Increase max health by x per level additively")
+                            .defineInRange("beefy",4,0,Double.MAX_VALUE);
+
+            robust = builder.comment("Increase max health by x per level multiplicatively")
+                    .defineInRange("robust",.1,0,Double.MAX_VALUE);
+
+            hardy = builder.comment("Increase max health by x per level multiplicatively")
+                    .defineInRange("hardy",.1,0,Double.MAX_VALUE);
+
+            swingy = builder.comment("Increase attack speed by x per level additively")
+                            .defineInRange("swingy",1,0,Double.MAX_VALUE);
+
+            mana_regeneration = builder.comment("Increases irons_spellbooks:mana_regen attribute additively")
+                            .defineInRange("mana_regeneration",1,0,Double.MAX_VALUE);
+
+            injury = builder.comment("Reduces max health by a flat amount per level.")
+                    .defineInRange("injury",2,0,Double.MAX_VALUE);
+            fractured = builder.comment("Reduces max health by a percentage amount per level.")
+                    .defineInRange("fractured",.1,0,Double.MAX_VALUE);
 
             builder.pop();
         }

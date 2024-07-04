@@ -4,6 +4,8 @@
     "minecraft:wither",
     "minecraft:slowness",
     "minecraft:weakness",
+    "moremobeffects:injury",
+    "moremobeffects:fractured",
     {
       "id": "attributeslib:bleeding",
       "required": false

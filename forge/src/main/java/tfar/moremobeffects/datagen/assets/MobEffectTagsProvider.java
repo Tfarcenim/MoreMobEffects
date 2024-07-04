@@ -14,6 +14,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import tfar.moremobeffects.ModTags;
 import tfar.moremobeffects.MoreMobEffects;
+import tfar.moremobeffects.init.ModMobEffects;
 import tfar.moremobeffects.platform.Services;
 
 import java.util.concurrent.CompletableFuture;
@@ -27,7 +28,8 @@ public class MobEffectTagsProvider extends TagsProvider<MobEffect> {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(ModTags.SOUL_SCORCHED_REMOVALS).add(from(MobEffects.POISON),from(MobEffects.WITHER),
-                        from(MobEffects.MOVEMENT_SLOWDOWN),from(MobEffects.WEAKNESS))
+                        from(MobEffects.MOVEMENT_SLOWDOWN),from(MobEffects.WEAKNESS),
+                        from(ModMobEffects.INJURY),from(ModMobEffects.FRACTURED))
                 .addOptional(ALObjects.MobEffects.BLEEDING.getId()).addOptional(MobEffectRegistry.BLIGHT.getId());
     }
 

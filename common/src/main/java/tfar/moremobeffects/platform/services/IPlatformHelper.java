@@ -62,4 +62,8 @@ public interface IPlatformHelper {
     MobEffect getBleeding();
 
     MobEffect getBlight();
+
+    Attribute getMaxMana();
+    Attribute getManaRegen();
+
 }

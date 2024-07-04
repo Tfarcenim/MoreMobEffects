@@ -69,4 +69,12 @@ public interface MultiloaderConfig {
     double wolf_aspect();
     double withering_aspect();
     double sigil_of_mana();
+
+    double beefy();
+    double robust();
+    double hardy();
+    double swingy();
+    double mana_regeneration();
+    double injury();
+    double fractured();
 }

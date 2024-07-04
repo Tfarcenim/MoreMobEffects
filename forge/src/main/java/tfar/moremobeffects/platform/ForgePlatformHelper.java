@@ -128,4 +128,14 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public MobEffect getBlight() {
         return MobEffectRegistry.BLIGHT.get();
     }
+
+    @Override
+    public Attribute getMaxMana() {
+        return AttributeRegistry.MAX_MANA.get();
+    }
+
+    @Override
+    public Attribute getManaRegen() {
+        return AttributeRegistry.MANA_REGEN.get();
+    }
 }
