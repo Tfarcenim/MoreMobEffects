@@ -9,11 +9,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -47,6 +51,9 @@ public class MoreMobEffectsForge {
         MinecraftForge.EVENT_BUS.addListener(this::livingDeath);
         MinecraftForge.EVENT_BUS.addListener(this::looting);
         MinecraftForge.EVENT_BUS.addListener(this::applyEffects);
+        MinecraftForge.EVENT_BUS.addListener(this::onBlockPlace);
+        MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
+        MinecraftForge.EVENT_BUS.addListener(this::onBreakSpeed);
         // Use Forge to bootstrap the Common mod.
         MoreMobEffects.init();
     }
@@ -71,6 +78,33 @@ public class MoreMobEffectsForge {
         }
     }
 
+    private void onBlockBreak(BlockEvent.BreakEvent event) {
+       Player player = event.getPlayer();
+        if (player != null && !player.getAbilities().instabuild) {
+            if (player.hasEffect(ModMobEffects.TIME_FOR_A_BREAK)) {
+                event.setCanceled(true);
+            }
+        }
+    }
+
+    private void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+        Player player = event.getEntity();
+        if (player != null && !player.getAbilities().instabuild) {
+            if (player.hasEffect(ModMobEffects.TIME_FOR_A_BREAK)) {
+                event.setCanceled(true);
+            }
+        }
+    }
+
+    private void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof LivingEntity living) {
+            if (living.hasEffect(ModMobEffects.BLOCK_ED)) {
+                event.setCanceled(true);
+            }
+        }
+    }
+
     private void applyEffects(MobEffectEvent.Applicable event) {
         LivingEntity living = event.getEntity();
         MobEffect effect = event.getEffectInstance().getEffect();
@@ -79,6 +113,11 @@ public class MoreMobEffectsForge {
                 event.setResult(Event.Result.ALLOW);
             }
         }
+
+        if (living.hasEffect(ModMobEffects.DISPELLED) && effect.isBeneficial()) {
+            event.setResult(Event.Result.DENY);
+        }
+
     }
 
     private void looting(LootingLevelEvent event) {

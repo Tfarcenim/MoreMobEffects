@@ -127,4 +127,10 @@ public class ModMobEffects {
     public static final MobEffect WITHERING_ASPECT = ATTRIBUTESLIB ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
     public static final MobEffect SIGIL_OF_MANA = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
     public static final MobEffect SORCEROUS_TRANSFERENCE = IRONS_SPELLBOOKS ? new CustomMobEffect(MobEffectCategory.BENEFICIAL,0xff0000) : null;
+
+    public static final MobEffect BLOCK_ED = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
+    public static final MobEffect TIME_FOR_A_BREAK = new CustomMobEffect(MobEffectCategory.HARMFUL,0xff0000);
+    public static final MobEffect DISPELLED = new DispelledEffect(MobEffectCategory.HARMFUL,0xff0000);
+    public static final MobEffect REJUVENATED = new RejuvenatedEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+
 }
