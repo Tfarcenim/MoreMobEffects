@@ -98,6 +98,7 @@ dependencies {
     implementation fg.deobf("top.theillusivec4.caelus:caelus-forge:$caelus")
 
     implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:$project.player_animator")
+    compileOnly "fuzs.forgeconfigapiport:forgeconfigapiport-common:$forge_config_api"
 
 }
 
