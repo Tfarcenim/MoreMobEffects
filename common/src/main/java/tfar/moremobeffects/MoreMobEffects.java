@@ -209,8 +209,13 @@ public class MoreMobEffects {
     }
 
     public static float modifyDamageAfterMagicAbsorb(LivingEntity living, DamageSource source, float amount) {
+
+        if (living.getAttribute(ModAttributes.RESISTANCE) != null && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
+            amount *= 2 - living.getAttributeValue(ModAttributes.RESISTANCE);
+        }
+
         if (living.hasEffect(ModMobEffects.WARDEN) && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
-            return amount * .85f;
+            amount *=.85f;
         }
         return amount;
     }

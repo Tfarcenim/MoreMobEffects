@@ -16,7 +16,7 @@ public class LivingEntityMixin {
     
     @Inject(at = @At("TAIL"), method = "createLivingAttributes")
     private static void init(CallbackInfoReturnable<AttributeSupplier.Builder> cir) {
-        cir.getReturnValue().add(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
+        cir.getReturnValue().add(ModAttributes.PROJECTILE_ATTACK_DAMAGE).add(ModAttributes.RESISTANCE);
     }
 
     @ModifyVariable(method = "getDamageAfterMagicAbsorb", at = @At("HEAD"), argsOnly = true)

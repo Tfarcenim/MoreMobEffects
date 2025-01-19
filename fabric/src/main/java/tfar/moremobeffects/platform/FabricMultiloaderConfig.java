@@ -198,7 +198,17 @@ public class FabricMultiloaderConfig implements MultiloaderConfig {
     }
 
     @Override
-    public double berserk() {
+    public double berserk_attack_damage() {
+        return 0;
+    }
+
+    @Override
+    public double berserk_ender_spell_power() {
+        return 0;
+    }
+
+    @Override
+    public double berserk_projectile_damage() {
         return 0;
     }
 
@@ -234,6 +244,41 @@ public class FabricMultiloaderConfig implements MultiloaderConfig {
 
     @Override
     public double sigil_of_mana() {
+        return 0;
+    }
+
+    @Override
+    public double beefy() {
+        return 0;
+    }
+
+    @Override
+    public double robust() {
+        return 0;
+    }
+
+    @Override
+    public double hardy() {
+        return 0;
+    }
+
+    @Override
+    public double swingy() {
+        return 0;
+    }
+
+    @Override
+    public double mana_regeneration() {
+        return 0;
+    }
+
+    @Override
+    public double injury() {
+        return 0;
+    }
+
+    @Override
+    public double fractured() {
         return 0;
     }
 }
