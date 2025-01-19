@@ -6,7 +6,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import tfar.moremobeffects.init.ModMobEffects;
-import tfar.moremobeffects.platform.Services;
 
 public class IronSpellbooksEvents {
 
@@ -18,7 +17,7 @@ public class IronSpellbooksEvents {
         if (target.hasEffect(ModMobEffects.MANA_FLARE) && attacker instanceof LivingEntity livingAttacker) {
             MobEffectInstance mobEffectInstance = livingAttacker.getEffect(ModMobEffects.SIGIL_OF_MANA);
             if (mobEffectInstance != null) {
-                event.setAmount((float) (event.getOriginalAmount() * (1 + Services.PLATFORM.getConfig().sigil_of_mana() * (mobEffectInstance.getAmplifier() + 1) )));
+                event.setAmount((float) (event.getOriginalAmount() * (1 + ModConfig.Server.sigil_of_mana.get() * (mobEffectInstance.getAmplifier() + 1) )));
             }
         }
     }

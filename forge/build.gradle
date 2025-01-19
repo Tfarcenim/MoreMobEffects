@@ -90,7 +90,7 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
     implementation fg.deobf("curse.maven:apothic-attributes-898963:5340012")
-    implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:5341949")
+    implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:6054196")
 
     implementation fg.deobf("dev.shadowsoffire:Placebo:$minecraft_version-$placebo")
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-$minecraft_version:$geckolib")

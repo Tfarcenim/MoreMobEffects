@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import tfar.moremobeffects.ModConfig;
 import tfar.moremobeffects.init.ModAttributes;
 import tfar.moremobeffects.platform.Services;
 
@@ -37,7 +38,7 @@ public class ArcanicConversionMobEffect extends MobEffect {
     public void applyEffectTick(LivingEntity living, int amplifier) {
         switch (variant) {
             case physical -> {
-                double spellboost = Services.PLATFORM.getConfig().arcanic_conversion() * (amplifier + 1);
+                double spellboost = ModConfig.Server.arcanic_conversion.get() * (amplifier + 1);
 
                 double attack_damage = living.getAttributeValue(Attributes.ATTACK_DAMAGE);
                 double projectile_damage = living.getAttributeValue(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
@@ -60,7 +61,7 @@ public class ArcanicConversionMobEffect extends MobEffect {
             }
 
             case summoner -> {
-                double spellboost = Services.PLATFORM.getConfig().will_of_the_summoner() * (amplifier + 1);
+                double spellboost = ModConfig.Server.will_of_the_summoner.get() * (amplifier + 1);
 
                 double spell_power = living.getAttributeValue(Services.PLATFORM.getSpellPower());
                 double ender_spell_power = living.getAttributeValue(Services.PLATFORM.getEnderSpellPower());

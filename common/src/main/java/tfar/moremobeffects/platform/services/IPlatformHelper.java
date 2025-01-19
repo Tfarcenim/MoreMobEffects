@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import tfar.moremobeffects.network.S2CModPacket;
-import tfar.moremobeffects.platform.MultiloaderConfig;
 
 import java.util.function.Function;
 
@@ -45,8 +44,6 @@ public interface IPlatformHelper {
     }
 
     <T extends Registry<? extends F>,F> void registerAll(Class<?> clazz, T registry, Class<? extends F> filter);
-
-    MultiloaderConfig getConfig();
 
     Attribute getCriticalHitRate();
     Attribute getCriticalHitDamage();

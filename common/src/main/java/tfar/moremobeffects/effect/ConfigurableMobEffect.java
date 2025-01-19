@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,12 +22,20 @@ public class ConfigurableMobEffect extends MobEffect {
         super(category, color);
     }
 
-    public ConfigurableMobEffect addConfigurableAttributeModifier(Attribute attribute, String uuid, Supplier<Double> value, AttributeModifier.Operation operation) {
-        return this.addConfigurableAttributeModifier(() -> attribute,uuid,value,operation);
+    public ConfigurableMobEffect addConfigurableAttributeModifier(Attribute attribute, String uuid, ForgeConfigSpec.DoubleValue value, AttributeModifier.Operation operation) {
+        return this.addConfigurableAttributeModifier(() -> attribute,uuid,value,operation,false);
     }
 
-    public ConfigurableMobEffect addConfigurableAttributeModifier(Supplier<Attribute> attributeSupplier, String uuid, Supplier<Double> value, AttributeModifier.Operation operation) {
-        Supplier<AttributeModifier> modifier = () -> new AttributeModifier(UUID.fromString(uuid), this::getDescriptionId,value.get(), operation);
+    public ConfigurableMobEffect addConfigurableAttributeModifier(Attribute attribute, String uuid, ForgeConfigSpec.DoubleValue value, AttributeModifier.Operation operation,boolean invert) {
+        return this.addConfigurableAttributeModifier(() -> attribute,uuid,value,operation,invert);
+    }
+
+    public ConfigurableMobEffect addConfigurableAttributeModifier(Supplier<Attribute> attributeSupplier, String uuid, ForgeConfigSpec.DoubleValue value, AttributeModifier.Operation operation) {
+        return addConfigurableAttributeModifier(attributeSupplier,uuid,value,operation,false);
+    }
+
+    public ConfigurableMobEffect addConfigurableAttributeModifier(Supplier<Attribute> attributeSupplier, String uuid, ForgeConfigSpec.DoubleValue value, AttributeModifier.Operation operation,boolean invert) {
+        Supplier<AttributeModifier> modifier = () -> new AttributeModifier(UUID.fromString(uuid), this::getDescriptionId,invert ?-value.get() : value.get(), operation);
         this.configurableAttributeModifiers.put(attributeSupplier, modifier);
         return this;
     }

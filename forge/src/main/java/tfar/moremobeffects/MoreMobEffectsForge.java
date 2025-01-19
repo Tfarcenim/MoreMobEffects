@@ -1,21 +1,15 @@
 package tfar.moremobeffects;
 
-import com.google.common.collect.Lists;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -58,22 +52,21 @@ public class MoreMobEffectsForge {
         MoreMobEffects.init();
     }
 
-    public static final TomlConfig.Server SERVER;
+    public static final ModConfig.Server SERVER;
     public static final ForgeConfigSpec SERVER_SPEC;
 
     static {
-        final Pair<TomlConfig.Server, ForgeConfigSpec> specPair2 = new ForgeConfigSpec.Builder().configure(TomlConfig.Server::new);
+        final Pair<ModConfig.Server, ForgeConfigSpec> specPair2 = new ForgeConfigSpec.Builder().configure(ModConfig.Server::new);
         SERVER_SPEC = specPair2.getRight();
         SERVER = specPair2.getLeft();
     }
 
-    public static Map<Registry<?>, List<Pair<ResourceLocation, Supplier<?>>>> registerLater = new HashMap<>();
+    public static Map<Registry<?>, List<Pair<ResourceLocation, Supplier<Object>>>> registerLater = new HashMap<>();
     private void register(RegisterEvent e) {
-        for (Map.Entry<Registry<?>,List<Pair<ResourceLocation, Supplier<?>>>> entry : registerLater.entrySet()) {
-            Registry<?> registry = entry.getKey();
-            List<Pair<ResourceLocation, Supplier<?>>> toRegister = entry.getValue();
-            for (Pair<ResourceLocation,Supplier<?>> pair : toRegister) {
-                e.register((ResourceKey<? extends Registry<Object>>)registry.key(),pair.getLeft(),(Supplier<Object>)pair.getValue());
+        List<Pair<ResourceLocation, Supplier<Object>>> list = registerLater.get(e.getVanillaRegistry());
+        if (list != null) {
+            for (Pair<ResourceLocation,Supplier<Object>> pair :  list) {
+                e.register((ResourceKey<? extends Registry<Object>>)e.getRegistryKey(),pair.getLeft(),pair.getRight());
             }
         }
     }

@@ -10,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.phys.AABB;
+import tfar.moremobeffects.ModConfig;
 import tfar.moremobeffects.init.ModAttributes;
 import tfar.moremobeffects.platform.Services;
 
@@ -77,11 +78,11 @@ public class BerserkEffect extends MobEffect {
 
     double getBoost(Attribute attribute) {
         if (attribute ==  Attributes.ATTACK_DAMAGE) {
-            return Services.PLATFORM.getConfig().berserk_attack_damage();
+            return ModConfig.Server.berserk_attack_damage.get();
         } else if (attribute ==  Services.PLATFORM.getEnderSpellPower()) {
-            return Services.PLATFORM.getConfig().berserk_ender_spell_power();
+            return ModConfig.Server.berserk_ender_spell_power.get();
         } else if (attribute == ModAttributes.PROJECTILE_ATTACK_DAMAGE) {
-            return Services.PLATFORM.getConfig().berserk_projectile_damage();
+            return ModConfig.Server.berserk_projectile_damage.get();
         }
         return 0;
     }

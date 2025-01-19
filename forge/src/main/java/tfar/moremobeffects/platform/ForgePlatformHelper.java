@@ -15,8 +15,6 @@ import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.moremobeffects.MoreMobEffects;
 import tfar.moremobeffects.MoreMobEffectsForge;
-import tfar.moremobeffects.TomlConfig;
-import tfar.moremobeffects.network.PacketHandler;
 import tfar.moremobeffects.network.PacketHandlerForge;
 import tfar.moremobeffects.network.S2CModPacket;
 import tfar.moremobeffects.platform.services.IPlatformHelper;
@@ -30,7 +28,6 @@ import java.util.function.Supplier;
 
 public class ForgePlatformHelper implements IPlatformHelper {
 
-    final MultiloaderConfig config = new TomlConfig();
     @Override
     public String getPlatformName() {
 
@@ -51,7 +48,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public <T extends Registry<? extends F>,F> void registerAll(Class<?> clazz, T registry, Class<? extends F> filter) {
-        List<Pair<ResourceLocation, Supplier<?>>> list = MoreMobEffectsForge.registerLater.computeIfAbsent(registry, k -> new ArrayList<>());
+        List<Pair<ResourceLocation, Supplier<Object>>> list = MoreMobEffectsForge.registerLater.computeIfAbsent(registry, k -> new ArrayList<>());
         for (Field field : clazz.getFields()) {
             MappedRegistry<? extends F> forgeRegistry = (MappedRegistry<? extends F>) registry;
             forgeRegistry.unfreeze();
@@ -64,11 +61,6 @@ public class ForgePlatformHelper implements IPlatformHelper {
                 illegalAccessException.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public MultiloaderConfig getConfig() {
-        return config;
     }
 
     @Override

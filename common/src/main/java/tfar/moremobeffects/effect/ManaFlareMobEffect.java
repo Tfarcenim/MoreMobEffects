@@ -8,6 +8,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import tfar.moremobeffects.ModConfig;
 import tfar.moremobeffects.init.ModDamageTypes;
 import tfar.moremobeffects.platform.Services;
 
@@ -28,7 +29,7 @@ public class ManaFlareMobEffect extends MobEffect {
             double multi = spellPower.getValue();
             Registry<DamageType> damageTypes = living.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE);
             DamageSource source = new DamageSource(damageTypes.getHolderOrThrow(ModDamageTypes.MANA_FLARE));
-            living.hurt(source, (float) ((amplifier + 1) * multi * Services.PLATFORM.getConfig().mana_flare()));
+            living.hurt(source, (float) ((amplifier + 1) * multi * ModConfig.Server.mana_flare.get()));
         }
     }
 }

@@ -67,8 +67,8 @@ public class MoreMobEffects {
                         if (player1 != null) {
                             MobEffectInstance martyr1 = player1.getEffect(ModMobEffects.MARTYR);
                             if (martyr1 != null) {
-                                fraction += Services.PLATFORM.getConfig().martyr();
-                                double transferred = baseDamage * Services.PLATFORM.getConfig().martyr();
+                                fraction += ModConfig.Server.martyr.get();
+                                double transferred = baseDamage * ModConfig.Server.martyr.get();
                                 player1.hurt(source, (float) transferred);
                                 if (fraction >= 1) break;
                             }
@@ -82,12 +82,12 @@ public class MoreMobEffects {
 
         MobEffectInstance exposed = target.getEffect(ModMobEffects.EXPOSED);
         if (exposed != null) {
-            baseDamage *= 1 + Services.PLATFORM.getConfig().exposed() * (exposed.getAmplifier() + 1);
+            baseDamage *= 1 + ModConfig.Server.exposed.get() * (exposed.getAmplifier() + 1);
         }
 
         MobEffectInstance vulnerable = target.getEffect(ModMobEffects.VULNERABLE);
         if (vulnerable != null) {
-            baseDamage *= 1 + Services.PLATFORM.getConfig().vulnerable() * (vulnerable.getAmplifier() + 1);
+            baseDamage *= 1 + ModConfig.Server.vulnerable.get() * (vulnerable.getAmplifier() + 1);
         }
 
         Entity attacker = source.getEntity();
@@ -101,7 +101,7 @@ public class MoreMobEffects {
                     attributeInstance.removeModifier(blazing_aspect_id);
                     MobEffectInstance blazing_aspect = livingAttacker.getEffect(ModMobEffects.COMMANDING_ASPECT);
                     if (blazing_aspect != null && (target.hasEffect(MobEffects.WEAKNESS) || target.hasEffect(Services.PLATFORM.getBlight()))) {
-                        attributeInstance.addTransientModifier(new AttributeModifier(blazing_aspect_id, "Blazing Aspect Bonus", Services.PLATFORM.getConfig().blazing_aspect() * (blazing_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
+                        attributeInstance.addTransientModifier(new AttributeModifier(blazing_aspect_id, "Blazing Aspect Bonus", ModConfig.Server.blazing_aspect.get() * (blazing_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
                     }
                 }
 
@@ -111,7 +111,7 @@ public class MoreMobEffects {
                     if (target.hasEffect(Services.PLATFORM.getBleeding())) {
                         MobEffectInstance wolf_aspect = livingAttacker.getEffect(ModMobEffects.WOLF_ASPECT);
                         if (wolf_aspect != null) {
-                            attributeInstanceCritChance.addTransientModifier(new AttributeModifier(wolf_aspect_id, "Wolf Aspect Bonus", Services.PLATFORM.getConfig().wolf_aspect() * (wolf_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
+                            attributeInstanceCritChance.addTransientModifier(new AttributeModifier(wolf_aspect_id, "Wolf Aspect Bonus", ModConfig.Server.wolf_aspect.get() * (wolf_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
                         }
                     }
                 }
@@ -121,7 +121,7 @@ public class MoreMobEffects {
                     attributeInstanceArmorShred.removeModifier(withering_aspect_id);
                     MobEffectInstance withering_aspect = livingAttacker.getEffect(ModMobEffects.WITHERING_ASPECT);
                     if (withering_aspect != null) {
-                        attributeInstanceArmorShred.addTransientModifier(new AttributeModifier(withering_aspect_id, "Withering Aspect Bonus", Services.PLATFORM.getConfig().withering_aspect() * (withering_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
+                        attributeInstanceArmorShred.addTransientModifier(new AttributeModifier(withering_aspect_id, "Withering Aspect Bonus", ModConfig.Server.withering_aspect.get() * (withering_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
                     }
                 }
             }
@@ -134,7 +134,7 @@ public class MoreMobEffects {
             MobEffectInstance arcanic_overload = livingAttacker.getEffect(ModMobEffects.ARCANIC_OVERLOAD);
             if (arcanic_overload != null && !source.is(DamageTypes.MAGIC)) {
                 target.hurt(target.damageSources().magic(), (float)
-                        (Services.PLATFORM.getConfig().arcanic_overload() * (arcanic_overload.getAmplifier() + 1) * baseDamage));
+                        (ModConfig.Server.arcanic_overload.get() * (arcanic_overload.getAmplifier() + 1) * baseDamage));
             }
 
             MobEffectInstance retribution = target.getEffect(ModMobEffects.RETRIBUTION);
@@ -145,7 +145,7 @@ public class MoreMobEffects {
 
                 if (spellPower != null) {
                     attacker.hurt(target.damageSources().thorns(target), (float)
-                            (Services.PLATFORM.getConfig().retribution() * (retribution.getAmplifier() + 1) * spellPower.getValue()));
+                            (ModConfig.Server.retribution.get() * (retribution.getAmplifier() + 1) * spellPower.getValue()));
                     target.removeEffect(ModMobEffects.RETRIBUTION);
                 }
             }
@@ -155,7 +155,7 @@ public class MoreMobEffects {
             if (domineering != null) {
                 long count = target.getActiveEffects()
                         .stream().filter(mobEffectInstance -> mobEffectInstance.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
-                baseDamage *= 1 + (Services.PLATFORM.getConfig().domineering() * domineering.getAmplifier() + 1) * count;
+                baseDamage *= 1 + (ModConfig.Server.domineering.get() * domineering.getAmplifier() + 1) * count;
             }
 
 
@@ -166,7 +166,7 @@ public class MoreMobEffects {
 
                     AttributeInstance spell_power = livingAttacker.getAttribute(Services.PLATFORM.getSpellPower());
                     if (spell_power != null) {
-                        double spell_power_boost = (spell_power.getValue()-1 +livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower()) -1) * Services.PLATFORM.getConfig().sorcerous_transference() * (sorcerous_transference.getAmplifier()+1) +1;
+                        double spell_power_boost = (spell_power.getValue()-1 +livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower()) -1) * ModConfig.Server.sorcerous_transference.get() * (sorcerous_transference.getAmplifier()+1) +1;
 
                         AttributeInstance targetAttribute = target.getAttribute(Services.PLATFORM.getSpellPower());
                         if (targetAttribute != null) {
@@ -182,7 +182,7 @@ public class MoreMobEffects {
                     double spell_power = livingAttacker.getAttributeValue(Services.PLATFORM.getSpellPower());
                     double ender_spell_power = livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower());
 
-                    double extraDamage = Services.PLATFORM.getConfig().battle_mage() * (battle_mage.getAmplifier() + 1)
+                    double extraDamage = ModConfig.Server.battle_mage.get() * (battle_mage.getAmplifier() + 1)
                             * (1 + ender_spell_power + spell_power) * baseDamage;
                     baseDamage += extraDamage;
                 }
@@ -191,7 +191,7 @@ public class MoreMobEffects {
 
         MobEffectInstance marked = target.getEffect(ModMobEffects.MARKED);
         if (marked != null && !source.is(DamageTypes.MAGIC)) {
-            baseDamage *= 1 + (Services.PLATFORM.getConfig().marked() * marked.getAmplifier() + 1);
+            baseDamage *= 1 + (ModConfig.Server.marked.get() * marked.getAmplifier() + 1);
             target.removeEffect(ModMobEffects.MARKED);
         }
 
@@ -201,7 +201,7 @@ public class MoreMobEffects {
 
     public static boolean livingDeath(LivingEntity living, DamageSource source) {
         if (living.hasEffect(ModMobEffects.REVIVE)) {
-            living.setHealth((float) (living.getMaxHealth() * Services.PLATFORM.getConfig().revive()));
+            living.setHealth((float) (living.getMaxHealth() * ModConfig.Server.revive.get()));
             living.removeEffect(ModMobEffects.REVIVE);
             return true;
         }

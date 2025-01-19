@@ -7,7 +7,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import tfar.moremobeffects.init.ModAttributes;
+import tfar.moremobeffects.ModConfig;
 import tfar.moremobeffects.platform.Services;
 
 import java.util.UUID;
@@ -29,7 +29,7 @@ public class PeakHealthEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
-        double boost = Services.PLATFORM.getConfig().peak_health() * (amplifier + 1);
+        double boost = ModConfig.Server.peak_health.get() * (amplifier + 1);
 
         double max_health = living.getAttributeValue(Attributes.MAX_HEALTH);
 

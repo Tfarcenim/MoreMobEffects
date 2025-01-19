@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.player.Player;
+import tfar.moremobeffects.ModConfig;
 import tfar.moremobeffects.platform.Services;
 
 public class WardenEffect extends MobEffect {
@@ -15,7 +16,7 @@ public class WardenEffect extends MobEffect {
 
     public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
 
-        double absorptionBoost = Services.PLATFORM.getConfig().warden_absorption() * pLivingEntity.getMaxHealth();
+        double absorptionBoost = ModConfig.Server.warden_absorption.get() * pLivingEntity.getMaxHealth();
 
         if (pLivingEntity instanceof Player player) {
             absorptionBoost *= -1 + player.getAttributeValue(Services.PLATFORM.getEnderSpellPower()) + player.getAttributeValue(Services.PLATFORM.getSpellPower());
@@ -27,7 +28,7 @@ public class WardenEffect extends MobEffect {
 
     public void addAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
 
-        double absorptionBoost = Services.PLATFORM.getConfig().warden_absorption() * pLivingEntity.getMaxHealth();
+        double absorptionBoost = ModConfig.Server.warden_absorption.get() * pLivingEntity.getMaxHealth();
 
         if (pLivingEntity instanceof Player player) {
             absorptionBoost *= -1 + player.getAttributeValue(Services.PLATFORM.getEnderSpellPower()) + player.getAttributeValue(Services.PLATFORM.getSpellPower());
