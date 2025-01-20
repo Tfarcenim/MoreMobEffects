@@ -41,7 +41,8 @@ public class MoreMobEffectsForge {
         bus.addListener(this::register);
         bus.addListener(this::commonSetup);
         bus.addListener(ModDatagen::start);
-        MinecraftForge.EVENT_BUS.addListener(this::livingAttack);
+        MinecraftForge.EVENT_BUS.addListener(this::livingHurt);
+        MinecraftForge.EVENT_BUS.addListener(this::livingDamage);
         MinecraftForge.EVENT_BUS.addListener(this::livingDeath);
         MinecraftForge.EVENT_BUS.addListener(this::looting);
         MinecraftForge.EVENT_BUS.addListener(this::applyEffects);
@@ -125,8 +126,12 @@ public class MoreMobEffectsForge {
         }
     }
 
-    private void livingAttack(LivingHurtEvent event) {
-        event.setAmount(MoreMobEffects.livingAttack(event.getEntity(),event.getSource(), event.getAmount()));
+    private void livingHurt(LivingHurtEvent event) {
+        event.setAmount(MoreMobEffects.livingHurt(event.getEntity(),event.getSource(), event.getAmount()));
+    }
+
+    private void livingDamage(LivingDamageEvent event){
+        MoreMobEffects.livingDamage(event.getEntity(),event.getSource(),event.getAmount());
     }
 
     private void livingDeath(LivingDeathEvent event) {

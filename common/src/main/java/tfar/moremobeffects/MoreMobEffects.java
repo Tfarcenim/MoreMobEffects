@@ -4,6 +4,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -52,7 +54,7 @@ public class MoreMobEffects {
     static final UUID withering_aspect_id = UUID.fromString("2f0edfe8-a36f-4064-b2f1-a484704000f5");
     static final UUID sorcerous_transference_id = UUID.fromString("d0d86f0b-360e-46e2-8089-819a119eaccd");
 
-    public static float livingAttack(LivingEntity target, DamageSource source, float baseDamage) {
+    public static float livingHurt(LivingEntity target, DamageSource source, float baseDamage) {
 
         if (target instanceof Player player) {
             MobEffectInstance martyr = target.getEffect(ModMobEffects.MARTYR);
@@ -135,19 +137,6 @@ public class MoreMobEffects {
             if (arcanic_overload != null && !source.is(DamageTypes.MAGIC)) {
                 target.hurt(target.damageSources().magic(), (float)
                         (ModConfig.Server.arcanic_overload.get() * (arcanic_overload.getAmplifier() + 1) * baseDamage));
-            }
-
-            MobEffectInstance retribution = target.getEffect(ModMobEffects.RETRIBUTION);
-
-            if (retribution != null) {
-                AttributeInstance spellPower = target.getAttributes().hasAttribute(Services.PLATFORM.getEnderSpellPower())
-                        ? target.getAttribute(Services.PLATFORM.getEnderSpellPower()) : null;
-
-                if (spellPower != null) {
-                    attacker.hurt(target.damageSources().thorns(target), (float)
-                            (ModConfig.Server.retribution.get() * (retribution.getAmplifier() + 1) * spellPower.getValue()));
-                    target.removeEffect(ModMobEffects.RETRIBUTION);
-                }
             }
 
             MobEffectInstance domineering = livingAttacker.getEffect(ModMobEffects.DOMINEERING);
@@ -237,4 +226,27 @@ public class MoreMobEffects {
         return new ResourceLocation(MOD_ID, path);
     }
 
+    public static void livingDamage(LivingEntity target, DamageSource source, float amount) {
+        Entity attacker = source.getEntity();
+        if (attacker instanceof LivingEntity && amount > 0) {
+            MobEffectInstance retribution = target.getEffect(ModMobEffects.RETRIBUTION);
+
+            if (retribution != null) {
+
+                AttributeInstance spellPower = target.getAttributes().hasAttribute(Services.PLATFORM.getSpellPower())
+                        ? target.getAttribute(Services.PLATFORM.getSpellPower()) : null;
+
+                AttributeInstance enderSpellPower = target.getAttributes().hasAttribute(Services.PLATFORM.getEnderSpellPower())
+                        ? target.getAttribute(Services.PLATFORM.getEnderSpellPower()) : null;
+
+                if (spellPower != null && enderSpellPower != null) {
+                    attacker.hurt(target.damageSources().thorns(target), (float)
+                            (ModConfig.Server.retribution.get() * (retribution.getAmplifier() + 1) * (1+ spellPower.getValue() + enderSpellPower.getValue())));
+                    target.removeEffect(ModMobEffects.RETRIBUTION);
+
+                    target.level().playSound(null,target.blockPosition(), SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.PLAYERS,1,1);
+                }
+            }
+        }
+    }
 }

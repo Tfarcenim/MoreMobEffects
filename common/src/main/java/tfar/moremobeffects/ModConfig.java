@@ -53,9 +53,10 @@ public class ModConfig {
         public static ForgeConfigSpec.DoubleValue battle_mage;
         public static ForgeConfigSpec.DoubleValue peak_health;
 
+        public static ForgeConfigSpec.DoubleValue peak_health_min;
+
         public static ForgeConfigSpec.DoubleValue berserk_attack_damage;
         public static ForgeConfigSpec.DoubleValue berserk_ender_spell_power;
-        public static ForgeConfigSpec.DoubleValue berserk_projectile_damage;
 
         public static ForgeConfigSpec.DoubleValue revive;
         public static ForgeConfigSpec.DoubleValue martyr;
@@ -225,6 +226,10 @@ public class ModConfig {
                     comment("Gain x per level of your Max Health boosts as Critical damage. (multiplicative)")
                     .defineInRange("peak_health", .05, 0, Double.MAX_VALUE);
 
+            peak_health_min = builder.
+                    comment("Minimum max health required to benefit from peak health.")
+                    .defineInRange("peak_health_min", 20, 0, Double.MAX_VALUE);
+
             berserk_attack_damage = builder
                     .comment("Deal more melee damage the lower your health is. ")
                             .defineInRange("berserk_attack_damage",2.5,0,Double.MAX_VALUE);
@@ -232,10 +237,6 @@ public class ModConfig {
             berserk_ender_spell_power = builder
                     .comment("Gain more ender spell power the lower your health is. ")
                     .defineInRange("berserk_ender_spell_power",2.5,0,Double.MAX_VALUE);
-
-            berserk_projectile_damage = builder
-                    .comment("Deal more ranged damage the lower your health is. ")
-                    .defineInRange("berserk_projectile_damage",.025,0,Double.MAX_VALUE);
 
             sorcerous_transference = builder
                     .comment("When under this effect, the user’s melee/ranged attacks give the target a spell power buff " +

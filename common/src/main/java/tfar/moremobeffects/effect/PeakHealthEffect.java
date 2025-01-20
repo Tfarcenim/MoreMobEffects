@@ -33,7 +33,7 @@ public class PeakHealthEffect extends MobEffect {
 
         double max_health = living.getAttributeValue(Attributes.MAX_HEALTH);
 
-        double total_boost = boost * max_health;
+        double total_boost = Math.max(0,boost * (max_health - ModConfig.Server.peak_health_min.get()));
 
         AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getCriticalHitDamage());
         if (attributeInstance != null) {

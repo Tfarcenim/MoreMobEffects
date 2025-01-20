@@ -73,7 +73,7 @@ public class BerserkEffect extends MobEffect {
     }
 
     Set<Attribute> getApplicable() {
-        return Set.of(Attributes.ATTACK_DAMAGE, Services.PLATFORM.getEnderSpellPower(), ModAttributes.PROJECTILE_ATTACK_DAMAGE);
+        return Set.of(Attributes.ATTACK_DAMAGE, Services.PLATFORM.getEnderSpellPower());
     }
 
     double getBoost(Attribute attribute) {
@@ -81,8 +81,6 @@ public class BerserkEffect extends MobEffect {
             return ModConfig.Server.berserk_attack_damage.get();
         } else if (attribute ==  Services.PLATFORM.getEnderSpellPower()) {
             return ModConfig.Server.berserk_ender_spell_power.get();
-        } else if (attribute == ModAttributes.PROJECTILE_ATTACK_DAMAGE) {
-            return ModConfig.Server.berserk_projectile_damage.get();
         }
         return 0;
     }

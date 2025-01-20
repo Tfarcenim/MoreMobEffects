@@ -41,8 +41,7 @@ public class ArcanicConversionMobEffect extends MobEffect {
                 double spellboost = ModConfig.Server.arcanic_conversion.get() * (amplifier + 1);
 
                 double attack_damage = living.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                double projectile_damage = living.getAttributeValue(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
-                double physical_damage = attack_damage - 1 + (projectile_damage - 1) * 100;
+                double physical_damage = attack_damage - 1;
 
                 double total_spell_boost = spellboost * physical_damage + 1;
 
