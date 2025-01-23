@@ -17,10 +17,8 @@ import java.util.UUID;
 
 public class PledgeOfSolitudeEffect extends TickingMobEffect {
     public PledgeOfSolitudeEffect(MobEffectCategory $$0, int $$1) {
-        super($$0, $$1,uuid,() -> Set.of(Services.PLATFORM.getCriticalHitDamage(),Services.PLATFORM.getCriticalHitRate()));
+        super($$0, $$1, () -> Set.of(Services.PLATFORM.getCriticalHitDamage(),Services.PLATFORM.getCriticalHitRate()));
     }
-
-    public static final UUID uuid = MoreMobEffects.make(MoreMobEffects.id("pledge_of_solitude"));
 
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
@@ -39,25 +37,25 @@ public class PledgeOfSolitudeEffect extends TickingMobEffect {
                 AttributeInstance instance = living.getAttribute(Services.PLATFORM.getCriticalHitDamage());
                 if (instance != null) {
                     double rBoost = (amplifier + 1) * ModConfig.Server.pledge_of_solitude_crit_damage.get();
-                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(uuid, "pledge of solitude", rBoost,
+                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of solitude", rBoost,
                             AttributeModifier.Operation.MULTIPLY_TOTAL), instance);
                 }
 
                 AttributeInstance critDamageInstance = living.getAttribute(Services.PLATFORM.getCriticalHitRate());
                 if (critDamageInstance != null) {
-                    critDamageInstance.removeModifier(uuid);
+                    critDamageInstance.removeModifier(getUuid());
                 }
 
             } else {
                 AttributeInstance instance = living.getAttribute(Services.PLATFORM.getCriticalHitRate());
                 if (instance != null) {
-                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(uuid, "pledge of solitude", -ModConfig.Server.pledge_of_solitude_crowded.get(),
+                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of solitude", -ModConfig.Server.pledge_of_solitude_crowded.get(),
                             AttributeModifier.Operation.ADDITION), instance);
                 }
 
                 AttributeInstance critDamageInstance = living.getAttribute(Services.PLATFORM.getCriticalHitDamage());
                 if (critDamageInstance != null) {
-                    critDamageInstance.removeModifier(uuid);
+                    critDamageInstance.removeModifier(getUuid());
                 }
             }
         }

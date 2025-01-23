@@ -103,6 +103,11 @@ public class ForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
+    public Attribute getEnderSpellDamage() {
+        return null;
+    }
+
+    @Override
     public Attribute getLifeSteal() {
         return ALObjects.Attributes.LIFE_STEAL.get();
     }

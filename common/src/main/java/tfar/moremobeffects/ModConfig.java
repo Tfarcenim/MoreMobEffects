@@ -88,6 +88,13 @@ public class ModConfig {
         public static ForgeConfigSpec.DoubleValue pledge_of_solitude_crowded;
 
         public static ForgeConfigSpec.DoubleValue magical_fuse_power;
+        public static ForgeConfigSpec.DoubleValue master_of_arms;
+
+        public static ForgeConfigSpec.DoubleValue battleborn_attack_damage;
+        public static ForgeConfigSpec.DoubleValue battleborn_ender_spell_power;
+        public static ForgeConfigSpec.DoubleValue battleborn_resistance;
+
+        public static ForgeConfigSpec.DoubleValue on_the_defensive;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
@@ -318,12 +325,27 @@ public class ModConfig {
             pledge_of_solitude_crit_damage = builder.comment("Gain x (multiplicative) attributeslib:crit_damage per level when no team member is within x blocks of you.")
                     .defineInRange("pledge_of_solitude_resistance",.1,0,Double.MAX_VALUE);
 
-            pledge_of_solitude_crowded = builder.comment("Lose x (additive) attributeslib:crit_rate when a team member is within y blocks of you and while affected by pledge of solitude")
+            pledge_of_solitude_crowded = builder.comment("Lose x (additive) attributeslib:crit_rate when a team member is within y blocks of you")
                     .defineInRange("pledge_of_solitude_crowded",.2,0,Double.MAX_VALUE);
 
-            magical_fuse_power = builder.comment("Lose x (additive) attributeslib:crit_rate when a team member is within y blocks of you and while affected by pledge of solitude")
+
+            magical_fuse_power = builder.comment("Base power of magical fuse")
                     .defineInRange("magical_fuse_power",5,0,Float.MAX_VALUE);
 
+            master_of_arms = builder.comment("Add x amount (multiplicative) of attack_damage to moremobeffects:projectile_damage per level")
+                    .defineInRange("master_of_arms",.1,0,Float.MAX_VALUE);
+
+            battleborn_attack_damage = builder.comment("Gain x% generic.attack_damage when at OR above 50% of max HP")
+                    .defineInRange("battleborn_attack_damage",.1,0,Float.MAX_VALUE);
+
+            battleborn_ender_spell_power = builder.comment("Gain x (multiplicative) irons_spellbooks:ender_spell_damage when at OR above 50% of max HP")
+                    .defineInRange("battleborn_ender_spell_power",.1,0,Float.MAX_VALUE);
+
+            battleborn_resistance = builder.comment("Gain x (multiplicative) moremobeffects:resistance when below 50% of max HP.")
+                    .defineInRange("battleborn_resistance",.5,0,Float.MAX_VALUE);
+
+            on_the_defensive = builder.comment("Your next basic/ranged attack will grant you absorption hearts based on x% of your max health and mana.")
+                    .defineInRange("on_the_defensive",1,0,Float.MAX_VALUE);
 
             builder.pop();
         }

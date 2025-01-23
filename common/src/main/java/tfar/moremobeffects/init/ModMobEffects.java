@@ -8,6 +8,8 @@ import tfar.moremobeffects.ModConfig;
 import tfar.moremobeffects.effect.*;
 import tfar.moremobeffects.platform.Services;
 
+import java.util.Set;
+
 public class ModMobEffects {
 
     public static final MobEffect VULNERABLE = new DamageMultiplierEffect(MobEffectCategory.HARMFUL,0xff0000);
@@ -161,6 +163,10 @@ public class ModMobEffects {
 
     public static final MobEffect PLEDGE_OF_SOLITUDE = new PledgeOfSolitudeEffect(MobEffectCategory.BENEFICIAL,0xff0000);
     public static final MobEffect MAGICAL_FUSE = new MagicalFuseEffect(MobEffectCategory.BENEFICIAL,0xff0000);
-    public static final MobEffect MASTER_OF_ARMS = ;
+    public static final MobEffect MASTER_OF_ARMS = new MasterOfArmsEffect(MobEffectCategory.BENEFICIAL,0xff0000, () -> Set.of(ModAttributes.PROJECTILE_ATTACK_DAMAGE));
+    public static final MobEffect BATTLE_BORN = new BattleBornEffect(MobEffectCategory.BENEFICIAL,0xff0000,() ->
+            Set.of(Attributes.ATTACK_DAMAGE,Services.PLATFORM.getEnderSpellPower(),ModAttributes.RESISTANCE));
+
+    public static final MobEffect ON_THE_DEFENSIVE = new OnTheDefensiveMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
 
 }

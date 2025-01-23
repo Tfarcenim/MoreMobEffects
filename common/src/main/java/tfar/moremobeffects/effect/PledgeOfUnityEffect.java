@@ -5,7 +5,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.scores.Team;
 import tfar.moremobeffects.ModConfig;
@@ -19,10 +18,8 @@ import java.util.UUID;
 
 public class PledgeOfUnityEffect extends TickingMobEffect {
     public PledgeOfUnityEffect(MobEffectCategory $$0, int $$1) {
-        super($$0, $$1,uuid,() -> Set.of(ModAttributes.RESISTANCE,Services.PLATFORM.getHealingReceived()));
+        super($$0, $$1, () -> Set.of(ModAttributes.RESISTANCE,Services.PLATFORM.getHealingReceived()));
     }
-
-    public static final UUID uuid = MoreMobEffects.make(MoreMobEffects.id("pledge_of_unity"));
 
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
@@ -43,23 +40,23 @@ public class PledgeOfUnityEffect extends TickingMobEffect {
                 double rBoost = (amplifier + 1) * ModConfig.Server.pledge_of_unity_resistance.get();
 
                 if (instance != null) {
-                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(uuid, "pledge of unity", rBoost,
+                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of unity", rBoost,
                             AttributeModifier.Operation.ADDITION), instance);
                 }
 
                 AttributeInstance instanceHeal = living.getAttribute(Services.PLATFORM.getHealingReceived());
                 if (instanceHeal != null) {
-                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(uuid, "pledge of unity", (amplifier + 1) * ModConfig.Server.pledge_of_unity_healing_received.get(),
+                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of unity", (amplifier + 1) * ModConfig.Server.pledge_of_unity_healing_received.get(),
                             AttributeModifier.Operation.ADDITION), instanceHeal);
                 }
             } else {
                 if (instance != null) {
-                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(uuid, "pledge of unity", -ModConfig.Server.pledge_of_unity_lonely.get(),
+                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of unity", -ModConfig.Server.pledge_of_unity_lonely.get(),
                             AttributeModifier.Operation.ADDITION), instance);
                 }
                 AttributeInstance instanceHeal = living.getAttribute(Services.PLATFORM.getHealingReceived());
                 if (instanceHeal != null) {
-                    instanceHeal.removeModifier(uuid);
+                    instanceHeal.removeModifier(getUuid());
                 }
             }
         }

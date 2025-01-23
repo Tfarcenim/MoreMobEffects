@@ -171,10 +171,6 @@ public class MoreMobEffectsForge {
         }
     }
 
-
-
-
-
     void playerTick(TickEvent.PlayerTickEvent event) {
 
     }
