@@ -1,14 +1,20 @@
 package tfar.moremobeffects;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.scores.PlayerTeam;
+import net.minecraft.world.scores.Team;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.BlockEvent;
@@ -26,6 +32,7 @@ import tfar.moremobeffects.init.ModMobEffects;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 @Mod(MoreMobEffects.MOD_ID)
@@ -49,6 +56,7 @@ public class MoreMobEffectsForge {
         MinecraftForge.EVENT_BUS.addListener(this::onBlockPlace);
         MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
         MinecraftForge.EVENT_BUS.addListener(this::onBreakSpeed);
+        MinecraftForge.EVENT_BUS.addListener(this::playerTick);
         // Use Forge to bootstrap the Common mod.
         MoreMobEffects.init();
     }
@@ -138,5 +146,13 @@ public class MoreMobEffectsForge {
         if (MoreMobEffects.livingDeath(event.getEntity(),event.getSource())) {
             event.setCanceled(true);
         }
+    }
+
+
+
+
+
+    void playerTick(TickEvent.PlayerTickEvent event) {
+
     }
 }

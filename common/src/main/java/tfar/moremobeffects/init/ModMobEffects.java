@@ -155,4 +155,10 @@ public class ModMobEffects {
     public static final MobEffect FRACTURED = new ConfigurableMobEffect(MobEffectCategory.HARMFUL,0xff0000)
             .addConfigurableAttributeModifier(Attributes.MAX_HEALTH,"5eb6dd61-eaf4-44b7-aac6-e1cc979e9980",ModConfig.Server.fractured, AttributeModifier.Operation.MULTIPLY_TOTAL,true);
 
+
+
+    public static final MobEffect PLEDGE_OF_UNITY = new PledgeOfUnityEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+
+    public static final MobEffect PLEDGE_OF_SOLITUDE = new PledgeOfSolitudeEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+
 }

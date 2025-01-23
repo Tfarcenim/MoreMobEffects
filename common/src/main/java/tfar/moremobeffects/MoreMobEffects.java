@@ -226,6 +226,31 @@ public class MoreMobEffects {
         return new ResourceLocation(MOD_ID, path);
     }
 
+    public static UUID make(ResourceLocation location) {
+        return new UUID(location.getNamespace().hashCode(),location.getPath().hashCode());
+    }
+
+    public static void safeAddModifier(AttributeModifier modifier,AttributeInstance instance) {
+        if (instance.hasModifier(modifier)) {
+            instance.removeModifier(modifier);
+        }
+        instance.addPermanentModifier(modifier);
+    }
+
+    public static void addModifierAvoidUpdates(AttributeModifier modifier,AttributeInstance instance) {
+        AttributeModifier oldModifier = instance.getModifier(modifier.getId());
+        if (oldModifier != null) {
+            if (oldModifier.getAmount() != modifier.getAmount()) {
+                instance.removeModifier(modifier);
+            } else {
+                return;
+            }
+        }
+        instance.addPermanentModifier(modifier);
+    }
+
+
+
     public static void livingDamage(LivingEntity target, DamageSource source, float amount) {
         Entity attacker = source.getEntity();
         if (attacker instanceof LivingEntity && amount > 0) {

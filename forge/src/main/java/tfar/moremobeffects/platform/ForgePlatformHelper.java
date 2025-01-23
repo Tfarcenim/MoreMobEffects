@@ -137,6 +137,11 @@ public class ForgePlatformHelper implements IPlatformHelper {
         return AttributeRegistry.MANA_REGEN.get();
     }
 
+    @Override
+    public Attribute getHealingReceived() {
+        return ALObjects.Attributes.HEALING_RECEIVED.get();
+    }
+
     int i;
 
     @Override

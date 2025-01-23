@@ -36,6 +36,7 @@ public class ModLangProvider extends LanguageProvider {
         });
 
         add(ModAttributes.PROJECTILE_ATTACK_DAMAGE.getDescriptionId(),"Projectile Attack Damage");
+        add(ModAttributes.RESISTANCE.getDescriptionId(),"Resistance");
     }
 
     protected void addDefaultMobEffect(Supplier<? extends MobEffect> supplier) {

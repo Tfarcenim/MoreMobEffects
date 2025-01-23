@@ -1,5 +1,6 @@
 {
   "attribute.name.generic.projectile_attack_damage": "Projectile Attack Damage",
+  "attribute.name.generic.resistance": "Resistance",
   "effect.moremobeffects.aiming": "Aiming",
   "effect.moremobeffects.arcane_boost": "Arcane Boost",
   "effect.moremobeffects.arcanic_conversion": "Arcanic Conversion",
@@ -38,6 +39,8 @@
   "effect.moremobeffects.might": "Might",
   "effect.moremobeffects.overheal": "Overheal",
   "effect.moremobeffects.peak_health": "Peak Health",
+  "effect.moremobeffects.pledge_of_solitude": "Pledge Of Solitude",
+  "effect.moremobeffects.pledge_of_unity": "Pledge Of Unity",
   "effect.moremobeffects.precise": "Precise",
   "effect.moremobeffects.rejuvenated": "Rejuvenated",
   "effect.moremobeffects.retribution": "Retribution",

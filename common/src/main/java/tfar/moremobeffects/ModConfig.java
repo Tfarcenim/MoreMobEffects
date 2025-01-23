@@ -78,6 +78,15 @@ public class ModConfig {
         public static ForgeConfigSpec.DoubleValue injury;
         public static ForgeConfigSpec.DoubleValue fractured;
 
+        public static ForgeConfigSpec.DoubleValue pledge_of_unity_max_dist;
+        public static ForgeConfigSpec.DoubleValue pledge_of_unity_resistance;
+        public static ForgeConfigSpec.DoubleValue pledge_of_unity_healing_received;
+        public static ForgeConfigSpec.DoubleValue pledge_of_unity_lonely;
+
+        public static ForgeConfigSpec.DoubleValue pledge_of_solitude_max_dist;
+        public static ForgeConfigSpec.DoubleValue pledge_of_solitude_crit_damage;
+        public static ForgeConfigSpec.DoubleValue pledge_of_solitude_crowded;
+
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
             vulnerable = builder.
@@ -287,6 +296,29 @@ public class ModConfig {
                     .defineInRange("injury",2,0,Double.MAX_VALUE);
             fractured = builder.comment("Reduces max health by a percentage amount per level.")
                     .defineInRange("fractured",.1,0,Double.MAX_VALUE);
+
+            pledge_of_unity_max_dist = builder.comment("Max distance for pledge of unity")
+                    .defineInRange("pledge_of_unity_max_dist",16,0,Double.MAX_VALUE);
+
+            pledge_of_unity_resistance = builder.comment("Gain x (additive) moremobeffects:resistance per level when a team member is within y blocks of you")
+                    .defineInRange("pledge_of_unity_resistance",.1,0,Double.MAX_VALUE);
+
+            pledge_of_unity_healing_received = builder.comment("Gain x (additive) attributeslib:healing_received per level when a team member is within y blocks of you")
+                    .defineInRange("pledge_of_unity_healing_received",.1,0,Double.MAX_VALUE);
+
+            pledge_of_unity_lonely = builder.comment("Lose x (additive) moremobeffects:resistance when a team member is NOT within y blocks of you and while affected by pledge of unity")
+                    .defineInRange("pledge_of_unity_lonely",.1,0,Double.MAX_VALUE);
+
+
+            pledge_of_solitude_max_dist = builder.comment("Max distance for pledge of solitude")
+                    .defineInRange("pledge_of_solitude_max_dist",16,0,Double.MAX_VALUE);
+
+            pledge_of_solitude_crit_damage = builder.comment("Gain x (multiplicative) attributeslib:crit_damage per level when no team member is within x blocks of you.")
+                    .defineInRange("pledge_of_solitude_resistance",.1,0,Double.MAX_VALUE);
+
+            pledge_of_solitude_crowded = builder.comment("Lose x (additive) attributeslib:crit_rate when a team member is within y blocks of you and while affected by pledge of solitude")
+                    .defineInRange("pledge_of_solitude_crowded",.2,0,Double.MAX_VALUE);
+
 
             builder.pop();
         }

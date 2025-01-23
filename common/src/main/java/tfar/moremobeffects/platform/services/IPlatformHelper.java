@@ -67,6 +67,7 @@ public interface IPlatformHelper {
 
     Attribute getMaxMana();
     Attribute getManaRegen();
+    Attribute getHealingReceived();
 
     <MSG extends S2CModPacket> void registerClientPacket(Class<MSG> packetLocation, Function<FriendlyByteBuf,MSG> reader);
     void sendToClient(S2CModPacket packet, ServerPlayer player);
