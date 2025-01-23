@@ -250,7 +250,6 @@ public class MoreMobEffects {
     }
 
 
-
     public static void livingDamage(LivingEntity target, DamageSource source, float amount) {
         Entity attacker = source.getEntity();
         if (attacker instanceof LivingEntity && amount > 0) {

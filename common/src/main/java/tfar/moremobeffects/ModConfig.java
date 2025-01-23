@@ -87,6 +87,8 @@ public class ModConfig {
         public static ForgeConfigSpec.DoubleValue pledge_of_solitude_crit_damage;
         public static ForgeConfigSpec.DoubleValue pledge_of_solitude_crowded;
 
+        public static ForgeConfigSpec.DoubleValue magical_fuse_power;
+
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
             vulnerable = builder.
@@ -318,6 +320,9 @@ public class ModConfig {
 
             pledge_of_solitude_crowded = builder.comment("Lose x (additive) attributeslib:crit_rate when a team member is within y blocks of you and while affected by pledge of solitude")
                     .defineInRange("pledge_of_solitude_crowded",.2,0,Double.MAX_VALUE);
+
+            magical_fuse_power = builder.comment("Lose x (additive) attributeslib:crit_rate when a team member is within y blocks of you and while affected by pledge of solitude")
+                    .defineInRange("magical_fuse_power",5,0,Float.MAX_VALUE);
 
 
             builder.pop();

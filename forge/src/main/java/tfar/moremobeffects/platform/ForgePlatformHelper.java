@@ -9,10 +9,15 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.Nullable;
 import tfar.moremobeffects.MoreMobEffects;
 import tfar.moremobeffects.MoreMobEffectsForge;
 import tfar.moremobeffects.network.PacketHandlerForge;
@@ -152,5 +157,15 @@ public class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public void sendToClient(S2CModPacket packet, ServerPlayer player) {
         PacketHandlerForge.sendToClient(packet,player);
+    }
+
+    @Override
+    public boolean onExplosionStart(Level level, Explosion explosion) {
+        return ForgeEventFactory.onExplosionStart(level, explosion);
+    }
+
+    @Override
+    public boolean getMobGriefingEvent(Level level, @Nullable Entity entity) {
+        return ForgeEventFactory.getMobGriefingEvent(level, entity);
     }
 }

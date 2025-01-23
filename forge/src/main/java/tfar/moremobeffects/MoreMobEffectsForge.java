@@ -9,7 +9,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.world.scores.Team;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -18,6 +20,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -33,6 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 @Mod(MoreMobEffects.MOD_ID)
@@ -57,6 +62,7 @@ public class MoreMobEffectsForge {
         MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
         MinecraftForge.EVENT_BUS.addListener(this::onBreakSpeed);
         MinecraftForge.EVENT_BUS.addListener(this::playerTick);
+        MinecraftForge.EVENT_BUS.addListener(this::onDetonate);
         // Use Forge to bootstrap the Common mod.
         MoreMobEffects.init();
     }
@@ -79,6 +85,23 @@ public class MoreMobEffectsForge {
             }
         }
     }
+
+    void onDetonate(ExplosionEvent.Detonate event) {
+        Explosion explosion = event.getExplosion();
+        List<Entity> affected = event.getAffectedEntities();
+        if (explosion instanceof MagicalFuseExplosion) {
+            affected.removeIf(entity -> MAGICAL_FUSE_RESISTANT.test(entity,explosion));
+        }
+    }
+
+    public static final BiPredicate<Entity,Explosion> MAGICAL_FUSE_RESISTANT = (entity,explosion) -> {
+        Entity cause= explosion.getIndirectSourceEntity();
+        if (cause == null) return false;
+        if (cause.isAlliedTo(entity)) {
+            return true;
+        }
+        return false;
+    };
 
     private void onBlockBreak(BlockEvent.BreakEvent event) {
        Player player = event.getPlayer();

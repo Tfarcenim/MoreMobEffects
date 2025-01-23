@@ -160,5 +160,7 @@ public class ModMobEffects {
     public static final MobEffect PLEDGE_OF_UNITY = new PledgeOfUnityEffect(MobEffectCategory.BENEFICIAL,0xff0000);
 
     public static final MobEffect PLEDGE_OF_SOLITUDE = new PledgeOfSolitudeEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+    public static final MobEffect MAGICAL_FUSE = new MagicalFuseEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+    public static final MobEffect MASTER_OF_ARMS = ;
 
 }
