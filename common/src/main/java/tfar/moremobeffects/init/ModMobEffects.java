@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import tfar.moremobeffects.ModConfig;
+import tfar.moremobeffects.MoreMobEffects;
 import tfar.moremobeffects.effect.*;
 import tfar.moremobeffects.platform.Services;
 
@@ -168,5 +169,10 @@ public class ModMobEffects {
             Set.of(Attributes.ATTACK_DAMAGE,Services.PLATFORM.getEnderSpellPower(),ModAttributes.RESISTANCE));
 
     public static final MobEffect ON_THE_DEFENSIVE = new OnTheDefensiveMobEffect(MobEffectCategory.BENEFICIAL,0xff0000);
+    public static final MobEffect GUARDED = new ConfigurableMobEffect(MobEffectCategory.BENEFICIAL,0xff0000)
+            .addConfigurableAttributeModifier(ModAttributes.RESISTANCE, MoreMobEffects.make(MoreMobEffects.id("guarded")).toString(),
+                    ModConfig.Server.guarded, AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+    public static final MobEffect Flighty_and_Mighty = new FlightyAndMightyEffect(MobEffectCategory.BENEFICIAL,0xff0000,() -> Set.of(Attributes.MOVEMENT_SPEED,Attributes.ATTACK_SPEED));
 
 }

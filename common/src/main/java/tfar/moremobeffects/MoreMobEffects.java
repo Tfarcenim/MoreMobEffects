@@ -252,7 +252,7 @@ public class MoreMobEffects {
 
     public static void livingDamage(LivingEntity target, DamageSource source, float amount) {
         Entity attacker = source.getEntity();
-        if (attacker instanceof LivingEntity && amount > 0) {
+        if (attacker instanceof LivingEntity livingAttacker && amount > 0) {
             MobEffectInstance retribution = target.getEffect(ModMobEffects.RETRIBUTION);
 
             if (retribution != null) {
@@ -270,6 +270,12 @@ public class MoreMobEffects {
 
                     target.level().playSound(null,target.blockPosition(), SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.PLAYERS,1,1);
                 }
+            }
+            MobEffectInstance onTheDefensive = livingAttacker.getEffect(ModMobEffects.ON_THE_DEFENSIVE);
+            if (onTheDefensive != null) {
+                float absorb = (float)((onTheDefensive.getAmplifier() + 1) *
+                        (livingAttacker.getMaxHealth()*ModConfig.Server.on_the_defensive_max_health.get()  + livingAttacker.getAttributeValue(Services.PLATFORM.getMaxMana())*ModConfig.Server.on_the_defensive_max_mana.get()));
+                livingAttacker.setAbsorptionAmount(livingAttacker.getAbsorptionAmount() + absorb);
             }
         }
     }

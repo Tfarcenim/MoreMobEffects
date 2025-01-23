@@ -94,7 +94,13 @@ public class ModConfig {
         public static ForgeConfigSpec.DoubleValue battleborn_ender_spell_power;
         public static ForgeConfigSpec.DoubleValue battleborn_resistance;
 
-        public static ForgeConfigSpec.DoubleValue on_the_defensive;
+        public static ForgeConfigSpec.DoubleValue on_the_defensive_max_health;
+        public static ForgeConfigSpec.DoubleValue on_the_defensive_max_mana;
+
+        public static ForgeConfigSpec.DoubleValue guarded;
+
+        public static ForgeConfigSpec.DoubleValue flighty_and_mighty_attack_speed;
+        public static ForgeConfigSpec.DoubleValue flighty_and_mighty_movement_speed;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
@@ -344,8 +350,23 @@ public class ModConfig {
             battleborn_resistance = builder.comment("Gain x (multiplicative) moremobeffects:resistance when below 50% of max HP.")
                     .defineInRange("battleborn_resistance",.5,0,Float.MAX_VALUE);
 
-            on_the_defensive = builder.comment("Your next basic/ranged attack will grant you absorption hearts based on x% of your max health and mana.")
-                    .defineInRange("on_the_defensive",1,0,Float.MAX_VALUE);
+            on_the_defensive_max_health = builder.comment("Your next basic/ranged attack will grant you absorption hearts based on x% of your max health and y% mana.")
+                    .defineInRange("on_the_defensive_max_health",1,0,Float.MAX_VALUE);
+
+            on_the_defensive_max_mana = builder.comment("Your next basic/ranged attack will grant you absorption hearts based on x% of your max health and y% mana.")
+                    .defineInRange("on_the_defensive_max_mana",.0625,0,Float.MAX_VALUE);
+
+            guarded = builder.comment("Increase your damage resistance by x (multiplicative)")
+                    .defineInRange("guarded",.125,0,Float.MAX_VALUE);
+
+            flighty_and_mighty_attack_speed = builder.comment("generic.attack_speed is boosted by x " +
+                            "(multiplicative) of your irons_spellbooks:cooldown_reduction")
+                    .defineInRange("flighty_and_mighty_attack_speed",.125,0,Float.MAX_VALUE);
+
+            flighty_and_mighty_movement_speed = builder.comment("generic.movement_speed is boosted by x " +
+                            "(multiplicative) of your irons_spellbooks:cooldown_reduction")
+                    .defineInRange("flighty_and_mighty_movement_speed",.125,0,Float.MAX_VALUE);
+
 
             builder.pop();
         }
