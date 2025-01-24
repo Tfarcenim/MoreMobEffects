@@ -74,6 +74,8 @@ public interface IPlatformHelper {
     Attribute getManaRegen();
     Attribute getHealingReceived();
 
+    MobEffect getStunnedEffect();
+
     <MSG extends S2CModPacket> void registerClientPacket(Class<MSG> packetLocation, Function<FriendlyByteBuf,MSG> reader);
     void sendToClient(S2CModPacket packet, ServerPlayer player);
     boolean onExplosionStart(Level level, Explosion explosion);

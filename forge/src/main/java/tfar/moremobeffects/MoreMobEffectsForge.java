@@ -30,6 +30,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.moremobeffects.datagen.ModDatagen;
+import tfar.moremobeffects.init.ModIntegration;
 import tfar.moremobeffects.init.ModMobEffects;
 
 import java.util.HashMap;
@@ -152,7 +153,7 @@ public class MoreMobEffectsForge {
     private void commonSetup(FMLCommonSetupEvent event) {
         registerLater.clear();
         MoreMobEffects.commonSetup();
-        if (ModMobEffects.IRONS_SPELLBOOKS) {
+        if (ModIntegration.irons_spellbooks.loaded) {
             MinecraftForge.EVENT_BUS.addListener(IronSpellbooksEvents::spellDamage);
         }
     }

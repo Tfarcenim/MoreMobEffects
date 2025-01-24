@@ -152,6 +152,11 @@ public class ForgePlatformHelper implements IPlatformHelper {
         return ALObjects.Attributes.HEALING_RECEIVED.get();
     }
 
+    @Override
+    public MobEffect getStunnedEffect() {
+        return null;
+    }
+
     int i;
 
     @Override

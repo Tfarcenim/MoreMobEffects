@@ -102,6 +102,13 @@ public class ModConfig {
         public static ForgeConfigSpec.DoubleValue flighty_and_mighty_attack_speed;
         public static ForgeConfigSpec.DoubleValue flighty_and_mighty_movement_speed;
 
+        public static ForgeConfigSpec.DoubleValue stunning_strike_damage_multiplier;
+        public static ForgeConfigSpec.DoubleValue stunning_strike_stun_duration_multiplier;
+
+        public static ForgeConfigSpec.DoubleValue hunted_target_damage_multiplier;
+        public static ForgeConfigSpec.DoubleValue alchemical_transgression_damage_multiplier;
+
+
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
             vulnerable = builder.
@@ -367,6 +374,15 @@ public class ModConfig {
                             "(multiplicative) of your irons_spellbooks:cooldown_reduction")
                     .defineInRange("flighty_and_mighty_movement_speed",.125,0,Float.MAX_VALUE);
 
+            stunning_strike_damage_multiplier = builder
+                    .defineInRange("stunning_strike_damage_multiplier",.25,0,Float.MAX_VALUE);
+
+            stunning_strike_stun_duration_multiplier = builder
+                    .defineInRange("stunning_strike_stun_duration_multiplier",1,0,Float.MAX_VALUE);
+
+            hunted_target_damage_multiplier = builder.defineInRange("hunted_target_damage_multiplier",.25,0,Float.MAX_VALUE);
+
+            alchemical_transgression_damage_multiplier = builder.defineInRange("alchemical_transgression_damage_multiplier",.25,0,Float.MAX_VALUE);
 
             builder.pop();
         }
