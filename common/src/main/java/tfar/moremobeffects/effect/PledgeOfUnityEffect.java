@@ -63,6 +63,6 @@ public class PledgeOfUnityEffect extends TickingMobEffect {
     }
 }
 //Gain a flat x attributeslib:healing_received and  moremobeffects:resistance per level when a team member is within x blocks of you.
-//“Team Member” must be a player. Minions/mobs should not count.
+//"Team Member" must be a player. Minions/mobs should not count.
 //Otherwise, lose a flat 0.1 moremobeffects:resistance.
 //Debuff should not increase per level.

@@ -5,6 +5,7 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,6 +21,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Nullable;
 import tfar.moremobeffects.MoreMobEffects;
 import tfar.moremobeffects.MoreMobEffectsForge;
+import tfar.moremobeffects.init.ModIntegration;
 import tfar.moremobeffects.network.PacketHandlerForge;
 import tfar.moremobeffects.network.S2CModPacket;
 import tfar.moremobeffects.platform.services.IPlatformHelper;
@@ -154,7 +156,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public MobEffect getStunnedEffect() {
-        return null;
+        return BuiltInRegistries.MOB_EFFECT.get(new ResourceLocation(ModIntegration.alexcaves.name(),"stunned"));
     }
 
     int i;

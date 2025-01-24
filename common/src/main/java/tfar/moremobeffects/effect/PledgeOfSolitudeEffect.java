@@ -62,6 +62,6 @@ public class PledgeOfSolitudeEffect extends TickingMobEffect {
     }
 }
 //Gain x% attributeslib:crit_damage when no team member is within x blocks of you. 
-//“Team Member” must be a player. Minions/mobs should not count. 
+//"Team Member" must be a player. Minions/mobs should not count.
 //Otherwise, lose 0.2 attributeslib:crit_rate. 
 //The debuff should not increase per level.

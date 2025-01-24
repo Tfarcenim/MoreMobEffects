@@ -4,7 +4,11 @@ import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 import tfar.moremobeffects.network.S2CModPacket;
 import tfar.moremobeffects.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
@@ -35,10 +39,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     }
 
-    @Override
-    public MultiloaderConfig getConfig() {
-        return null;
-    }
+
 
     @Override
     public Attribute getCriticalHitRate() {
@@ -72,6 +73,11 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public Attribute getEnderSpellPower() {
+        return null;
+    }
+
+    @Override
+    public Attribute getEnderSpellDamage() {
         return null;
     }
 
@@ -116,6 +122,16 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
+    public Attribute getHealingReceived() {
+        return null;
+    }
+
+    @Override
+    public MobEffect getStunnedEffect() {
+        return null;
+    }
+
+    @Override
     public <MSG extends S2CModPacket> void registerClientPacket(Class<MSG> packetLocation, Function<FriendlyByteBuf, MSG> reader) {
 
     }
@@ -123,5 +139,15 @@ public class FabricPlatformHelper implements IPlatformHelper {
     @Override
     public void sendToClient(S2CModPacket packet, ServerPlayer player) {
 
+    }
+
+    @Override
+    public boolean onExplosionStart(Level level, Explosion explosion) {
+        return false;
+    }
+
+    @Override
+    public boolean getMobGriefingEvent(Level level, @Nullable Entity entity) {
+        return false;
     }
 }
