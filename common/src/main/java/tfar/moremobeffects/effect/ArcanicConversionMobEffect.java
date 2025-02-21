@@ -43,7 +43,7 @@ public class ArcanicConversionMobEffect extends MobEffect {
                 double attack_damage = living.getAttributeValue(Attributes.ATTACK_DAMAGE);
                 double physical_damage = attack_damage - 1;
 
-                double total_spell_boost = spellboost * physical_damage + 1;
+                double total_spell_boost = spellboost * physical_damage;
 
                 AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getEnderSpellPower());
                 if (attributeInstance != null) {

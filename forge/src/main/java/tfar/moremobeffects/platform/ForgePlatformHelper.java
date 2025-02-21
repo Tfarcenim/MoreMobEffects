@@ -1,5 +1,7 @@
 package tfar.moremobeffects.platform;
 
+import com.github.alexmodguy.alexscaves.AlexsCaves;
+import com.github.alexmodguy.alexscaves.server.potion.ACEffectRegistry;
 import dev.shadowsoffire.attributeslib.api.ALObjects;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
@@ -156,7 +158,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public MobEffect getStunnedEffect() {
-        return BuiltInRegistries.MOB_EFFECT.get(new ResourceLocation(ModIntegration.alexcaves.name(),"stunned"));
+        return ACEffectRegistry.STUNNED.get();
     }
 
     int i;

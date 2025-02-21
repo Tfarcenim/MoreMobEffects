@@ -180,4 +180,5 @@ public class ModMobEffects {
     public static final MobEffect STUNNING_STRIKE = new CustomMobEffect(MobEffectCategory.BENEFICIAL,RED);
     public static final MobEffect HUNTED_TARGET = new CustomMobEffect(MobEffectCategory.HARMFUL,RED);
     public static final MobEffect ALCHEMICAL_TRANSGRESSION = new CustomMobEffect(MobEffectCategory.HARMFUL,RED);
+    public static final MobEffect ENDURING = new CustomMobEffect(MobEffectCategory.BENEFICIAL,RED);
 }

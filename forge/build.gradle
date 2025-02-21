@@ -100,6 +100,10 @@ dependencies {
     implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:$project.player_animator")
     compileOnly "fuzs.forgeconfigapiport:forgeconfigapiport-common:$forge_config_api"
 
+    implementation fg.deobf("curse.maven:citadel-331936:6002521")
+    implementation fg.deobf("curse.maven:alexs-caves-924854:5848216")
+
+
 }
 
 tasks.withType(JavaCompile).configureEach {

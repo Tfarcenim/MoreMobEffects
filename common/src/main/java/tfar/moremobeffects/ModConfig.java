@@ -108,6 +108,8 @@ public class ModConfig {
         public static ForgeConfigSpec.DoubleValue hunted_target_damage_multiplier;
         public static ForgeConfigSpec.DoubleValue alchemical_transgression_damage_multiplier;
 
+        public static ForgeConfigSpec.DoubleValue enduring_duration_reduction;
+        public static ForgeConfigSpec.IntValue guarded_shield_timer;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
@@ -383,6 +385,10 @@ public class ModConfig {
             hunted_target_damage_multiplier = builder.defineInRange("hunted_target_damage_multiplier",.25,0,Float.MAX_VALUE);
 
             alchemical_transgression_damage_multiplier = builder.defineInRange("alchemical_transgression_damage_multiplier",.25,0,Float.MAX_VALUE);
+
+            enduring_duration_reduction = builder.comment("Percentage to reduce duration of harmful effects per level").defineInRange("enduring_duration_reduction",.20,0,1);
+
+            guarded_shield_timer = builder.comment("How long guarded absorption lasts").defineInRange("guarded_shield_timer",200,0,100000000);
 
             builder.pop();
         }

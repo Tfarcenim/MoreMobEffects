@@ -22,7 +22,7 @@ public class MagicalFuseEffect extends MobEffect {
         AttributeInstance enderSpellPower = living.getAttribute(Services.PLATFORM.getEnderSpellPower());
         AttributeInstance spellPower = living.getAttribute(Services.PLATFORM.getSpellPower());
         if (enderSpellPower != null && spellPower != null) {
-            power *= enderSpellPower.getValue() - spellPower.getValue() -1;
+            power *= enderSpellPower.getValue() + spellPower.getValue() -1;
         }
         ExplosionType.customExplode(living.level(),living,living.getX(), living.getY(0.0625D), living.getZ(), (float) power, Level.ExplosionInteraction.NONE, ExplosionType.MAGICAL_FUSE);
     }

@@ -213,20 +213,20 @@ public class MoreMobEffects {
         return false;
     }
 
-    public static float getPoisonDamage(float damage,LivingEntity living) {
+    public static float getPoisonDamage(float vanillaDamage,LivingEntity living) {
         if (living.hasEffect(ModMobEffects.CORROSIVE)) {
             double spellpower = living.getAttributeValue(Services.PLATFORM.getSpellPower());
-            damage*= spellpower;
+            vanillaDamage*= spellpower;
         }
-        return damage;
+        return vanillaDamage;
     }
 
-    public static float getWitherDamage(float damage,LivingEntity living) {
+    public static float getWitherDamage(float vanillaDamage,LivingEntity living) {
         if (living.hasEffect(ModMobEffects.CORROSIVE)) {
             double spellpower = living.getAttributeValue(Services.PLATFORM.getSpellPower());
-            damage*= spellpower;
+            vanillaDamage*= spellpower;
         }
-        return damage;
+        return vanillaDamage;
     }
 
     public static float modifyDamageAfterMagicAbsorb(LivingEntity living, DamageSource source, float amount) {
@@ -284,7 +284,7 @@ public class MoreMobEffects {
 
     public static void livingDamage(LivingEntity target, DamageSource source, float amount) {
         Entity attacker = source.getEntity();
-        if (attacker instanceof LivingEntity livingAttacker && amount > 0) {
+        if (attacker instanceof LivingEntity livingAttacker) {
             MobEffectInstance retribution = target.getEffect(ModMobEffects.RETRIBUTION);
 
             if (retribution != null) {
@@ -308,10 +308,14 @@ public class MoreMobEffects {
             MobEffectInstance stunningStrike = livingAttacker.getEffect(ModMobEffects.STUNNING_STRIKE);
             if (stunningStrike != null) {
                 double time = ModConfig.Server.stunning_strike_stun_duration_multiplier.get() * (livingAttacker.getAttributeValue(Services.PLATFORM.getSpellPower()) + livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower()) -1);//(Ender Spell + Spell Power - 1)
-                if (ModIntegration.alexcaves.loaded) {
+                if (ModIntegration.alexscaves.loaded) {
                     target.addEffect(new MobEffectInstance(Services.PLATFORM.getStunnedEffect(), (int) time, 0));
                 }
                 livingAttacker.removeEffect(ModMobEffects.STUNNING_STRIKE);
+            }
+
+            if (target.hasEffect(ModMobEffects.GUARDED)) {
+                target.removeEffect(ModMobEffects.GUARDED);
             }
 
             MobEffectInstance onTheDefensive = livingAttacker.getEffect(ModMobEffects.ON_THE_DEFENSIVE);
@@ -319,7 +323,26 @@ public class MoreMobEffects {
                 float absorb = (float)((onTheDefensive.getAmplifier() + 1) *
                         (livingAttacker.getMaxHealth()*ModConfig.Server.on_the_defensive_max_health.get()  + livingAttacker.getAttributeValue(Services.PLATFORM.getMaxMana())*ModConfig.Server.on_the_defensive_max_mana.get()));
                 livingAttacker.setAbsorptionAmount(livingAttacker.getAbsorptionAmount() + absorb);
+                livingAttacker.removeEffect(ModMobEffects.ON_THE_DEFENSIVE);
+                ((LivingEntityDuck)livingAttacker).setGuardedTimer(ModConfig.Server.guarded_shield_timer.get());
+                ((LivingEntityDuck)livingAttacker).setAbsorptionToRemove(absorb);
             }
         }
     }
+
+    public static MobEffectInstance onIncomingEffect(MobEffectInstance instance,LivingEntity entity) {
+        if (entity.hasEffect(ModMobEffects.ENDURING)) {
+            double reduction = (entity.getEffect(ModMobEffects.ENDURING).getAmplifier() + 1 ) * ModConfig.Server.enduring_duration_reduction.get();
+            MobEffect effect = instance.getEffect();
+            if (effect.getCategory() == MobEffectCategory.HARMFUL && !instance.isInfiniteDuration()) {
+                MobEffectInstance newInstance = new MobEffectInstance(instance.getEffect(), (int) Math.max(0,(1-reduction)*instance.getDuration()),instance.getAmplifier(),instance.isAmbient(),instance.isVisible());
+                return newInstance;
+            }
+            return instance;
+        }
+
+
+        return instance;
+    }
+
 }

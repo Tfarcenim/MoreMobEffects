@@ -172,7 +172,13 @@ public class MoreMobEffectsForge {
         }
     }
 
-    void playerTick(TickEvent.PlayerTickEvent event) {
-
+    void playerTick(LivingEvent.LivingTickEvent event) {
+        LivingEntity living = event.getEntity();
+        if (((LivingEntityDuck)living).getGuardedTimer() > 0) {
+            ((LivingEntityDuck)living).setGuardedTimer(((LivingEntityDuck)living).getGuardedTimer()-1);
+            if (((LivingEntityDuck)living).getGuardedTimer() == 0) {
+                living.setAbsorptionAmount((float) (living.getAbsorptionAmount() - ((LivingEntityDuck) living).getAbsorptionToRemove()));
+            }
+        }
     }
 }

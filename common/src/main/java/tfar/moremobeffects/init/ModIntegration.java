@@ -3,7 +3,7 @@ package tfar.moremobeffects.init;
 import tfar.moremobeffects.platform.Services;
 
 public enum ModIntegration {
-    alexcaves,
+    alexscaves,
     attributeslib,
     irons_spellbooks;
     public final boolean loaded;
