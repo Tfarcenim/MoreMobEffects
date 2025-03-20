@@ -87,7 +87,10 @@ public class ModConfig {
         public static ForgeConfigSpec.DoubleValue pledge_of_solitude_crit_damage;
         public static ForgeConfigSpec.DoubleValue pledge_of_solitude_crowded;
 
+
         public static ForgeConfigSpec.DoubleValue magical_fuse_power;
+        public static ForgeConfigSpec.DoubleValue magical_fuse_damage_multiplier;
+
         public static ForgeConfigSpec.DoubleValue master_of_arms;
 
         public static ForgeConfigSpec.DoubleValue battleborn_attack_damage;
@@ -103,13 +106,17 @@ public class ModConfig {
         public static ForgeConfigSpec.DoubleValue flighty_and_mighty_movement_speed;
 
         public static ForgeConfigSpec.DoubleValue stunning_strike_damage_multiplier;
-        public static ForgeConfigSpec.DoubleValue stunning_strike_stun_duration_multiplier;
+        public static ForgeConfigSpec.DoubleValue stunning_strike_stun_base_duration;
+        public static ForgeConfigSpec.DoubleValue stunning_strike_duration_scaling;
 
         public static ForgeConfigSpec.DoubleValue hunted_target_damage_multiplier;
         public static ForgeConfigSpec.DoubleValue alchemical_transgression_damage_multiplier;
 
         public static ForgeConfigSpec.DoubleValue enduring_duration_reduction;
         public static ForgeConfigSpec.IntValue guarded_shield_timer;
+
+        public static ForgeConfigSpec.DoubleValue corrosive_base_damage;
+        public static ForgeConfigSpec.DoubleValue corrosive_scaling;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
@@ -344,8 +351,11 @@ public class ModConfig {
                     .defineInRange("pledge_of_solitude_crowded",.2,0,Double.MAX_VALUE);
 
 
-            magical_fuse_power = builder.comment("Base power of magical fuse")
+            magical_fuse_power = builder.comment("Explosion power of magical fuse")
                     .defineInRange("magical_fuse_power",5,0,Float.MAX_VALUE);
+
+            magical_fuse_damage_multiplier = builder.comment("Damage multiplier of magical fuse")
+                    .defineInRange("magical_fuse_damage_multiplier",1,0,Float.MAX_VALUE);
 
             master_of_arms = builder.comment("Add x amount (multiplicative) of attack_damage to moremobeffects:projectile_damage per level")
                     .defineInRange("master_of_arms",.1,0,Float.MAX_VALUE);
@@ -379,8 +389,8 @@ public class ModConfig {
             stunning_strike_damage_multiplier = builder
                     .defineInRange("stunning_strike_damage_multiplier",.25,0,Float.MAX_VALUE);
 
-            stunning_strike_stun_duration_multiplier = builder
-                    .defineInRange("stunning_strike_stun_duration_multiplier",1,0,Float.MAX_VALUE);
+            stunning_strike_stun_base_duration = builder
+                    .defineInRange("stunning_strike_stun_base_duration",100,0,Float.MAX_VALUE);
 
             hunted_target_damage_multiplier = builder.defineInRange("hunted_target_damage_multiplier",.25,0,Float.MAX_VALUE);
 
@@ -389,6 +399,12 @@ public class ModConfig {
             enduring_duration_reduction = builder.comment("Percentage to reduce duration of harmful effects per level").defineInRange("enduring_duration_reduction",.20,0,1);
 
             guarded_shield_timer = builder.comment("How long guarded absorption lasts").defineInRange("guarded_shield_timer",200,0,100000000);
+
+            corrosive_base_damage = builder.comment("Corrosive base damage").defineInRange("corrosive_base_damage",1,0,1e38f);
+
+            corrosive_scaling = builder.comment("Corrosive spellpower scaling").defineInRange("corrosive_scaling",1,-1e38f,1e38f);
+
+            stunning_strike_duration_scaling = builder.comment("Stun strike duration scaling").defineInRange("stunning_strike_duration_scaling",1,0,1e9);
 
             builder.pop();
         }

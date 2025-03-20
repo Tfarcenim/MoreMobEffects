@@ -182,3 +182,23 @@ public class MoreMobEffectsForge {
         }
     }
 }
+//1.) I'd like a revision (I will assume it's likely paid) on corrosion, with a few configurations:
+//Add bleed to corrosion's boost.
+//Add burn to corrosion boost (if that's even possible).
+//A config to amplify the base damage to a certain level. A value of "3" would add 3 damage to  poison, wither, and bleed.
+//A config for the amount of total spell power multiplied to the final damage. Values lower than 1 should be able to reduce their damage.
+//Configurable_Base_Damage_Amplifier * (x%_of_total_spwr + 1)
+//
+//2.) Is it possible to have the damage of magical fuse increase without also simultaneously scaling the explosion radius? I noticed that higher amounts eventually deal AOE damage to entities across multiple chunks and cause the game to freeze for a... well, few minutes.
+//
+//3.) For stunning strike's stun, can the formula look like this:
+//x + ((Ender Spell + Spell Power) * y%)
+//- X as thebase duration.
+//The user's ender spell & general spell power is now added to the duration instead of multiplied.
+//Y is the configurable value multipliedto the combined power.
+//
+//To double check, would the formula above result in this below?
+//a. A base duration of 2 seconds
+//b. Ender Spell 3, Spell Power 2.5
+//c. y = 0.5
+//2 + ((3 + 2.5)  * 0.5) = 4.75s stun

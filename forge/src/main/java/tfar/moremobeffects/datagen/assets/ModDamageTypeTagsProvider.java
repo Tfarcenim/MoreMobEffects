@@ -20,5 +20,6 @@ public class ModDamageTypeTagsProvider extends DamageTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         this.tag(DamageTypeTags.IS_LIGHTNING).add(ModDamageTypes.MANA_FLARE);
+        this.tag(DamageTypeTags.IS_EXPLOSION).add(ModDamageTypes.MAGICAL_FUSE_EXPLOSION);
     }
 }

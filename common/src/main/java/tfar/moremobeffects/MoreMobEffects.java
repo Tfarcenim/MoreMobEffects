@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tfar.moremobeffects.init.ModAttributes;
+import tfar.moremobeffects.init.ModDamageTypes;
 import tfar.moremobeffects.init.ModIntegration;
 import tfar.moremobeffects.init.ModMobEffects;
 import tfar.moremobeffects.network.PacketHandler;
@@ -200,6 +201,13 @@ public class MoreMobEffects {
             target.removeEffect(ModMobEffects.MARKED);
         }
 
+        if (source.is(ModDamageTypes.MAGICAL_FUSE_EXPLOSION)) {
+            baseDamage *= ModConfig.Server.magical_fuse_damage_multiplier.get();
+        }
+
+        if (target.hasEffect(ModMobEffects.CORROSIVE) && source.is(DamageTypes.ON_FIRE)) {
+            baseDamage = getCorrosionBoostedDamage(baseDamage,target);
+        }
 
         return baseDamage;
     }
@@ -214,22 +222,27 @@ public class MoreMobEffects {
     }
 
     public static float getPoisonDamage(float vanillaDamage,LivingEntity living) {
-        if (living.hasEffect(ModMobEffects.CORROSIVE)) {
-            double spellpower = living.getAttributeValue(Services.PLATFORM.getSpellPower());
-            vanillaDamage*= spellpower;
-        }
-        return vanillaDamage;
+        return getCorrosionBoostedDamage(vanillaDamage,living);
+    }
+
+    public static float getBleedDamage(float vanillaDamage,LivingEntity living) {
+        return getCorrosionBoostedDamage(vanillaDamage,living);
     }
 
     public static float getWitherDamage(float vanillaDamage,LivingEntity living) {
+        return getCorrosionBoostedDamage(vanillaDamage,living);
+    }
+
+    public static float getCorrosionBoostedDamage(float vanillaDamage,LivingEntity living) {
         if (living.hasEffect(ModMobEffects.CORROSIVE)) {
             double spellpower = living.getAttributeValue(Services.PLATFORM.getSpellPower());
-            vanillaDamage*= spellpower;
+            vanillaDamage += ModConfig.Server.corrosive_base_damage.get();
+            vanillaDamage*= (spellpower * ModConfig.Server.corrosive_scaling.get() +1);
         }
         return vanillaDamage;
     }
 
-    public static float modifyDamageAfterMagicAbsorb(LivingEntity living, DamageSource source, float amount) {
+        public static float modifyDamageAfterMagicAbsorb(LivingEntity living, DamageSource source, float amount) {
 
         if (living.getAttribute(ModAttributes.RESISTANCE) != null && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
             amount *= 2 - living.getAttributeValue(ModAttributes.RESISTANCE);
@@ -307,7 +320,9 @@ public class MoreMobEffects {
 
             MobEffectInstance stunningStrike = livingAttacker.getEffect(ModMobEffects.STUNNING_STRIKE);
             if (stunningStrike != null) {
-                double time = ModConfig.Server.stunning_strike_stun_duration_multiplier.get() * (livingAttacker.getAttributeValue(Services.PLATFORM.getSpellPower()) + livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower()) -1);//(Ender Spell + Spell Power - 1)
+                double time = ModConfig.Server.stunning_strike_stun_base_duration.get() +
+                        (livingAttacker.getAttributeValue(Services.PLATFORM.getSpellPower()) + livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower())) *
+                        ModConfig.Server.stunning_strike_duration_scaling.get();//(Ender Spell + Spell Power - 1)
                 if (ModIntegration.alexscaves.loaded) {
                     target.addEffect(new MobEffectInstance(Services.PLATFORM.getStunnedEffect(), (int) time, 0));
                 }

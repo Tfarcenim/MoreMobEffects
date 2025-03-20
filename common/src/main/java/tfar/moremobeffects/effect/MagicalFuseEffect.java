@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.level.Level;
 import tfar.moremobeffects.ExplosionType;
 import tfar.moremobeffects.ModConfig;
+import tfar.moremobeffects.init.ModDamageTypes;
 import tfar.moremobeffects.platform.Services;
 
 public class MagicalFuseEffect extends MobEffect {
@@ -24,7 +25,7 @@ public class MagicalFuseEffect extends MobEffect {
         if (enderSpellPower != null && spellPower != null) {
             power *= enderSpellPower.getValue() + spellPower.getValue() -1;
         }
-        ExplosionType.customExplode(living.level(),living,living.getX(), living.getY(0.0625D), living.getZ(), (float) power, Level.ExplosionInteraction.NONE, ExplosionType.MAGICAL_FUSE);
+        ExplosionType.customExplode(living.level(),living,living.level().damageSources().source(ModDamageTypes.MAGICAL_FUSE_EXPLOSION,living,living),null,living.getX(), living.getY(0.0625D), living.getZ(), (float) power,false, Level.ExplosionInteraction.NONE,true, ExplosionType.MAGICAL_FUSE);
     }
 }
 //When the effect duration ends, you explode, dealing (x * amplifier damage) * (ender spell - total spell power - 1) damage.
