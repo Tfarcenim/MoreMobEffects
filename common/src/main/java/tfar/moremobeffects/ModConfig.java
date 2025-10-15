@@ -1,122 +1,136 @@
 package tfar.moremobeffects;
 
 import net.minecraftforge.common.ForgeConfigSpec;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class ModConfig {
 
+    public static final ModConfig.Server SERVER;
+    public static final ForgeConfigSpec SERVER_SPEC;
+
+    static {
+        final Pair<Server, ForgeConfigSpec> specPair2 = new ForgeConfigSpec.Builder().configure(ModConfig.Server::new);
+        SERVER_SPEC = specPair2.getRight();
+        SERVER = specPair2.getLeft();
+    }
+
+
     public static class Server {
-        public static ForgeConfigSpec.DoubleValue vulnerable;
-        public static ForgeConfigSpec.DoubleValue exposed;
-        public static ForgeConfigSpec.DoubleValue archery;
-        public static ForgeConfigSpec.DoubleValue aiming;
-        public static ForgeConfigSpec.DoubleValue marksman;
+        public final ForgeConfigSpec.DoubleValue vulnerable;
+        public final ForgeConfigSpec.DoubleValue exposed;
+        public final ForgeConfigSpec.DoubleValue archery;
+        public final ForgeConfigSpec.DoubleValue aiming;
+        public final ForgeConfigSpec.DoubleValue marksman;
 
-        public static ForgeConfigSpec.DoubleValue inspired;
-        public static ForgeConfigSpec.DoubleValue precise;
+        public final ForgeConfigSpec.DoubleValue inspired;
+        public final ForgeConfigSpec.DoubleValue precise;
 
-        public static ForgeConfigSpec.DoubleValue brutality;
-        public static ForgeConfigSpec.DoubleValue savage;
+        public final ForgeConfigSpec.DoubleValue brutality;
+        public final ForgeConfigSpec.DoubleValue savage;
 
-        public static ForgeConfigSpec.DoubleValue archers_frenzy;
-        public static ForgeConfigSpec.DoubleValue hasty;
+        public final ForgeConfigSpec.DoubleValue archers_frenzy;
+        public final ForgeConfigSpec.DoubleValue hasty;
 
-        public static ForgeConfigSpec.DoubleValue might;
-        public static ForgeConfigSpec.DoubleValue strengthened;
+        public final ForgeConfigSpec.DoubleValue might;
+        public final ForgeConfigSpec.DoubleValue strengthened;
 
-        public static ForgeConfigSpec.DoubleValue empowered;
-        public static ForgeConfigSpec.DoubleValue magic_up;
-        public static ForgeConfigSpec.DoubleValue arcane_boost;
+        public final ForgeConfigSpec.DoubleValue empowered;
+        public final ForgeConfigSpec.DoubleValue magic_up;
+        public final ForgeConfigSpec.DoubleValue arcane_boost;
 
-        public static ForgeConfigSpec.DoubleValue spell_haste;
+        public final ForgeConfigSpec.DoubleValue spell_haste;
 
-        public static ForgeConfigSpec.DoubleValue focused;
-        public static ForgeConfigSpec.DoubleValue arcanic_conversion;
-        public static ForgeConfigSpec.DoubleValue arcanic_overload;
-        public static ForgeConfigSpec.DoubleValue retribution;
-        public static ForgeConfigSpec.DoubleValue domineering;
-        public static ForgeConfigSpec.DoubleValue marked;
-        public static ForgeConfigSpec.DoubleValue mana_flare;
-        public static ForgeConfigSpec.DoubleValue endergized;
-        public static ForgeConfigSpec.DoubleValue enderphins;
-        public static ForgeConfigSpec.DoubleValue life_steal;
-        public static ForgeConfigSpec.DoubleValue armor_pierce;
-        public static ForgeConfigSpec.DoubleValue overheal;
-        public static ForgeConfigSpec.DoubleValue summon_boost;
-        public static ForgeConfigSpec.DoubleValue spell_exhaustion;
-        public static ForgeConfigSpec.DoubleValue disarming;
+        public final ForgeConfigSpec.DoubleValue focused;
+        public final ForgeConfigSpec.DoubleValue arcanic_conversion;
+        public final ForgeConfigSpec.DoubleValue arcanic_overload;
+        public final ForgeConfigSpec.DoubleValue retribution;
+        public final ForgeConfigSpec.DoubleValue domineering;
+        public final ForgeConfigSpec.DoubleValue marked;
+        public final ForgeConfigSpec.DoubleValue mana_flare_base;
+        public final ForgeConfigSpec.DoubleValue mana_flare_spell_power_scaler;
+        public final ForgeConfigSpec.DoubleValue endergized;
+        public final ForgeConfigSpec.DoubleValue enderphins;
+        public final ForgeConfigSpec.DoubleValue life_steal;
+        public final ForgeConfigSpec.DoubleValue armor_pierce;
+        public final ForgeConfigSpec.DoubleValue overheal;
+        public final ForgeConfigSpec.DoubleValue summon_boost;
+        public final ForgeConfigSpec.DoubleValue spell_exhaustion;
+        public final ForgeConfigSpec.DoubleValue disarming;
 
-        public static ForgeConfigSpec.DoubleValue enders_game_spell_power_decrease;
-        public static ForgeConfigSpec.DoubleValue enders_game_spell_cooldown_decrease;
-        public static ForgeConfigSpec.DoubleValue enders_game_spell_cast_time_decrease;
+        public final ForgeConfigSpec.DoubleValue enders_game_spell_power_decrease;
+        public final ForgeConfigSpec.DoubleValue enders_game_spell_cooldown_decrease;
+        public final ForgeConfigSpec.DoubleValue enders_game_spell_cast_time_decrease;
 
-        public static ForgeConfigSpec.DoubleValue will_of_the_summoner;
-        public static ForgeConfigSpec.DoubleValue battle_mage;
-        public static ForgeConfigSpec.DoubleValue peak_health;
+        public final ForgeConfigSpec.DoubleValue will_of_the_summoner;
+        public final ForgeConfigSpec.DoubleValue battle_mage;
+        public final ForgeConfigSpec.DoubleValue peak_health;
 
-        public static ForgeConfigSpec.DoubleValue peak_health_min;
+        public final ForgeConfigSpec.DoubleValue peak_health_min;
 
-        public static ForgeConfigSpec.DoubleValue berserk_attack_damage;
-        public static ForgeConfigSpec.DoubleValue berserk_ender_spell_power;
+        public final ForgeConfigSpec.DoubleValue berserk_attack_damage;
+        public final ForgeConfigSpec.DoubleValue berserk_ender_spell_power;
 
-        public static ForgeConfigSpec.DoubleValue revive;
-        public static ForgeConfigSpec.DoubleValue martyr;
-        public static ForgeConfigSpec.DoubleValue sorcerous_transference;
+        public final ForgeConfigSpec.DoubleValue revive;
+        public final ForgeConfigSpec.DoubleValue martyr;
+        public final ForgeConfigSpec.DoubleValue sorcerous_transference;
 
-        public static ForgeConfigSpec.DoubleValue warden_absorption;
+        public final ForgeConfigSpec.DoubleValue aegis_absorption_hp_multiplier;
+        public final ForgeConfigSpec.DoubleValue aegis_base_absorption;
+        public final ForgeConfigSpec.DoubleValue aegis_damage_resistance;
 
-        public static ForgeConfigSpec.DoubleValue blazing_aspect;
-        public static ForgeConfigSpec.DoubleValue wolf_aspect;
-        public static ForgeConfigSpec.DoubleValue withering_aspect;
-        public static ForgeConfigSpec.DoubleValue sigil_of_mana;
+        public final ForgeConfigSpec.DoubleValue blazing_aspect;
+        public final ForgeConfigSpec.DoubleValue wolf_aspect;
+        public final ForgeConfigSpec.DoubleValue withering_aspect;
+        public final ForgeConfigSpec.DoubleValue sigil_of_mana;
 
-        public static ForgeConfigSpec.DoubleValue beefy;
-        public static ForgeConfigSpec.DoubleValue robust;
-        public static ForgeConfigSpec.DoubleValue hardy;
-        public static ForgeConfigSpec.DoubleValue swingy;
-        public static ForgeConfigSpec.DoubleValue mana_regeneration;
+        public final ForgeConfigSpec.DoubleValue beefy;
+        public final ForgeConfigSpec.DoubleValue robust;
+        public final ForgeConfigSpec.DoubleValue hardy;
+        public final ForgeConfigSpec.DoubleValue swingy;
+        public final ForgeConfigSpec.DoubleValue mana_regeneration;
 
-        public static ForgeConfigSpec.DoubleValue injury;
-        public static ForgeConfigSpec.DoubleValue fractured;
+        public final ForgeConfigSpec.DoubleValue injury;
+        public final ForgeConfigSpec.DoubleValue fractured;
 
-        public static ForgeConfigSpec.DoubleValue pledge_of_unity_max_dist;
-        public static ForgeConfigSpec.DoubleValue pledge_of_unity_resistance;
-        public static ForgeConfigSpec.DoubleValue pledge_of_unity_healing_received;
-        public static ForgeConfigSpec.DoubleValue pledge_of_unity_lonely;
+        public final ForgeConfigSpec.DoubleValue pledge_of_unity_max_dist;
+        public final ForgeConfigSpec.DoubleValue pledge_of_unity_resistance;
+        public final ForgeConfigSpec.DoubleValue pledge_of_unity_healing_received;
+        public final ForgeConfigSpec.DoubleValue pledge_of_unity_lonely;
 
-        public static ForgeConfigSpec.DoubleValue pledge_of_solitude_max_dist;
-        public static ForgeConfigSpec.DoubleValue pledge_of_solitude_crit_damage;
-        public static ForgeConfigSpec.DoubleValue pledge_of_solitude_crowded;
+        public final ForgeConfigSpec.DoubleValue pledge_of_solitude_max_dist;
+        public final ForgeConfigSpec.DoubleValue pledge_of_solitude_crit_damage;
+        public final ForgeConfigSpec.DoubleValue pledge_of_solitude_crowded;
 
 
-        public static ForgeConfigSpec.DoubleValue magical_fuse_power;
-        public static ForgeConfigSpec.DoubleValue magical_fuse_damage_multiplier;
+        public final ForgeConfigSpec.DoubleValue magical_fuse_power;
+        public final ForgeConfigSpec.DoubleValue magical_fuse_damage_multiplier;
 
-        public static ForgeConfigSpec.DoubleValue master_of_arms;
+        public final ForgeConfigSpec.DoubleValue master_of_arms;
 
-        public static ForgeConfigSpec.DoubleValue battleborn_attack_damage;
-        public static ForgeConfigSpec.DoubleValue battleborn_ender_spell_power;
-        public static ForgeConfigSpec.DoubleValue battleborn_resistance;
+        public final ForgeConfigSpec.DoubleValue battleborn_attack_damage;
+        public final ForgeConfigSpec.DoubleValue battleborn_ender_spell_power;
+        public final ForgeConfigSpec.DoubleValue battleborn_resistance;
 
-        public static ForgeConfigSpec.DoubleValue on_the_defensive_max_health;
-        public static ForgeConfigSpec.DoubleValue on_the_defensive_max_mana;
+        public final ForgeConfigSpec.DoubleValue on_the_defensive_max_health;
+        public final ForgeConfigSpec.DoubleValue on_the_defensive_max_mana;
 
-        public static ForgeConfigSpec.DoubleValue guarded;
+        public final ForgeConfigSpec.DoubleValue guarded;
 
-        public static ForgeConfigSpec.DoubleValue flighty_and_mighty_attack_speed;
-        public static ForgeConfigSpec.DoubleValue flighty_and_mighty_movement_speed;
+        public final ForgeConfigSpec.DoubleValue flighty_and_mighty_attack_speed;
+        public final ForgeConfigSpec.DoubleValue flighty_and_mighty_movement_speed;
 
-        public static ForgeConfigSpec.DoubleValue stunning_strike_damage_multiplier;
-        public static ForgeConfigSpec.DoubleValue stunning_strike_stun_base_duration;
-        public static ForgeConfigSpec.DoubleValue stunning_strike_duration_scaling;
+        public final ForgeConfigSpec.DoubleValue stunning_strike_damage_multiplier;
+        public final ForgeConfigSpec.DoubleValue stunning_strike_stun_base_duration;
+        public final ForgeConfigSpec.DoubleValue stunning_strike_duration_scaling;
 
-        public static ForgeConfigSpec.DoubleValue hunted_target_damage_multiplier;
-        public static ForgeConfigSpec.DoubleValue alchemical_transgression_damage_multiplier;
+        public final ForgeConfigSpec.DoubleValue hunted_target_damage_multiplier;
+        public final ForgeConfigSpec.DoubleValue alchemical_transgression_damage_multiplier;
 
-        public static ForgeConfigSpec.DoubleValue enduring_duration_reduction;
-        public static ForgeConfigSpec.IntValue guarded_shield_timer;
+        public final ForgeConfigSpec.DoubleValue enduring_duration_reduction;
+        public final ForgeConfigSpec.IntValue guarded_shield_timer;
 
-        public static ForgeConfigSpec.DoubleValue corrosive_base_damage;
-        public static ForgeConfigSpec.DoubleValue corrosive_scaling;
+        public final ForgeConfigSpec.DoubleValue corrosive_base_damage;
+        public final ForgeConfigSpec.DoubleValue corrosive_scaling;
 
         public Server(ForgeConfigSpec.Builder builder) {
             builder.push("server");
@@ -204,9 +218,12 @@ public class ModConfig {
                     comment("Increases the damage of the next physical damage by x (multiplicative). Immediately disappears after a successful attack.")
                     .defineInRange("marked", .05, 0, Double.MAX_VALUE);
 
-            mana_flare = builder.
-                    comment("Deals x damage (multiplicative with spell power) every second.")
+            mana_flare_base = builder.
+                    comment("Deals x damage (multiplicative with spell power) every second, scales with level")
                     .defineInRange("mana_flare", 1, 0, Double.MAX_VALUE);
+
+            mana_flare_spell_power_scaler = builder
+                    .defineInRange("mana_flare_spell_power_scaler", 1, 0, Double.MAX_VALUE);
 
             endergized = builder.
                     comment("Increases ender spell power by x per level")
@@ -289,10 +306,16 @@ public class ModConfig {
             martyr = builder.comment("Redirects x% of all damage received from teammates to you.")
                     .defineInRange("martyr",.1,0,1);
 
-            builder.push("warden");
+            builder.push("aegis");
 
-            warden_absorption = builder.comment("Gain x% of your maximum health per level as absorption hearts, further boosted by ender/spell power.")
-                            .defineInRange("absorption",1,0,Double.MAX_VALUE);
+            aegis_absorption_hp_multiplier = builder.comment("Gain x% of your maximum health per level as absorption hearts.")
+                            .defineInRange("absorption_hp_multiplier",1,0,Double.MAX_VALUE);
+
+            aegis_base_absorption = builder.comment("Base amount of absorption given per level.")
+                    .defineInRange("base_absorption",1,0,Double.MAX_VALUE);
+
+            aegis_damage_resistance = builder.comment("Aegis damage resistance, does NOT scale with level, 1 blocks all damage")
+                    .defineInRange("damage_resistance",.15,0,1);
 
             builder.pop();
 

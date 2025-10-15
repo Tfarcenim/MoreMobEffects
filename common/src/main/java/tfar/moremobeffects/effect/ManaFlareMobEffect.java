@@ -26,10 +26,10 @@ public class ManaFlareMobEffect extends MobEffect {
     public void applyEffectTick(LivingEntity living, int amplifier) {
         AttributeInstance spellPower = living.getAttribute(Services.PLATFORM.getSpellPower());
         if (spellPower != null) {
-            double multi = spellPower.getValue();
+            double multi = (amplifier + 1) *(spellPower.getValue()-1) * ModConfig.SERVER.mana_flare_spell_power_scaler.get();
             Registry<DamageType> damageTypes = living.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE);
             DamageSource source = new DamageSource(damageTypes.getHolderOrThrow(ModDamageTypes.MANA_FLARE));
-            living.hurt(source, (float) ((amplifier + 1) * multi * ModConfig.Server.mana_flare.get()));
+            living.hurt(source, (float) (ModConfig.SERVER.mana_flare_base.get() * (amplifier + 1) + multi));
         }
     }
 }

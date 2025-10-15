@@ -25,7 +25,7 @@ public class MasterOfArmsEffect extends TickingMobEffect {
             double attackDamage = attackDamageInstance.getValue();
             AttributeInstance projectileAttackInstance = living.getAttribute(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
             if (projectileAttackInstance != null) {
-                double multiplier = ModConfig.Server.master_of_arms.get() * attackDamage * (amplifier + 1);
+                double multiplier = ModConfig.SERVER.master_of_arms.get() * attackDamage * (amplifier + 1);
                 MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(),"master of arms",multiplier, AttributeModifier.Operation.ADDITION),projectileAttackInstance);
             }
         }

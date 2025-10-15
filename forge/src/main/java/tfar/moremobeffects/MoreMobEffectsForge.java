@@ -49,7 +49,7 @@ public class MoreMobEffectsForge {
         // This method is invoked by the Forge mod loader when it is ready
         // to load your mod. You can access Forge and Common code in this
         // project.
-        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.SERVER, SERVER_SPEC);
+        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.SERVER, ModConfig.SERVER_SPEC);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::register);
         bus.addListener(this::commonSetup);
@@ -68,14 +68,6 @@ public class MoreMobEffectsForge {
         MoreMobEffects.init();
     }
 
-    public static final ModConfig.Server SERVER;
-    public static final ForgeConfigSpec SERVER_SPEC;
-
-    static {
-        final Pair<ModConfig.Server, ForgeConfigSpec> specPair2 = new ForgeConfigSpec.Builder().configure(ModConfig.Server::new);
-        SERVER_SPEC = specPair2.getRight();
-        SERVER = specPair2.getLeft();
-    }
 
     public static Map<Registry<?>, List<Pair<ResourceLocation, Supplier<Object>>>> registerLater = new HashMap<>();
     private void register(RegisterEvent e) {

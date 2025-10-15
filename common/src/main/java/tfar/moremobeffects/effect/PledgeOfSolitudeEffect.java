@@ -26,7 +26,7 @@ public class PledgeOfSolitudeEffect extends TickingMobEffect {
             int nearbyPlayers = 0;
             Team team = living.getTeam();
             if (team != null) {
-                double maxDistSqr = ModConfig.Server.pledge_of_solitude_max_dist.get() * ModConfig.Server.pledge_of_solitude_max_dist.get();
+                double maxDistSqr = ModConfig.SERVER.pledge_of_solitude_max_dist.get() * ModConfig.SERVER.pledge_of_solitude_max_dist.get();
                 List<ServerPlayer> nearby = level.getPlayers(player1 -> {
                     Team team1 = player1.getTeam();
                     return living != player1 && team.isAlliedTo(team1) && living.distanceToSqr(player1) < maxDistSqr;
@@ -36,7 +36,7 @@ public class PledgeOfSolitudeEffect extends TickingMobEffect {
             if (nearbyPlayers == 0) {
                 AttributeInstance instance = living.getAttribute(Services.PLATFORM.getCriticalHitDamage());
                 if (instance != null) {
-                    double rBoost = (amplifier + 1) * ModConfig.Server.pledge_of_solitude_crit_damage.get();
+                    double rBoost = (amplifier + 1) * ModConfig.SERVER.pledge_of_solitude_crit_damage.get();
                     MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of solitude", rBoost,
                             AttributeModifier.Operation.MULTIPLY_TOTAL), instance);
                 }
@@ -49,7 +49,7 @@ public class PledgeOfSolitudeEffect extends TickingMobEffect {
             } else {
                 AttributeInstance instance = living.getAttribute(Services.PLATFORM.getCriticalHitRate());
                 if (instance != null) {
-                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of solitude", -ModConfig.Server.pledge_of_solitude_crowded.get(),
+                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of solitude", -ModConfig.SERVER.pledge_of_solitude_crowded.get(),
                             AttributeModifier.Operation.ADDITION), instance);
                 }
 

@@ -27,7 +27,7 @@ public class PledgeOfUnityEffect extends TickingMobEffect {
             int nearbyPlayers = 0;
             Team team = living.getTeam();
             if (team != null) {
-                double maxDistSqr = ModConfig.Server.pledge_of_unity_max_dist.get() * ModConfig.Server.pledge_of_unity_max_dist.get();
+                double maxDistSqr = ModConfig.SERVER.pledge_of_unity_max_dist.get() * ModConfig.SERVER.pledge_of_unity_max_dist.get();
                 List<ServerPlayer> nearby = level.getPlayers(player1 -> {
                     Team team1 = player1.getTeam();
                     return living != player1 && team.isAlliedTo(team1) && living.distanceToSqr(player1) < maxDistSqr;
@@ -37,7 +37,7 @@ public class PledgeOfUnityEffect extends TickingMobEffect {
             AttributeInstance instance = living.getAttribute(ModAttributes.RESISTANCE);
             if (nearbyPlayers > 0) {
 
-                double rBoost = (amplifier + 1) * ModConfig.Server.pledge_of_unity_resistance.get();
+                double rBoost = (amplifier + 1) * ModConfig.SERVER.pledge_of_unity_resistance.get();
 
                 if (instance != null) {
                     MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of unity", rBoost,
@@ -46,12 +46,12 @@ public class PledgeOfUnityEffect extends TickingMobEffect {
 
                 AttributeInstance instanceHeal = living.getAttribute(Services.PLATFORM.getHealingReceived());
                 if (instanceHeal != null) {
-                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of unity", (amplifier + 1) * ModConfig.Server.pledge_of_unity_healing_received.get(),
+                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of unity", (amplifier + 1) * ModConfig.SERVER.pledge_of_unity_healing_received.get(),
                             AttributeModifier.Operation.ADDITION), instanceHeal);
                 }
             } else {
                 if (instance != null) {
-                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of unity", -ModConfig.Server.pledge_of_unity_lonely.get(),
+                    MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(), "pledge of unity", -ModConfig.SERVER.pledge_of_unity_lonely.get(),
                             AttributeModifier.Operation.ADDITION), instance);
                 }
                 AttributeInstance instanceHeal = living.getAttribute(Services.PLATFORM.getHealingReceived());

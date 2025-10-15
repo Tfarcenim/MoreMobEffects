@@ -25,11 +25,11 @@ public class FlightyAndMightyEffect extends TickingMobEffect{
         AttributeInstance attackSpeedInstance = living.getAttribute(Attributes.ATTACK_SPEED);
         if (attackSpeedInstance != null) {
             MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(
-                    getUuid(),"flighty and mighty",boost* ModConfig.Server.flighty_and_mighty_attack_speed.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                    getUuid(),"flighty and mighty",boost* ModConfig.SERVER.flighty_and_mighty_attack_speed.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
                     attackSpeedInstance);
         }
         MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(
-                        getUuid(),"flighty and mighty",boost* ModConfig.Server.flighty_and_mighty_movement_speed.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                        getUuid(),"flighty and mighty",boost* ModConfig.SERVER.flighty_and_mighty_movement_speed.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
                 living.getAttribute(Attributes.MOVEMENT_SPEED));
     }
 }

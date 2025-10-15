@@ -19,7 +19,7 @@ public class MagicalFuseEffect extends MobEffect {
     @Override
     public void removeAttributeModifiers(LivingEntity living, AttributeMap $$1, int amplifier) {
         super.removeAttributeModifiers(living, $$1, amplifier);
-        double power = ModConfig.Server.magical_fuse_power.get() * (amplifier+1);
+        double power = ModConfig.SERVER.magical_fuse_power.get() * (amplifier+1);
         AttributeInstance enderSpellPower = living.getAttribute(Services.PLATFORM.getEnderSpellPower());
         AttributeInstance spellPower = living.getAttribute(Services.PLATFORM.getSpellPower());
         if (enderSpellPower != null && spellPower != null) {

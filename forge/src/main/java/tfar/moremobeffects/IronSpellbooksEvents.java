@@ -17,7 +17,7 @@ public class IronSpellbooksEvents {
         if (target.hasEffect(ModMobEffects.MANA_FLARE) && attacker instanceof LivingEntity livingAttacker) {
             MobEffectInstance mobEffectInstance = livingAttacker.getEffect(ModMobEffects.SIGIL_OF_MANA);
             if (mobEffectInstance != null) {
-                event.setAmount((float) (event.getOriginalAmount() * (1 + ModConfig.Server.sigil_of_mana.get() * (mobEffectInstance.getAmplifier() + 1) )));
+                event.setAmount((float) (event.getOriginalAmount() * (1 + ModConfig.SERVER.sigil_of_mana.get() * (mobEffectInstance.getAmplifier() + 1) )));
             }
         }
     }

@@ -29,11 +29,11 @@ public class PeakHealthEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
-        double boost = ModConfig.Server.peak_health.get() * (amplifier + 1);
+        double boost = ModConfig.SERVER.peak_health.get() * (amplifier + 1);
 
         double max_health = living.getAttributeValue(Attributes.MAX_HEALTH);
 
-        double total_boost = Math.max(0,boost * (max_health - ModConfig.Server.peak_health_min.get()));
+        double total_boost = Math.max(0,boost * (max_health - ModConfig.SERVER.peak_health_min.get()));
 
         AttributeInstance attributeInstance = living.getAttribute(Services.PLATFORM.getCriticalHitDamage());
         if (attributeInstance != null) {

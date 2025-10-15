@@ -29,12 +29,12 @@ public class BattleBornEffect extends TickingMobEffect{
 
             AttributeInstance attackDamageInstance = living.getAttribute(Attributes.ATTACK_DAMAGE);
             if (attackDamageInstance != null) {
-                MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(),"battleborn", ModConfig.Server.battleborn_attack_damage.get() * (amplifier + 1), AttributeModifier.Operation.ADDITION),
+                MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(),"battleborn", ModConfig.SERVER.battleborn_attack_damage.get() * (amplifier + 1), AttributeModifier.Operation.ADDITION),
                         attackDamageInstance);
             }
 
             AttributeInstance enderSpellInstance = living.getAttribute(Services.PLATFORM.getEnderSpellPower());
-            MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(),"battleborn", ModConfig.Server.battleborn_ender_spell_power.get() * (amplifier + 1),
+            MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(),"battleborn", ModConfig.SERVER.battleborn_ender_spell_power.get() * (amplifier + 1),
                     AttributeModifier.Operation.ADDITION),enderSpellInstance);
 
         } else {
@@ -46,7 +46,7 @@ public class BattleBornEffect extends TickingMobEffect{
             enderSpellInstance.removeModifier(getUuid());
 
             AttributeInstance resistanceInstance = living.getAttribute(ModAttributes.RESISTANCE);
-            MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(),"battleborn", ModConfig.Server.battleborn_resistance.get() * (amplifier + 1),
+            MoreMobEffects.addModifierAvoidUpdates(new AttributeModifier(getUuid(),"battleborn", ModConfig.SERVER.battleborn_resistance.get() * (amplifier + 1),
                     AttributeModifier.Operation.ADDITION),resistanceInstance);
         }
     }

@@ -38,7 +38,7 @@ public class ArcanicConversionMobEffect extends MobEffect {
     public void applyEffectTick(LivingEntity living, int amplifier) {
         switch (variant) {
             case physical -> {
-                double spellboost = ModConfig.Server.arcanic_conversion.get() * (amplifier + 1);
+                double spellboost = ModConfig.SERVER.arcanic_conversion.get() * (amplifier + 1);
 
                 double attack_damage = living.getAttributeValue(Attributes.ATTACK_DAMAGE);
                 double physical_damage = attack_damage - 1;
@@ -60,7 +60,7 @@ public class ArcanicConversionMobEffect extends MobEffect {
             }
 
             case summoner -> {
-                double spellboost = ModConfig.Server.will_of_the_summoner.get() * (amplifier + 1);
+                double spellboost = ModConfig.SERVER.will_of_the_summoner.get() * (amplifier + 1);
 
                 double spell_power = living.getAttributeValue(Services.PLATFORM.getSpellPower());
                 double ender_spell_power = living.getAttributeValue(Services.PLATFORM.getEnderSpellPower());

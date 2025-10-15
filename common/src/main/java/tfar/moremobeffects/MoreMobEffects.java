@@ -71,8 +71,8 @@ public class MoreMobEffects {
                         if (player1 != null) {
                             MobEffectInstance martyr1 = player1.getEffect(ModMobEffects.MARTYR);
                             if (martyr1 != null) {
-                                fraction += ModConfig.Server.martyr.get();
-                                double transferred = baseDamage * ModConfig.Server.martyr.get();
+                                fraction += ModConfig.SERVER.martyr.get();
+                                double transferred = baseDamage * ModConfig.SERVER.martyr.get();
                                 player1.hurt(source, (float) transferred);
                                 if (fraction >= 1) break;
                             }
@@ -85,18 +85,18 @@ public class MoreMobEffects {
 
         MobEffectInstance exposed = target.getEffect(ModMobEffects.EXPOSED);
         if (exposed != null) {
-            baseDamage *= 1 + ModConfig.Server.exposed.get() * (exposed.getAmplifier() + 1);
+            baseDamage *= 1 + ModConfig.SERVER.exposed.get() * (exposed.getAmplifier() + 1);
         }
 
         MobEffectInstance alchemicalTransgression = target.getEffect(ModMobEffects.ALCHEMICAL_TRANSGRESSION);
         if (alchemicalTransgression != null) {
             double value = target.getAttributeValue(Services.PLATFORM.getSpellPower());
-            baseDamage *= 1 + ModConfig.Server.alchemical_transgression_damage_multiplier.get() * (alchemicalTransgression.getAmplifier() + 1) * value;
+            baseDamage *= 1 + ModConfig.SERVER.alchemical_transgression_damage_multiplier.get() * (alchemicalTransgression.getAmplifier() + 1) * value;
         }
 
         MobEffectInstance vulnerable = target.getEffect(ModMobEffects.VULNERABLE);
         if (vulnerable != null) {
-            baseDamage *= 1 + ModConfig.Server.vulnerable.get() * (vulnerable.getAmplifier() + 1);
+            baseDamage *= 1 + ModConfig.SERVER.vulnerable.get() * (vulnerable.getAmplifier() + 1);
         }
 
         Entity attacker = source.getEntity();
@@ -110,7 +110,7 @@ public class MoreMobEffects {
                     attributeInstance.removeModifier(blazing_aspect_id);
                     MobEffectInstance blazing_aspect = livingAttacker.getEffect(ModMobEffects.COMMANDING_ASPECT);
                     if (blazing_aspect != null && (target.hasEffect(MobEffects.WEAKNESS) || target.hasEffect(Services.PLATFORM.getBlight()))) {
-                        attributeInstance.addTransientModifier(new AttributeModifier(blazing_aspect_id, "Blazing Aspect Bonus", ModConfig.Server.blazing_aspect.get() * (blazing_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
+                        attributeInstance.addTransientModifier(new AttributeModifier(blazing_aspect_id, "Blazing Aspect Bonus", ModConfig.SERVER.blazing_aspect.get() * (blazing_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
                     }
                 }
 
@@ -120,7 +120,7 @@ public class MoreMobEffects {
                     if (target.hasEffect(Services.PLATFORM.getBleeding())) {
                         MobEffectInstance wolf_aspect = livingAttacker.getEffect(ModMobEffects.WOLF_ASPECT);
                         if (wolf_aspect != null) {
-                            attributeInstanceCritChance.addTransientModifier(new AttributeModifier(wolf_aspect_id, "Wolf Aspect Bonus", ModConfig.Server.wolf_aspect.get() * (wolf_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
+                            attributeInstanceCritChance.addTransientModifier(new AttributeModifier(wolf_aspect_id, "Wolf Aspect Bonus", ModConfig.SERVER.wolf_aspect.get() * (wolf_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
                         }
                     }
                 }
@@ -130,7 +130,7 @@ public class MoreMobEffects {
                     attributeInstanceArmorShred.removeModifier(withering_aspect_id);
                     MobEffectInstance withering_aspect = livingAttacker.getEffect(ModMobEffects.WITHERING_ASPECT);
                     if (withering_aspect != null) {
-                        attributeInstanceArmorShred.addTransientModifier(new AttributeModifier(withering_aspect_id, "Withering Aspect Bonus", ModConfig.Server.withering_aspect.get() * (withering_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
+                        attributeInstanceArmorShred.addTransientModifier(new AttributeModifier(withering_aspect_id, "Withering Aspect Bonus", ModConfig.SERVER.withering_aspect.get() * (withering_aspect.getAmplifier() + 1), AttributeModifier.Operation.ADDITION));
                     }
                 }
             }
@@ -139,7 +139,7 @@ public class MoreMobEffects {
                 double projectile_damage = livingAttacker.getAttributeValue(ModAttributes.PROJECTILE_ATTACK_DAMAGE);
                 MobEffectInstance huntedTarget = target.getEffect(ModMobEffects.HUNTED_TARGET);
                 if (huntedTarget != null) {
-                    projectile_damage *= 1 + (1 + huntedTarget.getAmplifier()) * ModConfig.Server.hunted_target_damage_multiplier.get();
+                    projectile_damage *= 1 + (1 + huntedTarget.getAmplifier()) * ModConfig.SERVER.hunted_target_damage_multiplier.get();
                 }
                 baseDamage *= projectile_damage;
             }
@@ -147,7 +147,7 @@ public class MoreMobEffects {
             MobEffectInstance arcanic_overload = livingAttacker.getEffect(ModMobEffects.ARCANIC_OVERLOAD);
             if (arcanic_overload != null && !source.is(DamageTypes.MAGIC)) {
                 target.hurt(target.damageSources().magic(), (float)
-                        (ModConfig.Server.arcanic_overload.get() * (arcanic_overload.getAmplifier() + 1) * baseDamage));
+                        (ModConfig.SERVER.arcanic_overload.get() * (arcanic_overload.getAmplifier() + 1) * baseDamage));
             }
 
             MobEffectInstance domineering = livingAttacker.getEffect(ModMobEffects.DOMINEERING);
@@ -155,7 +155,7 @@ public class MoreMobEffects {
             if (domineering != null) {
                 long count = target.getActiveEffects()
                         .stream().filter(mobEffectInstance -> mobEffectInstance.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
-                baseDamage *= 1 + (ModConfig.Server.domineering.get() * domineering.getAmplifier() + 1) * count;
+                baseDamage *= 1 + (ModConfig.SERVER.domineering.get() * domineering.getAmplifier() + 1) * count;
             }
 
 
@@ -166,7 +166,7 @@ public class MoreMobEffects {
 
                     AttributeInstance spell_power = livingAttacker.getAttribute(Services.PLATFORM.getSpellPower());
                     if (spell_power != null) {
-                        double spell_power_boost = (spell_power.getValue()-1 +livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower()) -1) * ModConfig.Server.sorcerous_transference.get() * (sorcerous_transference.getAmplifier()+1) +1;
+                        double spell_power_boost = (spell_power.getValue()-1 +livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower()) -1) * ModConfig.SERVER.sorcerous_transference.get() * (sorcerous_transference.getAmplifier()+1) +1;
 
                         AttributeInstance targetAttribute = target.getAttribute(Services.PLATFORM.getSpellPower());
                         if (targetAttribute != null) {
@@ -182,7 +182,7 @@ public class MoreMobEffects {
                     double spell_power = livingAttacker.getAttributeValue(Services.PLATFORM.getSpellPower());
                     double ender_spell_power = livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower());
 
-                    double extraDamage = ModConfig.Server.battle_mage.get() * (battle_mage.getAmplifier() + 1)
+                    double extraDamage = ModConfig.SERVER.battle_mage.get() * (battle_mage.getAmplifier() + 1)
                             * (1 + ender_spell_power + spell_power) * baseDamage;
                     baseDamage += extraDamage;
                 }
@@ -190,19 +190,19 @@ public class MoreMobEffects {
 
                 MobEffectInstance stunningStrike = livingAttacker.getEffect(ModMobEffects.STUNNING_STRIKE);
                 if (stunningStrike != null) {
-                    baseDamage *= 1 + (stunningStrike.getAmplifier() + 1) * ModConfig.Server.stunning_strike_damage_multiplier.get();
+                    baseDamage *= 1 + (stunningStrike.getAmplifier() + 1) * ModConfig.SERVER.stunning_strike_damage_multiplier.get();
                 }
             }
         }
 
         MobEffectInstance marked = target.getEffect(ModMobEffects.MARKED);
         if (marked != null && !source.is(DamageTypes.MAGIC)) {
-            baseDamage *= 1 + (ModConfig.Server.marked.get() * marked.getAmplifier() + 1);
+            baseDamage *= 1 + (ModConfig.SERVER.marked.get() * marked.getAmplifier() + 1);
             target.removeEffect(ModMobEffects.MARKED);
         }
 
         if (source.is(ModDamageTypes.MAGICAL_FUSE_EXPLOSION)) {
-            baseDamage *= ModConfig.Server.magical_fuse_damage_multiplier.get();
+            baseDamage *= ModConfig.SERVER.magical_fuse_damage_multiplier.get();
         }
 
         if (target.hasEffect(ModMobEffects.CORROSIVE) && source.is(DamageTypes.ON_FIRE)) {
@@ -214,7 +214,7 @@ public class MoreMobEffects {
 
     public static boolean livingDeath(LivingEntity living, DamageSource source) {
         if (living.hasEffect(ModMobEffects.REVIVE)) {
-            living.setHealth((float) (living.getMaxHealth() * ModConfig.Server.revive.get()));
+            living.setHealth((float) (living.getMaxHealth() * ModConfig.SERVER.revive.get()));
             living.removeEffect(ModMobEffects.REVIVE);
             return true;
         }
@@ -236,8 +236,8 @@ public class MoreMobEffects {
     public static float getCorrosionBoostedDamage(float vanillaDamage,LivingEntity living) {
         if (living.hasEffect(ModMobEffects.CORROSIVE)) {
             double spellpower = living.getAttributeValue(Services.PLATFORM.getSpellPower());
-            vanillaDamage += ModConfig.Server.corrosive_base_damage.get();
-            vanillaDamage*= (spellpower * ModConfig.Server.corrosive_scaling.get() +1);
+            vanillaDamage += ModConfig.SERVER.corrosive_base_damage.get();
+            vanillaDamage*= (spellpower * ModConfig.SERVER.corrosive_scaling.get() +1);
         }
         return vanillaDamage;
     }
@@ -248,8 +248,8 @@ public class MoreMobEffects {
             amount *= 2 - living.getAttributeValue(ModAttributes.RESISTANCE);
         }
 
-        if (living.hasEffect(ModMobEffects.WARDEN) && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
-            amount *=.85f;
+        if (living.hasEffect(ModMobEffects.AEGIS) && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
+            amount *= 1 - ModConfig.SERVER.aegis_damage_resistance.get();
         }
         return amount;
     }
@@ -301,28 +301,17 @@ public class MoreMobEffects {
             MobEffectInstance retribution = target.getEffect(ModMobEffects.RETRIBUTION);
 
             if (retribution != null) {
-
-                AttributeInstance spellPower = target.getAttributes().hasAttribute(Services.PLATFORM.getSpellPower())
-                        ? target.getAttribute(Services.PLATFORM.getSpellPower()) : null;
-
-                AttributeInstance enderSpellPower = target.getAttributes().hasAttribute(Services.PLATFORM.getEnderSpellPower())
-                        ? target.getAttribute(Services.PLATFORM.getEnderSpellPower()) : null;
-
-                if (spellPower != null && enderSpellPower != null) {
-                    attacker.hurt(target.damageSources().thorns(target), (float)
-                            (ModConfig.Server.retribution.get() * (retribution.getAmplifier() + 1) * (1+ spellPower.getValue() + enderSpellPower.getValue())));
-                    target.removeEffect(ModMobEffects.RETRIBUTION);
-
-                    target.level().playSound(null,target.blockPosition(), SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.PLAYERS,1,1);
-                }
+                attacker.hurt(target.damageSources().thorns(target), (float)(double)ModConfig.SERVER.retribution.get()*(retribution.getAmplifier() + 1));
+                target.removeEffect(ModMobEffects.RETRIBUTION);
+                target.level().playSound(null,target.blockPosition(), SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.PLAYERS,1,1);
             }
 
 
             MobEffectInstance stunningStrike = livingAttacker.getEffect(ModMobEffects.STUNNING_STRIKE);
             if (stunningStrike != null) {
-                double time = ModConfig.Server.stunning_strike_stun_base_duration.get() +
+                double time = ModConfig.SERVER.stunning_strike_stun_base_duration.get() +
                         (livingAttacker.getAttributeValue(Services.PLATFORM.getSpellPower()) + livingAttacker.getAttributeValue(Services.PLATFORM.getEnderSpellPower())) *
-                        ModConfig.Server.stunning_strike_duration_scaling.get();//(Ender Spell + Spell Power - 1)
+                        ModConfig.SERVER.stunning_strike_duration_scaling.get();//(Ender Spell + Spell Power - 1)
                 if (ModIntegration.alexscaves.loaded) {
                     target.addEffect(new MobEffectInstance(Services.PLATFORM.getStunnedEffect(), (int) time, 0));
                 }
@@ -336,10 +325,10 @@ public class MoreMobEffects {
             MobEffectInstance onTheDefensive = livingAttacker.getEffect(ModMobEffects.ON_THE_DEFENSIVE);
             if (onTheDefensive != null) {
                 float absorb = (float)((onTheDefensive.getAmplifier() + 1) *
-                        (livingAttacker.getMaxHealth()*ModConfig.Server.on_the_defensive_max_health.get()  + livingAttacker.getAttributeValue(Services.PLATFORM.getMaxMana())*ModConfig.Server.on_the_defensive_max_mana.get()));
+                        (livingAttacker.getMaxHealth()*ModConfig.SERVER.on_the_defensive_max_health.get()  + livingAttacker.getAttributeValue(Services.PLATFORM.getMaxMana())*ModConfig.SERVER.on_the_defensive_max_mana.get()));
                 livingAttacker.setAbsorptionAmount(livingAttacker.getAbsorptionAmount() + absorb);
                 livingAttacker.removeEffect(ModMobEffects.ON_THE_DEFENSIVE);
-                ((LivingEntityDuck)livingAttacker).setGuardedTimer(ModConfig.Server.guarded_shield_timer.get());
+                ((LivingEntityDuck)livingAttacker).setGuardedTimer(ModConfig.SERVER.guarded_shield_timer.get());
                 ((LivingEntityDuck)livingAttacker).setAbsorptionToRemove(absorb);
             }
         }
@@ -347,7 +336,7 @@ public class MoreMobEffects {
 
     public static MobEffectInstance onIncomingEffect(MobEffectInstance instance,LivingEntity entity) {
         if (entity.hasEffect(ModMobEffects.ENDURING)) {
-            double reduction = (entity.getEffect(ModMobEffects.ENDURING).getAmplifier() + 1 ) * ModConfig.Server.enduring_duration_reduction.get();
+            double reduction = (entity.getEffect(ModMobEffects.ENDURING).getAmplifier() + 1 ) * ModConfig.SERVER.enduring_duration_reduction.get();
             MobEffect effect = instance.getEffect();
             if (effect.getCategory() == MobEffectCategory.HARMFUL && !instance.isInfiniteDuration()) {
                 MobEffectInstance newInstance = new MobEffectInstance(instance.getEffect(), (int) Math.max(0,(1-reduction)*instance.getDuration()),instance.getAmplifier(),instance.isAmbient(),instance.isVisible());
